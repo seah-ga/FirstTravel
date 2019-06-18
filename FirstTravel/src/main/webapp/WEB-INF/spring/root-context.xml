@@ -18,7 +18,7 @@
 	<!-- connection pool -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.0.127:1521:xe"/>
 		<property name="username" value="TEAM2"/>
 		<property name="password" value="1234"/>
 	</bean>
