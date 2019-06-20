@@ -21,5 +21,9 @@ public class OverseasController {
 	public void itemOverseasRead() throws Exception {
 		
 	}
+	@RequestMapping(value="../include/nds/search", method=RequestMethod.GET)
+	public void search() throws Exception {
+		
+	}
 	
 }
