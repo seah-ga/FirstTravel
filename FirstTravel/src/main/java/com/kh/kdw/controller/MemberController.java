@@ -18,7 +18,7 @@ public class MemberController {
 	
 //	@Inject
 //	private IMemberService memberService;
-	
+//	
 	@RequestMapping(value = "/login")
 	public void login() throws Exception {
 		
