@@ -27,7 +27,16 @@
 	
 	<!-- 스프링이 자동으로 읽도록 등록 -->
 	<context:component-scan base-package="com.kh.firsttravel" />
+
+	<context:component-scan base-package="com.kh.kdw.controller" />
+	<context:component-scan base-package="com.kh.kdw.persistence" />
+
+	<context:component-scan base-package="com.kh.nds.controller" />
+	
 	<context:component-scan base-package="com.kh.psj.controller" />
+	<context:component-scan base-package="com.kh.psj.persistence" />
+	<context:component-scan base-package="com.kh.psj.service" />
+
 <!-- 	<context:component-scan base-package="com.kh.persistence" /> -->
 <!-- 	<context:component-scan base-package="com.kh.service" /> -->
 	

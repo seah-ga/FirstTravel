@@ -365,6 +365,9 @@ table.calendar td {
 					<div class="col-md-4">
 						<select class="city">
 							<option>출발도시</option>
+							<c:forEach var="CityVo" items="${cityList}">
+							<option value="${CityVo.airport}">${CityVo.domestic_city}</option>
+							</c:forEach>
 						</select>
 						
 						
@@ -372,6 +375,9 @@ table.calendar td {
 					<div class="col-md-4">
 						<select class="city">
 							<option>도착도시</option>
+							<c:forEach var="CityVo" items="${cityList}">
+							<option value="${CityVo.airport}">${CityVo.domestic_city}</option>
+							</c:forEach>
 						</select>
 						
 					
@@ -866,6 +872,12 @@ table.calendar td {
 			$("#moveNextMonth").on("click", function() {
 				moveNextMonth();
 			});
+			
+			$(".tDay").click(function() {
+				var day = $(this).children().eq(0).text();
+				console.log(day);
+			});
+			
 		});
 
 		//calendar 그리기
@@ -876,7 +888,9 @@ table.calendar td {
 			for (var i = 0; i < 6; i++) {
 				setTableHTML += '<tr height="80">';
 				for (var j = 0; j < 7; j++) {
-					setTableHTML += '<td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap">';
+					setTableHTML += '<td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"'
+									+ 'onMouseOver="' +  "this.style.backgroundColor='#9BB9DE'"  +'"'
+									+	'onMouseOut="' +  "this.style.backgroundColor=''" + '"' + 'class="tDay">';
 					setTableHTML += '    <div class="cal-day"></div>';
 					setTableHTML += '    <div class="cal-schedule"></div>';
 					setTableHTML += '</td>';
@@ -884,6 +898,7 @@ table.calendar td {
 				setTableHTML += '</tr>';
 			}
 			setTableHTML += '</table>';
+			console.log(setTableHTML);
 			$("#cal_tab").html(setTableHTML);
 		}
 
