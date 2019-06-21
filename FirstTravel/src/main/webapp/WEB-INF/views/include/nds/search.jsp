@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,22 +62,9 @@
                 <div class="row">
                     <div class="col-lg-12" style="margin-top: 40px;">
                         <form action="/nds/itemoverseasread" class="d-md-flex justify-content-between">
-                            <select>
-                                <option value="1">태국</option>
-                                <option value="2">필리핀</option>
-                                <option value="3">베트남</option>
-                                <option value="4">말레이시아</option>
-                                <option value="5">라오스</option>
-                                <option value="6">미얀마</option>
-                                <option value="7">대만</option>
-                                <option value="8">미국</option>
-                                <option value="9">하와이</option>
-                                <option value="10">캐나다</option>
-                                <option value="11">유럽</option>
-                                <option value="12">아프리카<option>
-                                <option value="13">중동</option>
-                                <option value="14">일본</option>
-                                <option value="15">중국</option>
+                            <select><c:forEach var="overseasVo" items="${list}">
+                                <option value="">${overseasVo.overseas_Country}</option>
+                                </c:forEach>
                             </select>
                             <select>
                                 <option value="1">도시</option>
