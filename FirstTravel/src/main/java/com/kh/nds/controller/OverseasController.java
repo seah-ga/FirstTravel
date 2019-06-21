@@ -12,8 +12,18 @@ public class OverseasController {
 	public void itemOverseasMain() throws Exception{
 	}
 	
-	@RequestMapping(value="/index", method=RequestMethod.GET)
-	public void index() throws Exception {
+	@RequestMapping(value="/itemoverseaspackage", method=RequestMethod.GET)
+	public void itemOverseasPackage() throws Exception {
 		
 	}
+	
+	@RequestMapping(value="/itemoverseasread", method=RequestMethod.GET)
+	public void itemOverseasRead() throws Exception {
+		
+	}
+	@RequestMapping(value="../include/nds/search", method=RequestMethod.GET)
+	public void search() throws Exception {
+		
+	}
+	
 }

@@ -27,16 +27,25 @@
 	
 	<!-- 스프링이 자동으로 읽도록 등록 -->
 	<context:component-scan base-package="com.kh.firsttravel" />
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/seah-ga/FirstTravel.git
 	<context:component-scan base-package="com.kh.kdw.controller" />
 	<context:component-scan base-package="com.kh.kdw.persistence" />
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/seah-ga/FirstTravel.git
 	<context:component-scan base-package="com.kh.nds.controller" />
 	
 	<context:component-scan base-package="com.kh.psj.controller" />
+<<<<<<< HEAD
 	<context:component-scan base-package="com.kh.psj.persistence" />
 	<context:component-scan base-package="com.kh.psj.service" />
 
+=======
+>>>>>>> branch 'master' of https://github.com/seah-ga/FirstTravel.git
 <!-- 	<context:component-scan base-package="com.kh.persistence" /> -->
 <!-- 	<context:component-scan base-package="com.kh.service" /> -->
 	
