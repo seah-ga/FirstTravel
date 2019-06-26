@@ -1,13 +1,6 @@
-<script src="/resources/psj/assets/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="/resources/psj/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-    <script src="/resources/psj/assets/js/vendor/wow.min.js"></script>
-    <script src="/resources/psj/assets/js/vendor/owl-carousel.min.js"></script>
-    <script src="/resources/psj/assets/js/vendor/jquery.nice-select.min.js"></script>
-    <script src="/resources/psj/assets/js/vendor/ion.rangeSlider.js"></script>
-    <script src="/resources/psj/assets/js/main.js"></script>
 <script src="/resources/nds/js/jquery-1.8.0.min.js" type="text/javascript"></script> 
 <!-- Main js files --> 
-<script src="/resources/nds/js/screen.js" type="text/javascript"></script> 
+<!-- <script src="/resources/nds/js/screen.js" type="text/javascript"></script>  -->
 <!-- Tabs --> 
 <script src="/resources/nds/js/tabs.js" type="text/javascript"></script> 
 <!-- Include prettyPhoto --> 
@@ -55,4 +48,4 @@
   <script type="text/javascript" src="/resources/nds/ndsread/plugins/google-map/gmap.js"></script>
 
     <!-- Main Js File -->
-    <script src="js/script.js"></script>
+<!--     <script src="js/script.js"></script> -->

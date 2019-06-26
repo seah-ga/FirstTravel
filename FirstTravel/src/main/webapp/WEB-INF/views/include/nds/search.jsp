@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,14 +25,6 @@
 <link rel="shortcut icon" href="assets/images/logo/favicon.png" type="image/x-icon">
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="/resources/psj/assets/css/animate-3.7.0.css">
-    <link rel="stylesheet" href="/resources/psj/assets/css/font-awesome-4.7.0.min.css">
-    <link rel="stylesheet" href="/resources/psj/assets/fonts/flat-icon/flaticon.css">
-    <link rel="stylesheet" href="/resources/psj/assets/css/bootstrap-4.1.3.min.css">
-    <link rel="stylesheet" href="/resources/psj/assets/css/owl-carousel.min.css">
-    <link rel="stylesheet" href="/resources/psj/assets/css/nice-select.css">
-    <link rel="stylesheet" href="/resources/psj/assets/css/style.css">
-
 
 <link rel="stylesheet" href="/resources/nds/css/base.css">
 <link rel="stylesheet" href="/resources/nds/css/skeleton.css">
@@ -53,6 +46,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>												
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
+<script>
+$(document).ready(function() {
+	$("#btnsearch").click(function() {
+		var overseas_Country = $("#country").val();
+		var overseas_City = $("#city option:selected").text();
+		var airPort = $("#city").val();
+		console.log(airPort);
+		location.href="/nds/itemoverseasread?overseas_Country="+overseas_Country+"&overseas_City="+overseas_City+"&airPort="+airPort;
+	});
+});
+</script>
 </head>
 <body>
 <div class="search-area">
@@ -60,40 +64,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12" style="margin-top: 40px;">
-                        <form action="/nds/itemoverseasread" class="d-md-flex justify-content-between">
-                            <select>
-                                <option value="1">태국</option>
-                                <option value="2">필리핀</option>
-                                <option value="3">베트남</option>
-                                <option value="4">말레이시아</option>
-                                <option value="5">라오스</option>
-                                <option value="6">미얀마</option>
-                                <option value="7">대만</option>
-                                <option value="8">미국</option>
-                                <option value="9">하와이</option>
-                                <option value="10">캐나다</option>
-                                <option value="11">유럽</option>
-                                <option value="12">아프리카<option>
-                                <option value="13">중동</option>
-                                <option value="14">일본</option>
-                                <option value="15">중국</option>
+                            <select id="country">
+                            	<option>국가(선택)</option>
+	                            <c:forEach var="overseasVo" items="${countrylist}">
+                                <option value="${overseasVo.overseas_Country}">${overseasVo.overseas_Country}</option>
+                                </c:forEach>
                             </select>
-                            <select>
-                                <option value="1">도시</option>
-                                <option value="2">Dhaka</option>
-                                <option value="3">Rajshahi</option>
-                                <option value="4">Barishal</option>
-                                <option value="5">Noakhali</option>
+                            <select id="city">
+                           
                             </select>
-                            <select>
-                                <option value="1">출발월(전체)</option>
-                                <option value="2">Part Time</option>
-                                <option value="3">Full Time</option>
-                                <option value="4">Remote</option>
-                                <option value="5">Office Job</option>
-                            </select>
-                            <button type="submit" class="template-btn">검색</button>
-                        </form>
+                     
+                            <input type="button" value="검색" id="btnsearch">
                     </div>
                 </div>
             </div>

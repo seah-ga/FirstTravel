@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <style type="text/css">
 .cal_top{
     text-align: center;
@@ -49,10 +50,12 @@ table.calendar td{
         for(var i=0;i<6;i++){
             setTableHTML+='<tr height="35">';
             for(var j=0;j<7;j++){
-                setTableHTML+='<td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap">';
-                setTableHTML+='    <div class="cal-day"></div>';
-                setTableHTML+='    <div class="cal-schedule"></div>';
-                setTableHTML+='</td>';
+            	setTableHTML += '<td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"'
+					+ 'onMouseOver="' +  "this.style.backgroundColor='#9BB9DE'"  +'"'
+					+	'onMouseOut="' +  "this.style.backgroundColor=''" + '"' + 'class="tDay">';
+					setTableHTML += '    <div class="cal-day"></div>';
+					setTableHTML += '    <div class="cal-schedule"></div>';
+					setTableHTML += '</td>';
             }
             setTableHTML+='</tr>';
         }
@@ -67,7 +70,11 @@ table.calendar td{
         dayCount = 0;
         today = new Date();
         year = today.getFullYear();
+        
         month = today.getMonth()+1;
+        if(month < 10) {
+        	month = "0" + month;
+        }
         firstDay = new Date(year,month-1,1);
         lastDay = new Date(year,month,0);
     }
@@ -122,16 +129,136 @@ table.calendar td{
         lastDay = new Date(year,month,0);
         drawDays();
     }
+    $(document).ready(function(){
+    	//	검색 창
+    	$("#country").change(function() {
+    		var overseas_Country = $("#country option:selected").val();
+    		var data = {
+    				"overseas_Country" : overseas_Country
+    		};
+    		var url = "/restover/countrychk";
+    		
+    		$.ajax({
+    			"type" : "post",
+    			"url" : url,
+    			"headers" : {
+    				"content-type" : "application/json",
+    				"X-HTTP-Method-Override" : "post"
+    			},
+    			"dataType" : "text",
+    			"data" : JSON.stringify(data),
+    			"success" : function(rData) {
+    			var	parsedJson = JSON.parse(rData);
+    			var str = "";
+    				for (var i = 0; i<parsedJson.length; i++) {
+    					str +="<option value='"+parsedJson[i].airPort+"'>"+parsedJson[i].overseas_City+"</option>";
+    				}
+    				$("#city").html(str);
+    			}
+    		});
+    	});
+    	// 출발일 선택.
+    	// API 항공
+    	$(".tDay").click(function() {
+    		var year = $("#cal_top_year").text();
+    		var month = $("#cal_top_month").text();
+			var day = $(this).children().eq(0).text();
+			var urlstr = window.location.href;
+    		var airPort = urlstr.substr(urlstr.lastIndexOf("=") +1, 3);
+    		var datestr = year+month+day;
+    		var overseasapiurl = "/restover/overseasapi?airPort="+airPort+"&datestr="+datestr;
+    		$.ajax({
+    			"type" : "get",
+    			"url" : overseasapiurl,
+    			"headers" : {
+    				"content-type" : "application/json",
+    				"X-HTTP-Method-Override" : "get"
+    			},
+    			"success" : function(rData) {
+    				console.log(rData);
+    				var data = rData.response.body.items.item;
+    				console.log(data);
+    		var str = "";
+    		if (data == null || data == "" || day == null || day == "") {
+    			str += "<tr>"
+    			str += "<td><h2>해당 날짜의 항공정보가 없습니다.<h2></td>"
+    			str += "</tr>"
+    			$("#airtable").html(str);
+    		} else {
+	    		for (var i = 0 ; i < data.length ; i++) {
+	    	 	
+		            str += 	 "<tr>";
+		            str +=  	  "<td>"+data[i].internationalStdate+"</td>";
+		            str +=  	  "<td>"+data[i].internationalEddate+"</td>";
+		            str +=  	  "<td>"+data[i].airlineKorean+"</td>";
+		            str +=  	  "<td>"+data[i].internationalNum+"</td>";
+		            str +=  	  "<td>100.500원&nbsp;/&nbsp;20000원&nbsp;</td>";
+		            str +=  	 " <td><input type='checkbox'></td>";
+		            str +=   "</tr>";
+	           	 		$("#airtable").html(str);
+	    		}
+    		}	
+    	}	
+    });	
+    		hotel_date = year+"-"+month+"-"+day;
+    		var data = {
+    			"hotel_date" : hotel_date
+    		};
+    		var hotelurl = "/restover/selecthotel"; 
+    		$.ajax({
+    			"type" : "post",
+    			"url" : hotelurl,
+    			"headers" : {
+    				"content-type" : "application/json",
+    				"X-HTTP-Method-Override" : "post"
+    			},
+    			"dataType" : "text",
+    			"data" : JSON.stringify(data),
+    			"success" : function(rData) {
+    				var	parsedJson = JSON.parse(rData);
+    				console.log(parsedJson);
+    				var hotelstr = "";
+    				
+    				for (var i = 0 ; i < parsedJson.length ; i++) {
+		    	    		hotelstr += "<tr>";
+		    	    		hotelstr += "<td>"+parsedJson[i].hotel_date+"</td>";
+		    	    		hotelstr += "<td>"+parsedJson[i].hotel_city+"</td>";
+		    	    		hotelstr += "<td>"+parsedJson[i].hotel_name+"</td>";
+		    	    		hotelstr += "<td>"+parsedJson[i].hotel_location+"</td>";
+		    	    		hotelstr += "<td>"+String(parsedJson[i].price_adult).substring(0,3)+","+String(parsedJson[i].price_adult).substring(3)+"원&nbsp;/&nbsp;"+String(parsedJson[i].price_child).substring(0,2)+","+String(parsedJson[i].price_child).substring(2)+"원&nbsp;</td>";
+		    	    		hotelstr += "<td><input type='checkbox' class='hotelchk' data-price-adult='"+parsedJson[i].price_adult+"' data-price-child='"+parsedJson[i].price_child+"'></td>";
+		    	    		hotelstr += "</tr>";
+			    	    		
+					} 
+					if (hotelstr == null || hotelstr == "") {
+						hotelstr += "<tr>";
+						hotelstr += "<td><h2>해당 날짜의 호텔정보가 없습니다.<h2></td>";
+						hotelstr += "</tr>";
+					}
+    				$("#hoteltable").html(hotelstr);
+    			}
+    		});
+    			
+  });
+    	$("#hoteltable").on("click",".hotelchk",function(){
+			var ff = $(this).attr("data-price-adult");
+			console.log(ff);
+    });
+});
 </script>
 <title>해외(상세정보)</title>
 </head>
 <body>
+<button id="ff">ffffff</button>
+<button id="ff">ffffff</button>
+<button id="ff">ffffff</button>
 <section class="page-header">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
-					<h1 class="page-name">일본</h1>
+					<h1 class="page-name">${overseasVo.overseas_Country}</h1>
+					<h2>${overseasVo.overseas_City}</h2>
 				</div>
 			</div>
 		</div>
@@ -182,7 +309,6 @@ table.calendar td{
 								<img src='/resources/nds/images/portfolio/a.jpg' alt='' />
 							</li>
 							<li data-target='#carousel-custom' data-slide-to='1'>
-								<img src='/192.168.0.127/shared/upload_team2/test2.jpg' alt='u' />
 							</li>
 							<li data-target='#carousel-custom' data-slide-to='2'>
 								<img src='/resources/nds/images/portfolio/a.jpg' alt='' />
@@ -197,7 +323,7 @@ table.calendar td{
 								<img src='/resources/nds/images/portfolio/a.jpg' alt='' />
 							</li>
 							<li data-target='#carousel-custom' data-slide-to='6'>
-								<img src='/resources/nds/images/portfolio/a.jpg' alt='' />
+								<img src="/resources/nds/images/portfolio/a.jpg" alt='1' />
 							</li>
 						</ol>
 					</div>
@@ -211,7 +337,7 @@ table.calendar td{
 			
 			<div class="row">
 				<div class="col-md-6">
-					<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;출발일 선택</h4>
+					<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;운행기간 선택</h4>
 					 <div class="cal_top">
 				        <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit" style="">&lt;</span></a>
 				        <span id="cal_top_year"></span>
@@ -228,9 +354,10 @@ table.calendar td{
 					<div class="col-md-3">
 					<div class="single-product-details">
 					<h4>인원</h4>
-					<p>성인 : <input type="number"></p>
-					<p>아동 : <input type="number"></p>
-					<p>유아 : <input type="number"></p>
+					<p>성인 : <input type="number" value="1"
+									min="0" max="30" class="peopleNum"></p>
+					<p>유아 : <input type="number" value="0"
+									min="0" max="30" class="peopleNum"></p>
 					<h3>합산 : 600.000원</h3>
 					<a href="" class="btn btn-main mt-20">장바구니</a>
 					<a href="" class="btn btn-main mt-20">결제</a>
@@ -250,31 +377,22 @@ table.calendar td{
 								 <div class="comment-info">
 								     <div class="dashboard-wrapper user-dashboard">
           <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>출발/도착</th>
-                  <th>항공</th>
-                  <th>가격 성인&nbsp;/&nbsp;유아&nbsp;/&nbsp;아동</th>
-                  <th>선택</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>06/24 (월)20:40 <br>~ 06/28 (금)09:20</td>
-                  <td>제주 항공</td>
-                  <td>100.500원&nbsp;/&nbsp;20000원&nbsp;/&nbsp;60474원</td>
-                  <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                  <td>06/24 (월)20:40 <br>~ 06/28 (금)09:20</td>
-                  <td>제주 항공</td>
-                  <td>100.000원&nbsp;/&nbsp;200.000원&nbsp;/&nbsp;300.000원</td>
-                  <td><input type="checkbox"></td>
-                </tr>
-              </tbody>
-            </table>
+         <table class="table">
+           <thead>
+              <tr>
+     	  		 <th>운항 시작일</th>
+     	  		 <th>운항 종료일</th>
+      	 		 <th>항공</th>
+      	 		 <th>항공편</th>
+       	  		 <th>가격 성인&nbsp;/&nbsp;유아&nbsp;</th>
+        		 <th>선택</th>
+          	     <th></th>
+              </tr>
+          </thead>
+          	<tbody id="airtable">
+          	
+          	</tbody>
+         </table>
           </div>
         </div>
         <div class="container-fluid">
@@ -282,9 +400,6 @@ table.calendar td{
 		<div class="col-md-12" >
 			<nav>
 				<ul class="pagination">
-					<li class="page-item">
-						<a class="page-link" href="#">&lt;</a>
-					</li>
 					<li class="page-item">
 						<a class="page-link" href="#">1</a>
 					</li>
@@ -321,26 +436,16 @@ table.calendar td{
             <table class="table">
               <thead>
                 <tr>
-                  <th>체크인/체크아웃</th>
-                  <th>호텔명</th>
-                  <th>가격 성인&nbsp;/&nbsp;유아&nbsp;/&nbsp;아동</th>
+                  <th>체크인 날짜</th>
+                  <th>도시</th>
+                  <th>호텔 이름</th>
+                  <th>위치</th>
+                  <th>가격 성인&nbsp;/&nbsp;유아&nbsp;</th>
                   <th>선택</th>
-                  <th></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>06/24 (월)20:40 <br>~ 06/28 (금)09:20</td>
-                  <td>메메메호텔</td>
-                  <td>100.500원&nbsp;/&nbsp;20000원&nbsp;/&nbsp;60474원</td>
-                  <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                  <td>06/24 (월)20:40 <br>~ 06/28 (금)09:20</td>
-                  <td>에에에호텔</td>
-                  <td>100.500원&nbsp;/&nbsp;20000원&nbsp;/&nbsp;60474원</td>
-                  <td><input type="checkbox"></td>
-                </tr>
+              <tbody id="hoteltable">
+                
               </tbody>
             </table>
           </div>
@@ -350,9 +455,6 @@ table.calendar td{
 		<div class="col-md-12" >
 			<nav>
 				<ul class="pagination">
-					<li class="page-item">
-						<a class="page-link" href="#">&lt;</a>
-					</li>
 					<li class="page-item">
 						<a class="page-link" href="#">1</a>
 					</li>

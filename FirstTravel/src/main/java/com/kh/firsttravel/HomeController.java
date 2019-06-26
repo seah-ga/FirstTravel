@@ -33,7 +33,10 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "redirect:/kdw/login";
+
+		return "index";
+		//board/list
+
 	}
 	
 }
