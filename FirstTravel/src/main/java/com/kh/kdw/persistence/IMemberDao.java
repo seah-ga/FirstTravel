@@ -4,7 +4,7 @@ import com.kh.kdw.domain.MemberVo;
 
 public interface IMemberDao {
 	// 아이디 체크 확인
-	public MemberVo checkId(String user_id) throws Exception;
+	public int checkId(String user_id) throws Exception;
 	
 	// 회원 가입
 	public void memberJoin(MemberVo memberVo) throws Exception;
@@ -17,5 +17,8 @@ public interface IMemberDao {
 	
 	// 회원 삭제
 	public void memberDelete(String user_id, String user_pw) throws Exception;
+	
+	// 이메일 인증 키 생성
+	public void chkEmail(String user_email, String authkey) throws Exception;
 	
 }

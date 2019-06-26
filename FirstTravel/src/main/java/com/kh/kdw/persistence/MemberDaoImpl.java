@@ -1,5 +1,8 @@
 package com.kh.kdw.persistence;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,34 +18,53 @@ public class MemberDaoImpl implements IMemberDao {
 	private static final String NAMESPACE = "member.";
 
 	@Override
-	public MemberVo checkId(String user_id) throws Exception {
+	public int checkId(String user_id) throws Exception {
 		// TODO Auto-generated method stub
-		MemberVo memberVo = sqlSession.selectOne(NAMESPACE + "checkId", user_id);
-		return memberVo;
+		int cnt = sqlSession.selectOne(NAMESPACE + "checkId", user_id);
+		System.out.println(cnt + "dao");
+		return cnt;
 	}
 
 	@Override
 	public void memberJoin(MemberVo memberVo) throws Exception {
-		// TODO Auto-generated method stub
+		// 회원가입
+		sqlSession.insert(NAMESPACE + "memberJoin", memberVo);
 
 	}
 
 	@Override
 	public MemberVo memberLogin(String user_id, String user_pw) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		// 로그인
+		Map<String, Object> loginMap = new HashMap<>();
+		loginMap.put("user_id", user_id);
+		loginMap.put("user_pw", user_pw);
+		MemberVo memberVo = sqlSession.selectOne(NAMESPACE + "memberLogin", loginMap);
+		return memberVo;
 	}
 
 	@Override
 	public void memberModify(MemberVo memberVo) throws Exception {
-		// TODO Auto-generated method stub
-
+		// 회원정보수정
+		sqlSession.update(NAMESPACE + "memberModify", memberVo);
 	}
 
 	@Override
 	public void memberDelete(String user_id, String user_pw) throws Exception {
-		// TODO Auto-generated method stub
+		// 회원 탈퇴
+		Map<String, Object> loginMap = new HashMap<>();
+		loginMap.put("user_id", user_id);
+		loginMap.put("user_pw", user_pw);
+		sqlSession.delete(NAMESPACE + "memberDelete", loginMap);
 
+	}
+
+	@Override
+	public void chkEmail(String user_email, String authkey) throws Exception {
+		// 이메일 인증 키 생성
+		Map<String, Object> map = new HashMap<>();
+		map.put("user_email", user_email);
+		map.put("authkey", authkey);
+		sqlSession.insert(NAMESPACE + "createAuthKey", map);
 	}
 
 }
