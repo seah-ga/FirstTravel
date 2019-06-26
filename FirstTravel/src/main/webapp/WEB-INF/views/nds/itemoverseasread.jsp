@@ -130,6 +130,7 @@ table.calendar td{
         drawDays();
     }
     $(document).ready(function(){
+    	 
     	//	검색 창
     	$("#country").change(function() {
     		var overseas_Country = $("#country option:selected").val();
@@ -160,6 +161,8 @@ table.calendar td{
     	// 출발일 선택.
     	// API 항공
     	$(".tDay").click(function() {
+    		
+       	 	
     		var year = $("#cal_top_year").text();
     		var month = $("#cal_top_month").text();
 			var day = $(this).children().eq(0).text();
@@ -185,15 +188,19 @@ table.calendar td{
     			str += "</tr>"
     			$("#airtable").html(str);
     		} else {
+    			
 	    		for (var i = 0 ; i < data.length ; i++) {
-	    	 	
+	    			var a = Math.floor(Math.random() * 320000) + 100000;
+	    			var b = Math.floor(Math.random() * 53000) + 20000;
+	    			var air_price_adult = Math.round(a/100)*100;
+	        		var air_price_child = Math.round(b/100)*100;
 		            str += 	 "<tr>";
 		            str +=  	  "<td>"+data[i].internationalStdate+"</td>";
 		            str +=  	  "<td>"+data[i].internationalEddate+"</td>";
 		            str +=  	  "<td>"+data[i].airlineKorean+"</td>";
 		            str +=  	  "<td>"+data[i].internationalNum+"</td>";
-		            str +=  	  "<td>100.500원&nbsp;/&nbsp;20000원&nbsp;</td>";
-		            str +=  	 " <td><input type='checkbox'></td>";
+		            str +=  	  "<td>"+air_price_adult+"원&nbsp;/&nbsp;"+air_price_child+"원&nbsp;</td>";
+		            str +=  	 " <td><input type='checkbox' class='airchk' data-price-adult='"+air_price_adult+"' data-price-child='"+air_price_child+"'></td>";
 		            str +=   "</tr>";
 	           	 		$("#airtable").html(str);
 	    		}
@@ -240,10 +247,30 @@ table.calendar td{
     		});
     			
   });
-    	$("#hoteltable").on("click",".hotelchk",function(){
-			var ff = $(this).attr("data-price-adult");
-			console.log(ff);
+    	$("#hoteltable").on("change",".hotelchk",function(){
+			var hotel_price_adult = $(this).attr("data-price-adult");
+			var hotel_price_child = $(this).attr("data-price-child");
+			if ($(this).is(":checked")) {
+				var adultnum = $("#adultnum").val();
+				var childnum = $("#childnum").val();
+				
+				var result = (hotel_price_adult*adultnum) + (hotel_price_child*childnum);
+				
+				$("#moneyval").text("합계 :" + result + "원");
+			} else {
+				
+			}
     });
+    	$("#airtable").on("change",".airchk",function(){
+    		var air_price_adult = $(this).attr("data-price-adult");	
+    		var air_price_child = $(this).attr("data-price-child");	
+    		if ($(this).is(":checked")) {
+				console.log(air_price_adult);
+				console.log(air_price_child);
+			} else {
+				
+			}
+    });	
 });
 </script>
 <title>해외(상세정보)</title>
@@ -355,10 +382,10 @@ table.calendar td{
 					<div class="single-product-details">
 					<h4>인원</h4>
 					<p>성인 : <input type="number" value="1"
-									min="0" max="30" class="peopleNum"></p>
+									min="0" max="30" class="peopleNum" id="adultnum"></p>
 					<p>유아 : <input type="number" value="0"
-									min="0" max="30" class="peopleNum"></p>
-					<h3>합산 : 600.000원</h3>
+									min="0" max="30" class="peopleNum" id="childnum"></p>
+					<h3 id="moneyval"></h3>
 					<a href="" class="btn btn-main mt-20">장바구니</a>
 					<a href="" class="btn btn-main mt-20">결제</a>
 			</div>

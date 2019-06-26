@@ -98,5 +98,5 @@ public class RestOverseasController {
 			entity = new ResponseEntity<List<OverseasHotelVo>>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
-		}
 	}
+}
