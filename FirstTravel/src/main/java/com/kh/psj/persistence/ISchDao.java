@@ -8,7 +8,7 @@ public interface ISchDao {
 	public void insertSch(SchVo schVo) throws Exception;
 	public void deleteSch(SchVo schVo) throws Exception;
 	public void updateSch(SchVo schVo) throws Exception;
-	public List<SchVo> selectAllSch() throws Exception;
+	public List<SchVo> selectAllSch(int user_code) throws Exception;
 	public SchVo selectSchByDate(SchVo schVo) throws Exception;
 
 }

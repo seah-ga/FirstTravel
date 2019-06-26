@@ -36,15 +36,15 @@ public class SchDaoImpl implements ISchDao{
 	}
 	//ID별 스케쥴
 	@Override
-	public List<SchVo> selectAllSch() throws Exception {		
-		sqlSession.selectList(NAME_SPACE + "selectAllSch"); 
-		return null;
+	public List<SchVo> selectAllSch(int user_code) throws Exception {		
+		List<SchVo> schList = sqlSession.selectList(NAME_SPACE + "selectAllSch", user_code); 
+		return schList;
 	}
 	//ID + 날짜별 스케쥴
 	@Override
 	public SchVo selectSchByDate(SchVo schVo) throws Exception {
-		
-		return null;
+		SchVo returnSchVo = sqlSession.selectOne(NAME_SPACE + "selectSchByDate", schVo); 
+		return returnSchVo;
 	}
 	
 }

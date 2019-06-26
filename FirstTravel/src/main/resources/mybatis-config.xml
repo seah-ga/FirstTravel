@@ -10,6 +10,7 @@
 		<typeAlias type="com.kh.kdw.domain.MemberVo" alias="MemberVo"/>
 		<typeAlias type="com.kh.kdw.domain.GBoardVo" alias="GBoardVo"/>
 		<typeAlias type="com.kh.psj.domain.CityVo" alias="CityVo"/>
+		<typeAlias type="com.kh.psj.domain.SchVo" alias="SchVo"/>
 		<typeAlias type="com.kh.psj.domain.AirVo" alias="AirVo"/>
 		<typeAlias type="com.kh.psj.domain.HotelVo" alias="HotelVo"/>
 	</typeAliases>

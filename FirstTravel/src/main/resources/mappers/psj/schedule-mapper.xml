@@ -10,9 +10,9 @@
 </insert>
 <delete id="deleteSch">
 	delete from tbl_schedule
-	where user_code = #{user_code}
-	and	  sch_date = #{sch_date}
-	and	  sch_time = #{sch_time}
+		where user_code = #{user_code}
+		and	  sch_date = #{sch_date}
+		and	  sch_time = #{sch_time}
 
 </delete>
 <update id="updateSch">
@@ -21,17 +21,17 @@
 	where user_code = #{user_code}
 	and	  sch_date = #{sch_date}
 	and	  sch_time = #{sch_time}
-	
+		
 </update>
-<select id="selectSchByDate">
+<select id="selectSchByDate" resultType="SchVo">
 	select *
-	from tbl schdule
+	from tbl_schedule
 	where user_code = #{user_code}
 	and sch_date = #{sch_date}
 </select>
-<select id="selectAllSch">
+<select id="selectAllSch" resultType="SchVo">
 	select *
-	from tbl schdule
+	from tbl_schedule
 	where user_code = #{user_code}
 </select>
 
