@@ -1,9 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">										
@@ -42,112 +39,63 @@ table.calendar td{
 					
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-6">
-					 <div class="cal_top">
-				        <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit">&lt;</span></a>
-				        <span id="cal_top_year"></span>
-				        <span id="cal_top_month"></span>
-				        <a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit">&gt;</span></a>
-    				</div>
-    			<div id="cal_tab" class="cal">
-    		</div>
-				
+				<div class="row">
+					<div class="col-md-6">
+						<div class="cal_top">
+							<a href="#" id="movePrevMonth"><span id="prevMonth"
+								class="cal_tit">&lt;</span></a> <span id="cal_top_year"></span> <span
+								id="cal_top_month"></span> <a href="#" id="moveNextMonth"><span
+								id="nextMonth" class="cal_tit">&gt;</span></a>
+						</div>
+						<div id="cal_tab" class="cal"></div>
+
+					</div>
+					<div class="col-md-6">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Product</th>
+									<th>Payment Taken</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>TB - Monthly</td>
+									<td>01/04/2012</td>
+									<td>Default</td>
+								</tr>
+								<tr class="table-active">
+									<td>1</td>
+									<td>TB - Monthly</td>
+									<td>01/04/2012</td>
+									<td>Approved</td>
+								</tr>
+								<tr class="table-success">
+									<td>2</td>
+									<td>TB - Monthly</td>
+									<td>02/04/2012</td>
+									<td>Declined</td>
+								</tr>
+								<tr class="table-warning">
+									<td>3</td>
+									<td>TB - Monthly</td>
+									<td>03/04/2012</td>
+									<td>Pending</td>
+								</tr>
+								<tr class="table-danger">
+									<td>4</td>
+									<td>TB - Monthly</td>
+									<td>04/04/2012</td>
+									<td>Call in to confirm</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
-				<div class="col-md-6">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>
-									#
-								</th>
-								<th>
-									Product
-								</th>
-								<th>
-									Payment Taken
-								</th>
-								<th>
-									Status
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									1
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									01/04/2012
-								</td>
-								<td>
-									Default
-								</td>
-							</tr>
-							<tr class="table-active">
-								<td>
-									1
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									01/04/2012
-								</td>
-								<td>
-									Approved
-								</td>
-							</tr>
-							<tr class="table-success">
-								<td>
-									2
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									02/04/2012
-								</td>
-								<td>
-									Declined
-								</td>
-							</tr>
-							<tr class="table-warning">
-								<td>
-									3
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									03/04/2012
-								</td>
-								<td>
-									Pending
-								</td>
-							</tr>
-							<tr class="table-danger">
-								<td>
-									4
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									04/04/2012
-								</td>
-								<td>
-									Call in to confirm
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="row">
+				<div class="row">
 				<div class="col-md-12">
 					<table class="table">
 						<thead>

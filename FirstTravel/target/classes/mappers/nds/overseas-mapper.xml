@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="overseas">
+
+<select id="selectAllcountry" resultType="com.kh.nds.domain.OverseasVo">
+	select DISTINCT overseas_country
+	from tbl_overseas
+</select>
+	
+<select id="countryChk" resultType="com.kh.nds.domain.OverseasVo">
+	select overseas_city , airport
+	from tbl_overseas
+	where overseas_country = #{overseas_Country}
+</select>	
+
+<select id="selecthotel" resultType="com.kh.nds.domain.OverseasHotelVo">
+	select *
+	from tbl_overseashotel
+	where hotel_date = #{hotel_date}
+</select>
+</mapper>
