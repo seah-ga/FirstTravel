@@ -114,12 +114,12 @@ $(document).ready(function() {
 
                   <div class="md-form">
                     <i class="fas fa-user prefix grey-text"></i>
-                    <input type="text" id="user_id" name="user_id" class="form-control">
+                    <input type="text" id="user_id" name="user_id" class="form-control" value="user1">
                     <label for="form3">아이디</label>
                   </div>
                   <div class="md-form">
                     <i class="fas fa-key prefix grey-text"></i>
-                    <input type="password" id="user_pw" name="user_pw" class="form-control">
+                    <input type="password" id="user_pw" name="user_pw" class="form-control" value="1234">
                     <label for="form2">비밀번호</label>
                   </div>
 
