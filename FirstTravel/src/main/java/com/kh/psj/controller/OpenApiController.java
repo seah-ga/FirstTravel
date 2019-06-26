@@ -25,7 +25,7 @@ import com.kh.psj.domain.AirVo;
 
 @RestController
 @RequestMapping("/rest")
-public class myRestController {
+public class OpenApiController {
 	/// 파싱용 메서드
 	public String parsingData(StringBuilder urlBuilder) throws Exception {
 		 URL url = new URL(urlBuilder.toString());

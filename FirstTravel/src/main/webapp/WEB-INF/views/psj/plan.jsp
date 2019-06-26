@@ -489,18 +489,23 @@
 		
 		// 달력 클릭시 해당 날짜 정보출력을 위해 박스에 저장.
 		$(".tDay").click(function() {
-			var day = parseInt($(this).children().eq(0).text());
-			if(day < 10) {
-				day = "0" + day;
-			}
-			var year = $("#cal_top_year").text();
-			var month = parseInt($("#cal_top_month").text());
-			if(month < 10) {
-				month = "0" + month;
-			}
-			console.log(year + month.toString() + day.toString());
-			var date = year + month.toString() + day.toString();
-			$("#txt_date").val(date);
+			var strDay = $(this).children().eq(0).text();
+			console.log(strDay);
+			if(!!strDay){ // not null
+				var day = parseInt(strDay);
+				
+				if(day < 10) {
+					day = "0" + day;
+				}
+				var year = $("#cal_top_year").text();
+				var month = parseInt($("#cal_top_month").text());
+				if(month < 10) {
+					month = "0" + month;
+				}
+				console.log(year + month.toString() + day.toString());
+				var date = year + month.toString() + day.toString();
+				$("#txt_date").val(date);
+			}	
 			
 		});
 	

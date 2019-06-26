@@ -5,6 +5,6 @@ import java.util.List;
 import com.kh.psj.domain.CityVo;
 
 public interface ICityService {
-	public List<CityVo> getAllCities();
+	public List<CityVo> getAllCities() throws Exception;
 
 }
