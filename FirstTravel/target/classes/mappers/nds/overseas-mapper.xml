@@ -10,4 +10,15 @@
 	from tbl_overseas
 </select>
 	
+<select id="countryChk" resultType="com.kh.nds.domain.OverseasVo">
+	select overseas_city , airport
+	from tbl_overseas
+	where overseas_country = #{overseas_Country}
+</select>	
+
+<select id="selecthotel" resultType="com.kh.nds.domain.OverseasHotelVo">
+	select *
+	from tbl_overseashotel
+	where hotel_date = #{hotel_date}
+</select>
 </mapper>

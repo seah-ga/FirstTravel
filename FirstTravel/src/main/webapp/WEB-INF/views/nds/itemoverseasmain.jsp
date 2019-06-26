@@ -4,11 +4,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<script>
+$(document).ready(function(){
+	$("#country").change(function() {
+		var overseas_Country = $("#country option:selected").val();
+		var data = {
+				"overseas_Country" : overseas_Country
+		};
+		var url = "/restover/countrychk";
+		
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"headers" : {
+				"content-type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(data),
+			"success" : function(rData) {
+			var	parsedJson = JSON.parse(rData);
+			var str = "";
+				for (var i = 0; i<parsedJson.length; i++) {
+					str += "<option value='"+parsedJson[i].airPort+"'>"+parsedJson[i].overseas_City+"</option>";
+					console.log(parsedJson[i].airPort);
+				}
+				$("#city").html(str);
+			}
+		});
+	});
+});
+</script>
 <title>해외 상품(메인)</title>
 </head>
 <body>
-
    <div class="row">
                 <div class="col-lg-12">
                   <div class="section-top text-center">

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.nds.domain.OverseasHotelVo;
 import com.kh.nds.domain.OverseasVo;
 
 @Repository
@@ -21,6 +22,18 @@ public class OverseasDaoImpl implements IOverseasDao {
 	public List<OverseasVo> selectAllcountry() throws Exception {
 		List<OverseasVo> list = sqlSession.selectList(NAMESPACE + "selectAllcountry");
 		
+		return list;
+	}
+
+	@Override
+	public List<OverseasVo> countryChk(String overseas_Country) throws Exception {
+		List<OverseasVo> list = sqlSession.selectList(NAMESPACE + "countryChk", overseas_Country);
+		return list;
+	}
+
+	@Override
+	public List<OverseasHotelVo> selectHotel(String hotel_date) throws Exception {
+		List<OverseasHotelVo> list = sqlSession.selectList(NAMESPACE + "selecthotel", hotel_date);
 		return list;
 	}
 
