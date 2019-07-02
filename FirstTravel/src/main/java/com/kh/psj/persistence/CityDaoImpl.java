@@ -15,11 +15,11 @@ public class CityDaoImpl implements ICityDao {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private final String NAME_SPACE = "domesticCity"; 
+	private final String NAME_SPACE = "domesticCity."; 
 
 	@Override
-	public List<CityVo> getCities() {
-		List<CityVo> list = sqlSession.selectList(NAME_SPACE + ".selectAllCity");
+	public List<CityVo> getCities() throws Exception{
+		List<CityVo> list = sqlSession.selectList(NAME_SPACE + "selectAllCity");
 				
 		return list;
 	}

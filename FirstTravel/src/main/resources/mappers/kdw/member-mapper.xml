@@ -5,10 +5,51 @@
   
 <mapper namespace="member">
 
-	<select id="checkId" resultType="com.kh.kdw.domain.MemberVo">
-		select *
+	<!-- 아이디 중복체크 -->
+	<select id="checkId" resultType="int">
+		select count(*)
 		from tbl_user
 		where user_id = #{user_id}
 	</select>
+	
+	<!-- 이메일 인증번호 -->
+	<insert id="createAuthKey">
+		insert into tbl_chk_email(email_code, user_email, authkey)
+		values(seq_email.nextval, #{user_email}, #{authkey})
+	</insert>
+	
+	<!-- 회원가입 -->
+	<insert id="memberJoin">
+		insert into tbl_user(user_code, user_id, user_name, user_pw, user_address, user_phone, user_email, chk_ad)
+		values(seq_user.nextval, #{user_id}, #{user_name}, #{user_pw}, #{user_address}, #{user_phone}, #{user_email}, #{chk_ad})
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="memberLogin" resultType="MemberVo">
+		select *
+		from tbl_user
+		where user_id = #{user_id}
+		and user_pw = #{user_pw}
+	
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="memberModify">
+		update tbl_user set
+			user_name = #{user_name},
+			user_pw = #{user_pw},
+			user_address = #{user_address},
+			user_phone = #{user_phone},
+			user_email = #{user_email},
+			chk_ad = #{chk_ad}
+		where user_id = #{user_id}	
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete">
+		delete from tbl_user
+		where user_id = #{user_id}
+		and user_pw = #{user_pw}
+	</delete>
 
 </mapper>  

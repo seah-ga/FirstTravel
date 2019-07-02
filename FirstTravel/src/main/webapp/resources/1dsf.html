@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="kdw/js/jquery-3.4.1.min.js"></script>
+<script src="kdw/js/jquery.validate.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation-bootstrap-tooltip@0.10.3/jquery-validate.bootstrap-tooltip.min.js"></script>
+<script>
+$(function(){
+	$("form").click(function(e) {
+		e.preventDefault();
+		$("form").validate({
+        	
+        	
+	      showErrors: function(errorMap, errorList) {
+			console.log(this.validElements());
+	          // Clean up any tooltips for valid elements
+	          $.each(this.validElements(), function (index, element) {
+	        	  console.log(index);
+	        	  console.log(element);
+	              var $element = $(element);
+
+	              $element.data("title", "") // Clear the title - there is no error associated anymore
+	                  .removeClass("error")
+	                  .tooltip("destroy");
+	          });
+
+	          // Create new tooltips for invalid elements
+	          $.each(errorList, function (index, error) {
+	        	  console.log(index);
+	        	  console.log(error);
+	              var $element = $(error.element);
+
+	              $element.tooltip("destroy") // Destroy any pre-existing tooltip so we can repopulate with new tooltip content
+	                  .data("title", error.message)
+	                  .addClass("error")
+	                  .tooltip(); // Create a new tooltip based on the error messsage we just set in the title
+	          });
+	      },
+
+	      submitHandler: function(form) {
+	          alert("This is a valid form!");
+	      }
+	  });
+		return false;
+	});
+	
+})
+
+</script>
+</head>
+<body>
+<form action="/Demo/Tooltip" method="post">
+        <div class="row">
+            <label for="TextBox">A number must be entered:</label>
+            <input data-msg-number="The field TextBox must be a number." 
+                data-msg-required="The TextBox field is required." 
+                data-rule-number="true" 
+                data-rule-required="true" 
+                id="TextBox" name="TextBox" type="text" value="" />
+        </div>
+        <div class="row">
+            <label for="DropDownList">An option must be selected:</label>
+            <select data-msg-required="The DropDownList field is required." 
+                data-rule-required="true" 
+                id="DropDownList" name="DropDownList">
+                <option value="">Please select</option>
+                <option value="An option">An option</option>
+            </select>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-default">Submit</button>
+            <button type="reset" class="btn btn-info">Reset</button>
+        </div>
+    </form>
+</body>
+</html>

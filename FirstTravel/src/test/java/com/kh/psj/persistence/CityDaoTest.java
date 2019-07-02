@@ -19,11 +19,11 @@ public class CityDaoTest {
 	@Inject
 	ICityDao dao;
 	
-	@Test
-	public void testSelectAllCity() {
-		
-		List<CityVo> list =  dao.getCities();
-		System.out.println(list);
-	}
+//	@Test
+//	public void testSelectAllCity() {
+//		
+//		List<CityVo> list =  dao.getCities();
+//		System.out.println(list);
+//	}
 
 }

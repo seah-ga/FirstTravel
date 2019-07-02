@@ -135,38 +135,91 @@ $(document).ready(function() {
 		var enterDay = $(this).children(".cal-day").text();
 //			console.log(enterYear + enterMonth + enterDay);
 		var enterDate = enterYear + enterMonth + enterDay;
-		if(enterDay != null && enterDay != ""){
-			var div_sch = $(this).children(".cal-schedule");
-			var str_html = "<input type='button' value='스케쥴' class='btn-primary btn-sch' data-date='" + enterDate +"'>";
-			div_sch.html(str_html);
-		}
+		
 	});
+	$(".tDay").click(function() {
+		var strDay = $(this).children().eq(0).text();
+		console.log(strDay);
+		if(!!strDay){ // not null
+			var day = parseInt(strDay);
+			
+			if(day < 10) {
+				day = "0" + day;
+			}
+			var year = $("#cal_top_year").text();
+			var month = parseInt($("#cal_top_month").text());
+			if(month < 10) {
+				month = "0" + month;
+			}
+			console.log(year + month.toString() + day.toString());
+			var date = year + month.toString() + day.toString();
+			$("#txt_enterDate").val(date);
+		}	
+		
+	});
+	
+	
 	$("#cal_tab").on("mouseleave",".tDay", function() {
 		var div_sch = $(this).children(".cal-schedule");
 //			div_sch.remove(":button");
 		div_sch.children("input[type='button']").remove();
 	});
 	
-	$("#cal_tab").on("click", ".btn-sch", function() {
-//			console.log("스케쥴가기 클릭");
-		var enterDate = $(this).attr("data-date");
-		console.log(enterDate);
-		location.href = "/psj/schedule?enterDate=" + enterDate;
-	});
+	
+	
 	$("#tSch").on("mouseenter", ".tdBtn", function() {
-		var btnHtml = "<input type='button' value='입력' class='btn-success btn-xs btn-input'>"
-		if($(this).text() != "-" || !$(this).text() != ""){
-			btnHtml = "<input type='button' value='수정' class='btn-warning btn-xs btn-update'>"
-					+ "<input type='button' value='삭제' class='btn-danger btn-xs btn-delete'>";
-		}
-		$(this).html(btnHtml);
+		var prevHtml = $(this).prev().html();
+		var type = prevHtml.substring(1,6);  /// input box가 떠있나 안떠있나 구분을 위한
+// 		console.log(prevHtml.substring(1,6));
+		var btnHtml = ""
+		if(type != 'input'){
+			if(!$(this).prev().text() && type != 'input'){  // 내용물이 없고 인풋박스가 없을때
+				btnHtml = "<input type='button' value='수정' class='btn-warning btn-xs btn-update'>"
+						+ "<input type='button' value='삭제' class='btn-danger btn-xs btn-delete'>";
+			}else{
+				btnHtml = "<input type='button' value='입력' class='btn-success btn-xs btn-input'>"		
+			}
+			$(this).html(btnHtml);
+		}	
 		$(this).parent().css("background-color", "#9BB9DE");
 	});
+	
 	$("#tSch").on("mouseleave", ".tdBtn", function() {
-		$(this).html("");
-		$(this).parent().css("background-color", "");
+		var btn = $(this).children("input[type=button]");
+		var btnTxt = btn.val(); // 테이블에 띄워져 있는 버튼의 텍스트
+		
+// 		console.log("dd" + btnTxt);
+		
+		if(btnTxt != '확인' ){ // input 박스가 떠 있을때는 상태가 유지 되도록.
+			$(this).html("");
+			$(this).parent().css("background-color", ""); 
+		}	
 	})
-	function drawScheduler() {
+	
+	// 확인 버튼 클릭 ( 스케쥴 데이터 입력 )
+	$("#tSch").on("click", ".btn-confirm", function() {
+		var date = $("#txt_enterDate").text();
+		var time = $(this).parent().attr("data-time");
+		var content = $(this).parent().prev().children("input[type=text]").val(); 
+		
+		console.log("date :" + date);
+		console.log("time :" + time);
+		console.log("content :" + content);
+	});
+	
+	
+	/// 입력 버튼클릭
+	$("#tSch").on("click", ".btn-input", function() { 
+		console.log("인풋버튼클릭됨");
+		inputHtml = "<input type='text' class='inp-sch' size='80%'>";
+		$(this).val("확인");
+		$(this).attr("class","btn-success btn-xs btn-confirm");
+		$(this).parent().prev().html(inputHtml);
+		$(this).parent().prev().children(".inp-sch").focus();
+		
+	});
+	//스케쥴러 그리기
+	function drawScheduler() { 
 		var schHtml = "";
 		for(var i = 0; i <= 24; i++){
 			var time = "";
@@ -176,9 +229,9 @@ $(document).ready(function() {
 				time = i + ": 00";
 			}
 			schHtml += "<tr>"
-			schHtml += "<td>" + time    + "</td>";
-			schHtml += "<td class='tdSch'>" +  "-"   + "</td>";
-			schHtml += "<td class='tdBtn'>" + "</td>"
+			schHtml += "<td class='tdTime'>" + time    + "</td>";
+			schHtml += "<td class='tdSch'> </td>";
+			schHtml += "<td class='tdBtn' data-time='"+ time + "'>" + "</td>"
 			schHtml += "</tr>"
 		}
 		$("#tSch").html(schHtml);
@@ -192,6 +245,11 @@ $(document).ready(function() {
 </script>
 <style type="text/css">
 table .tdBtn {
+	width: 100px;
+	
+}
+
+table .tdTime {
 	width: 100px;
 	
 }
@@ -214,6 +272,7 @@ table.calendar td {
 <body>
 <div class="container-fluid">
 	<div class="row">
+		<input type="text" readonly="readonly" id="txt_enterDate"> 
 		<div class="col-md-6">
 				<table class="table">
 					<thead>

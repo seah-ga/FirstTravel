@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="schedule">
+<insert id="insertSch">
+	insert into tbl_schedule (user_code, sch_date, sch_time, sch_content)
+	values (#{user_code}, #{sch_date}, #{sch_time}, #{sch_content})
+</insert>
+<delete id="deleteSch">
+	delete from tbl_schedule
+		where user_code = #{user_code}
+		and	  sch_date = #{sch_date}
+		and	  sch_time = #{sch_time}
+
+</delete>
+<update id="updateSch">
+	update tbl_schedule
+	set sch_content = #{sch_content}
+	where user_code = #{user_code}
+	and	  sch_date = #{sch_date}
+	and	  sch_time = #{sch_time}
+		
+</update>
+<select id="selectSchByDate" resultType="SchVo">
+	select *
+	from tbl_schedule
+	where user_code = #{user_code}
+	and sch_date = #{sch_date}
+</select>
+<select id="selectAllSch" resultType="SchVo">
+	select *
+	from tbl_schedule
+	where user_code = #{user_code}
+</select>
+
+
+</mapper>

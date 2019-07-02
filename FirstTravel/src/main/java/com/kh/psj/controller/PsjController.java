@@ -25,17 +25,20 @@ public class PsjController {
 	
 	@RequestMapping(value="/plan")
 	public void index(Model model) {
-		List<CityVo> cityList = cityService.getAllCities();
-		model.addAttribute("cityList", cityList);
-		
-		System.out.println("컨트롤러 인덱스");
+		System.out.println("컨트롤러 plan");
+		try {
+			List<CityVo> cityList = cityService.getAllCities();
+			model.addAttribute("cityList", cityList);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value="/schedule")
 	public void schedule(@RequestParam("enterDate")String enterDate, Model model) {
-		
-		
-		
+		model.addAttribute("enterDate", enterDate);
 	}
 
 }
