@@ -1,9 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
+
+<style>
+.search {
+-webkit-appearance: none;  /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+    width: 200px; /* 원하는 너비설정 */
+    padding: .8em .5em; /* 여백으로 높이 설정 */
+    font-family: inherit;  /* 폰트 상속 */
+    background: no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 
+    border: 1px solid #999;
+    border-radius: 0px; /* iOS 둥근모서리 제거 */
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+}
+</style>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/nds/ndsread/images/favicon.png" />
   
   <!-- Themefisher Icon font -->
@@ -48,6 +62,7 @@
 <meta charset="UTF-8">
 <script>
 $(document).ready(function() {
+	// 검색 버튼을 클릭했을때 (메인,리드 쪽하고 연동)
 	$("#btnsearch").click(function() {
 		var overseas_Country = $("#country").val();
 		var overseas_City = $("#city option:selected").text();
@@ -57,20 +72,21 @@ $(document).ready(function() {
 	});
 });
 </script>
-</head>
-<body>
+
+
+<!-- 검색 창 -->
 <div class="search-area">
         <div class="search-bg">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12" style="margin-top: 40px;">
-                            <select id="country">
+                    <div class="col-lg-12">
+                            <select id="country" class="search">
                             	<option>국가(선택)</option>
 	                            <c:forEach var="overseasVo" items="${countrylist}">
                                 <option value="${overseasVo.overseas_Country}">${overseasVo.overseas_Country}</option>
                                 </c:forEach>
                             </select>
-                            <select id="city">
+                            <select id="city" class="search">
                            
                             </select>
                      

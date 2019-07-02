@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="cart">
+<insert id="insert">
+	insert into tbl_cart (cart_code, user_code, dep_city, arr_city, departure_date, 
+		adult_count, child_count, child_price, adult_price)
+	values (SEQ_CART.NEXTVAL,#{user_code}, #{dep_city}, #{arr_city}, #{departure_date}, 
+		#{adult_count}, #{child_count}, #{child_price}, #{adult_price})
+		
+</insert>
+
+<select id="selectAll" resultType="cartVo">
+	select * from tbl_cart 
+	where user_code = #{user_code}
+</select>		
+
+
+</mapper>

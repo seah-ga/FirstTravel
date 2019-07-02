@@ -1,6 +1,6 @@
 <script src="/resources/nds/js/jquery-1.8.0.min.js" type="text/javascript"></script> 
 <!-- Main js files --> 
-<!-- <script src="/resources/nds/js/screen.js" type="text/javascript"></script>  -->
+<script src="/resources/nds/js/screen.js" type="text/javascript"></script> 
 <!-- Tabs --> 
 <script src="/resources/nds/js/tabs.js" type="text/javascript"></script> 
 <!-- Include prettyPhoto --> 
