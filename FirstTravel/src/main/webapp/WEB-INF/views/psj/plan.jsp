@@ -31,14 +31,13 @@
 <link rel="stylesheet" href="/resources/psj/assets/css/nice-select.css">
 <link rel="stylesheet" href="/resources/psj/assets/css/style.css">
 <!--  제이쿼리 , 부트스트랩 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">										
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>										
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>										
 
 <script type="text/javascript">
 		<!-- ctrl f   '달력', '비용', '호텔', '항공' -->
-		<!--  달력관련 -->
+	//달력관력
 		var today = null;
 		var year = null;
 		var month = null;
@@ -46,15 +45,21 @@
 		var lastDay = null;
 		var $tdDay = null;
 		var $tdSche = null;
-		<!-- 비용관련 전역변수 -->
-		var top_adult_charge = parseInt($("#adult_charge").text()); // 인원당 비용
-		var top_child_charge = parseInt($("#child_charge").text()); // 
-		var top_adult_num = parseInt($("#adNum").val());   // 인원
-		var top_child_num = parseInt($("#cdNum").val());
-		var top_sum_charge = (top_adult_num * top_adult_charge) + (top_child_num * top_child_charge); // 비용합계 
-		<!--------- -->
+	//비용관련
+		var top_adult_charge = 0; // 인원당 비용
+		var top_child_charge = 0; // 
+		var top_adult_num = 1;   // 인원
+		var top_child_num = 0;
+		var top_sum_charge = 0; // 비용합계 
+	
 		
-
+	function chargeInit() {
+		 top_adult_charge = 0; // 인원당 비용
+		 top_child_charge = 0; // 
+		 top_adult_num = 1;   // 인원
+		 top_child_num = 0;
+		 top_sum_charge = 0; // 비용합계 
+	}
 	$(document).ready(function() {
 		
 		
@@ -77,19 +82,20 @@
 			$("#txt_date").val(date);
 			////////////////////////////////////////////////////
 		
-			<!-- 비용 변경시 이용할 함수들 -->
+// 			비용 변경시 이용할 함수들 
 		
 		function ifCheckEl(checkBox, childCharge, adultCharge) {
 			if(checkBox.is(":checked")){ // 체크를 할때
 				top_adult_charge += adultCharge; 
 				top_child_charge += childCharge; 
-				ifValChange();
+		
 			
 			}else if(!checkBox.is(":checked")){ // 체크를 풀 때
 				top_adult_charge -= adultCharge; 
 				top_child_charge -= childCharge; 
-				ifValChange();
+				
 			}	
+			ifValChange();
 		} 
 		// 인당 요금이 변경될때마다 호출할 함수
 		function ifValChange() {
@@ -117,8 +123,7 @@
 		
 			$("#result_char").text(top_sum_charge);
 		} 	
-		<!-- ---------------------------------------------------------------------- -->	
-		<!-- 달력 관련 함수 ----------->
+		//달력관련함수
 		function drawCalendar() {
 			var setTableHTML = "";
 			setTableHTML += '<table class="calendar">';
@@ -210,7 +215,7 @@
 			/// 제공되는 무료 오픈 api 정보가 부족해 일단 울산 숙박업만 출력하기로.
 			
 			if($("#sel_hotel_loc option:selected").text() == '울산'){
-				var url = "/rest/getHotel";
+				var url = "/rest/hotel-list";
 				$.ajax({
 					"type" : "get",
 					"url" : url,
@@ -233,10 +238,10 @@
 										+  "<td>" +  priceAdult + "</td>" // 가격 대인
 										+  "<td>" + "<button type='button' class='btn btn-info' data-toggle='modal'"  
 										+			"data-target='#modal_hotelInfo'" 
-										+				"data-hotelName=" + hotel.ulsanhotelTitle 
-										+				" data-hotelAddr=" + hotel.ulsanhotelNewAddr 
-										+   			" data-hotelTel=" + hotel.ulsanhotelTel 
-										+				" data-hotelId=" + hotel.ulsanhotelEntId
+										+				"data-hotelName='" + hotel.ulsanhotelTitle + "'" 
+										+				" data-hotelAddr='" + hotel.ulsanhotelNewAddr  + "'" 
+										+   			" data-hotelTel='" + hotel.ulsanhotelTel  + "'" 
+										+				" data-hotelId='" + hotel.ulsanhotelEntId + "'" 
 										+ 				">상세정보</button>"  
 										+  "</td>" // 호텔상세정보 보기 버튼
 										+  "<td>" + "<input type='checkbox' class='chk_hotel'" 
@@ -261,6 +266,7 @@
 			ifCheckEl($(this), childCharge, adultCharge);
 // 			console.log(childCharge);
 		});
+		
 		$("#hotelList").on("click",".btn-info", function(e) {
 			var hotelName = $(this).attr("data-hotelName");
 			var hotelAddr = $(this).attr("data-hotelAddr");
@@ -269,7 +275,7 @@
 			
 			console.log(hotelName + ":::" + hotelAddr + "::::" + hotelTel + ":::" + hotelId);
 			// --- 호텔 사진 받아오기 ------------------
-			var url_picture = "/rest/hotelpicture";
+			var url_picture = "/rest/hotel-picture";
 			var data_hotel = {
 					"hotelEntId" : hotelId
 			};
@@ -371,6 +377,7 @@
 		/// 항공정보 검색
 		$("#btn_searchAir").click(function() {
 			console.log("서치에어 클릭");
+			chargeInit(); // 이전에 선택했던 값정보 초기화 
 			var depPort = $("#sel_dep").val();
 			var arrPort = $("#sel_arr").val();
 			var depDate = $("#txt_date").val();
@@ -381,7 +388,7 @@
 					"depPlandTime" : depDate
 			};
 		
-			var url = "/rest/getAir";
+			var url = "/rest/air-info";
 			
 			$.ajax({
 				"type" : "get",
@@ -535,6 +542,41 @@
 			location.href = "/psj/schedule?enterDate=" + enterDate;
 		});
 		
+		
+		$("#btn_cart").click(function() {
+			var url = "/sch/cart";
+			var depCity = $("#sel_dep option:checked").text();
+			var arrCity = $("#sel_arr option:checked").text();
+			var departure_date = $("#txt_date").val();
+// 			console.log($("#sel_dep option:checked").text());
+// 			console.log($("#sel_arr option:checked").text());
+			var data = {
+				"user_code" : "111",
+				"dep_city" : depCity,
+				"arr_city" : arrCity,
+				"departure_date" : departure_date,
+				"adult_count" : top_adult_num,
+				"child_count" :top_child_num,
+				"adult_price" : top_adult_charge,
+				"child_price" :	top_child_charge
+			};
+			var jsonData = JSON.stringify(data);
+			$.ajax({
+					"type" : "put",
+					"url" : url,
+					"headers" :  {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "get"
+					},
+					"data" : jsonData,
+					"success" : function(rData) {
+						var showHtml = "<p>" + depCity + "출발 " + "</p>";
+							showHtml += "<p>" + arrCity + "도착" + "<p>";
+						
+					}
+			});		
+			
+		});
 	
 	
 	
@@ -756,7 +798,7 @@ table.calendar td {
 																  
 					</div>
 					<div class="col-md-6">
-						<input type="button" value="장바구니" class="btn-warning  btn-block">
+						<input type="button" value="장바구니" class="btn-warning  btn-block" id="btn_cart">
 					</div>
 					<div class="col-md-6">
 						<input type="button" value="결제하기" class="btn-primary  btn-block"
@@ -1249,8 +1291,8 @@ table.calendar td {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-				<div class="modal fade" id="modal_hotelInfo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg" role="document" style="max-width: 100%; width: auto; display: table;">
+				<div class="modal fade" id="modal_hotelInfo"  role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" style="max-width: 100%; width: auto; display: table;">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="modal-hotel-Title">
@@ -1400,7 +1442,7 @@ table.calendar td {
 	
 	<!-- Javascript -->
 <!-- 	<script src="/resources/psj/assets/js/vendor/jquery-2.2.4.min.js"></script> -->
-	<script src="/resources/psj/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
+<!-- 	<script src="/resources/psj/assets/js/vendor/bootstrap-4.1.3.min.js"></script> -->
 	<script src="/resources/psj/assets/js/vendor/wow.min.js"></script>
 	<script src="/resources/psj/assets/js/vendor/owl-carousel.min.js"></script>
 	<script src="/resources/psj/assets/js/vendor/jquery.nice-select.min.js"></script>

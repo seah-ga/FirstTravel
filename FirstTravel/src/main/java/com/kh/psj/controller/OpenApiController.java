@@ -69,7 +69,7 @@ public class OpenApiController {
 	}
 	
 	
-	@RequestMapping(value="/hotelpicture", produces = "application/json; charset=utf-8") // 호텔사진받아오기
+	@RequestMapping(value="/hotel-picture", produces = "application/json; charset=utf-8") // 호텔사진받아오기
 	public String getHotelPicture(HotelVo hotelVo) throws IOException {
 		String hotelEntId = hotelVo.getHotelEntId();
 		System.out.println(hotelEntId);
@@ -86,7 +86,7 @@ public class OpenApiController {
 	}
 	
 	
-	@RequestMapping(value="/getHotel", produces = "application/json; charset=utf-8") // 호텔목록받기
+	@RequestMapping(value="/hotel-list", produces = "application/json; charset=utf-8") // 호텔목록받기
 	public String getHotel() throws IOException {
 //		System.out.println("호텔목록받기");
 	      StringBuilder urlBuilder = new StringBuilder("http://data.ulsan.go.kr/rest/ulsanhotel/getUlsanhotelList"); /*URL*/
@@ -104,7 +104,7 @@ public class OpenApiController {
 	        return null;
 	 }
 	
-	@RequestMapping(value="/getAir", produces = "application/json; charset=utf-8") // 항공정보받기
+	@RequestMapping(value="/air-info", produces = "application/json; charset=utf-8") // 항공정보받기
 	public String test(AirVo airVo) throws Exception {
 		System.out.println("airVo:" + airVo);
 		String depAir = airVo.getDepAirportId();

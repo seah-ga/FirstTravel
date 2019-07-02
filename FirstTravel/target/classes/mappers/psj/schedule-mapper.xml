@@ -5,18 +5,18 @@
   	
 <mapper namespace="schedule">
 <insert id="insertSch">
-	insert into tbl_schedule (user_code, sch_date, sch_time, sch_content)
+	insert into tbl_schedule_by_time (user_code, sch_date, sch_time, sch_content)
 	values (#{user_code}, #{sch_date}, #{sch_time}, #{sch_content})
 </insert>
 <delete id="deleteSch">
-	delete from tbl_schedule
+	delete from tbl_schedule_by_time
 		where user_code = #{user_code}
 		and	  sch_date = #{sch_date}
 		and	  sch_time = #{sch_time}
 
 </delete>
 <update id="updateSch">
-	update tbl_schedule
+	update tbl_schedule_by_time
 	set sch_content = #{sch_content}
 	where user_code = #{user_code}
 	and	  sch_date = #{sch_date}
@@ -25,14 +25,39 @@
 </update>
 <select id="selectSchByDate" resultType="SchVo">
 	select *
-	from tbl_schedule
+	from tbl_schedule_by_time
 	where user_code = #{user_code}
 	and sch_date = #{sch_date}
 </select>
 <select id="selectAllSch" resultType="SchVo">
 	select *
-	from tbl_schedule
+	from tbl_schedule_by_time
 	where user_code = #{user_code}
+</select>
+
+<!-- 타이틀부분 -->
+<insert id="insertSchTitle">
+	insert into tbl_schedule_by_date(user_code,sch_d_date,sch_d_content)
+	values(#{user_code}, #{sch_d_date}, #{sch_d_content})
+</insert>
+
+<delete id="deleteSchTitle">
+	delete from tbl_schedule_by_date
+	where user_code = #{user_code}
+	and   sch_d_date = #{sch_d_date}
+</delete>
+
+<update id="updateSchTitle">
+	update tbl_schedule_by_date
+	set sch_d_content = #{sch_d_content}
+	where user_code = #{user_code}
+	and   sch_d_date = #{sch_d_date}
+</update>
+<select id="selectSchTitle" resultType="SchTitleVo">
+	select *
+	from tbl_schedule_by_date
+	where user_code = #{user_code}
+	
 </select>
 
 

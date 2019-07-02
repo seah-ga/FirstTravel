@@ -52,14 +52,6 @@ public class SchDaoTest {
 		List<SchVo> list = schDao.selectAllSch(111);
 		System.out.println(list);
 	}
-	@Test
-	public void selectOneTest() throws Exception {
-		SchVo schVo = new SchVo();
-	
-		schVo.setSch_date("20190626");
-		schVo.setUser_code(111);
-		SchVo returnSchVo = schDao.selectSchByDate(schVo);
-		System.out.println(returnSchVo);
-	}
+
 
 }

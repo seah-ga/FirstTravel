@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.psj.domain.SchTitleVo;
 import com.kh.psj.domain.SchVo;
 
 @Repository
@@ -42,9 +43,33 @@ public class SchDaoImpl implements ISchDao{
 	}
 	//ID + 날짜별 스케쥴
 	@Override
-	public SchVo selectSchByDate(SchVo schVo) throws Exception {
-		SchVo returnSchVo = sqlSession.selectOne(NAME_SPACE + "selectSchByDate", schVo); 
-		return returnSchVo;
+	public List<SchVo> selectSchByDate(int user_code, String date) throws Exception {
+		SchVo schVo = new SchVo();
+		schVo.setSch_date(date);
+		schVo.setUser_code(user_code);
+		List<SchVo> list = sqlSession.selectList(NAME_SPACE + "selectSchByDate", schVo); 
+		return list;
+	}
+	@Override
+	public void insertSchTitle(SchTitleVo schTitleVo) throws Exception {
+		sqlSession.insert(NAME_SPACE + "insertSchTitle", schTitleVo);
+		
+	}
+	@Override
+	public void deleteSchTitle(SchTitleVo schTitleVo) throws Exception {
+		sqlSession.delete(NAME_SPACE + "deleteSchTitle", schTitleVo); 
+		
+	}
+	@Override
+	public void updateSchTitle(SchTitleVo schTitleVo) throws Exception {
+		sqlSession.update(NAME_SPACE + "updateSchTitle", schTitleVo);
+		
+	}
+	@Override
+	public List<SchTitleVo> selectSchTitle(SchTitleVo schTitleVo) throws Exception {
+		List<SchTitleVo> returnSchTitleVo = sqlSession.selectList(NAME_SPACE + "selectSchTitle", schTitleVo);
+		return returnSchTitleVo;
+		
 	}
 	
 }
