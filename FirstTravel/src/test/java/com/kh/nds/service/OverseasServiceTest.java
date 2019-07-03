@@ -32,7 +32,17 @@ public class OverseasServiceTest {
 	@Test
 	public void selectHotel() throws Exception {
 		String hotel_date = "2019-06-25";
-		List<OverseasHotelVo> list= overseasService.selectHotel(hotel_date);
+		String hotel_city = "타이페이";
+		OverseasHotelVo vo = new OverseasHotelVo();
+		vo.setHotel_date(hotel_date);
+		vo.setHotel_city(hotel_city);
+		List<OverseasHotelVo> list= overseasService.selectHotel(vo);
 		System.out.println(list + "리스트를 보자꾸나");
+	}
+	@Test
+	public void cityImage() throws Exception {
+		String airPort = "KXK";
+		OverseasVo vo = overseasService.cityImage(airPort);
+		System.out.println(vo + "리스트를 보자꾸나");
 	}
 }

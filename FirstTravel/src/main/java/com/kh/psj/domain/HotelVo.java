@@ -1,7 +1,7 @@
 package com.kh.psj.domain;
 
 public class HotelVo {
-	String hotelEntId;
+	private String hotelEntId;
 
 	public String getHotelEntId() {
 		return hotelEntId;

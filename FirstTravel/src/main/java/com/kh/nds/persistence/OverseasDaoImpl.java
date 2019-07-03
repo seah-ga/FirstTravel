@@ -32,9 +32,16 @@ public class OverseasDaoImpl implements IOverseasDao {
 	}
 
 	@Override
-	public List<OverseasHotelVo> selectHotel(String hotel_date) throws Exception {
-		List<OverseasHotelVo> list = sqlSession.selectList(NAMESPACE + "selecthotel", hotel_date);
+	public List<OverseasHotelVo> selectHotel(OverseasHotelVo overseasHotelVo) throws Exception {
+		List<OverseasHotelVo> list = sqlSession.selectList(NAMESPACE + "selecthotel", overseasHotelVo);
 		return list;
 	}
+
+	@Override
+	public OverseasVo cityImage(String airPort) throws Exception {
+		OverseasVo vo = sqlSession.selectOne(NAMESPACE + "cityimage" , airPort);
+		return vo;
+	}
+
 
 }

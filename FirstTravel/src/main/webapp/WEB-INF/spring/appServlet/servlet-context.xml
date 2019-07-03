@@ -40,17 +40,12 @@
 	<context:component-scan base-package="com.kh.psj.persistence" />
 	<context:component-scan base-package="com.kh.psj.service" />
 	<context:component-scan base-package="com.kh.ljh.controller" />
-
-
-
-
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
-	<!-- 업로드 경로 설정: H:/upload -->
+<!-- 	업로드 경로 설정: H:/upload -->
 <!-- 	String uploadPath = new String("H:/upload"); -->
 	<beans:bean class="java.lang.String" id="uploadPath">
-<!-- 		<beans:constructor-arg value="H:\workspace\springmvc\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\FirstTravel\resources\a"/> -->
 		<beans:constructor-arg value="\\192.168.0.127\shared\upload_team2"/>
 	</beans:bean>
 	
@@ -63,4 +58,5 @@
 	<!-- 인터셉터 -->
 	
 	<!-- **, * 패턴 사용가능 --><!-- mapping path가 할 것을 가로 채서 먼저 할일을 정한다. -->
+	
 </beans:beans>

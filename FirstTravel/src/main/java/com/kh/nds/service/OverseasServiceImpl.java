@@ -29,9 +29,16 @@ public class OverseasServiceImpl implements IOverseasService {
 	}
 
 	@Override
-	public List<OverseasHotelVo> selectHotel(String hotel_date) throws Exception {
-		List<OverseasHotelVo> list = overseasDao.selectHotel(hotel_date);
+	public List<OverseasHotelVo> selectHotel(OverseasHotelVo overseasHotelVo) throws Exception {
+		List<OverseasHotelVo> list = overseasDao.selectHotel(overseasHotelVo);
 		return list;
 	}
+
+	@Override
+	public OverseasVo cityImage(String airPort) throws Exception {
+		OverseasVo vo = overseasDao.cityImage(airPort);
+		return vo;
+	}
+
 
 }

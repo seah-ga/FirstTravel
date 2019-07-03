@@ -4,21 +4,30 @@
   	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   	
 <mapper namespace="overseas">
-
+<!-- 검색창에 띄울 해외 모든 국가 -->
 <select id="selectAllcountry" resultType="com.kh.nds.domain.OverseasVo">
 	select DISTINCT overseas_country
 	from tbl_overseas
 </select>
-	
+<!-- 검색창에 띄울 국가에 따른 도시출력 -->
 <select id="countryChk" resultType="com.kh.nds.domain.OverseasVo">
 	select overseas_city , airport
 	from tbl_overseas
 	where overseas_country = #{overseas_Country}
 </select>	
-
+<!-- 호텔 체크인날짜, 호텔의 도시를 보고 테이블에 띄움 -->
 <select id="selecthotel" resultType="com.kh.nds.domain.OverseasHotelVo">
 	select *
 	from tbl_overseashotel
 	where hotel_date = #{hotel_date}
+	and hotel_city = #{hotel_city}
 </select>
+<!-- 도시(에어포트(도시코드))에 따른 이미지 -->
+<select id="cityimage" resultType="com.kh.nds.domain.OverseasVo">
+	select image1, image2, image3, image4, image5, image6
+	from tbl_overseas
+	where airport = #{airPort}
+	
+</select>
+
 </mapper>

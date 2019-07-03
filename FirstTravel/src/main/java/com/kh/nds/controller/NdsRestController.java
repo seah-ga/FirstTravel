@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,14 +22,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.nds.domain.OverseasHotelVo;
 import com.kh.nds.domain.OverseasVo;
 import com.kh.nds.service.IOverseasService;
+import com.kh.psj.domain.CityVo;
+import com.kh.psj.service.ICityService;
 
 @RestController
-@RequestMapping("/restover")
-public class RestOverseasController {
+@RequestMapping(value="/ndsrest")
+public class NdsRestController {
 	
 	@Inject
 	private IOverseasService overseasService;
 	
+	@Inject
+	private ICityService cityService;
+	
+	// 항공 API
 	@RequestMapping(value="/overseasapi", produces = "application/json; charset=utf-8")
 	 public String overseasAPI(@RequestParam("airPort") String airPort,
 			 				   @RequestParam("datestr") String datestr) throws Exception {
@@ -66,10 +71,27 @@ public class RestOverseasController {
 		        System.out.println(result);
 		        return data;
 		    }
-
 	
+	// 국가리스트 출력
+	@RequestMapping(value="/countrylist", method=RequestMethod.GET)
+	public ResponseEntity<List<OverseasVo>> countryList() throws Exception {
+		
+		ResponseEntity<List<OverseasVo>> entity = null;
+		
+		try {
+			 List<OverseasVo> list = overseasService.selectAllcountry();
+			 entity = new ResponseEntity<List<OverseasVo>>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<List<OverseasVo>>(HttpStatus.BAD_REQUEST);
+		} 
+		return entity;
+	}
+	
+	// 국가에따른 도시 출력
 	@RequestMapping(value="/countrychk", method=RequestMethod.POST)
 	public ResponseEntity<List<OverseasVo>> countryChk(@RequestBody OverseasVo vo) throws Exception {
+		System.out.println("OverseasVo" + vo);
 		
 		ResponseEntity<List<OverseasVo>> entity = null;
 		
@@ -84,19 +106,35 @@ public class RestOverseasController {
 		return entity;
 	}
 	
+	// 한국 도시 출력
+	@RequestMapping(value="/domesticlist", method=RequestMethod.GET)
+	public ResponseEntity<List<CityVo>> domesticList() throws Exception {
+		
+		ResponseEntity<List<CityVo>> entity = null;
+		
+		try {
+			List<CityVo> list = cityService.getAllCities();
+			entity = new ResponseEntity<List<CityVo>>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<List<CityVo>>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	// 데이터베이스에있는 도시,날짜에 따른 호텔출력
 	@RequestMapping(value="/selecthotel", method=RequestMethod.POST)
 	public ResponseEntity<List<OverseasHotelVo>> selectHotel(@RequestBody OverseasHotelVo vo) throws Exception {
 		
 		ResponseEntity<List<OverseasHotelVo>> entity = null;
 		
 		try {
-			String hotel_date = vo.getHotel_date();
-			List<OverseasHotelVo> list = overseasService.selectHotel(hotel_date);
+			List<OverseasHotelVo> list = overseasService.selectHotel(vo);
 			entity = new ResponseEntity<List<OverseasHotelVo>>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<List<OverseasHotelVo>>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
-		}
 	}
+}
