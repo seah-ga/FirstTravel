@@ -6,12 +6,13 @@
 <head>
 <script>
 $(document).ready(function(){
+	// 검색 창
 	$("#country").change(function() {
 		var overseas_Country = $("#country option:selected").val();
 		var data = {
 				"overseas_Country" : overseas_Country
 		};
-		var url = "/restover/countrychk";
+		var url = "/ndsrest/countrychk";
 		
 		$.ajax({
 			"type" : "post",

@@ -14,7 +14,7 @@ public class CityServiceImpl implements ICityService {
 	@Inject
 	ICityDao CityDao;
 	@Override
-	public List<CityVo> getAllCities() {
+	public List<CityVo> getAllCities() throws Exception{
 		List<CityVo> list = CityDao.getCities();
 		return list;
 	}

@@ -32,6 +32,28 @@
 	<context:component-scan base-package="com.kh.firsttravel" />
 	<context:component-scan base-package="com.kh.kdw.controller" />
 	<context:component-scan base-package="com.kh.kdw.persistence" />
+	<context:component-scan base-package="com.kh.kdw.service" />
+	<context:component-scan base-package="com.kh.nds.controller" />
+	<context:component-scan base-package="com.kh.nds.persistence" />
+	<context:component-scan base-package="com.kh.nds.service" />
+	<context:component-scan base-package="com.kh.psj.controller" />
+	<context:component-scan base-package="com.kh.psj.persistence" />
+	<context:component-scan base-package="com.kh.psj.service" />
+	<context:component-scan base-package="com.kh.ljh.controller" />
+	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+<!-- 	업로드 경로 설정: H:/upload -->
+<!-- 	String uploadPath = new String("H:/upload"); -->
+	<beans:bean class="java.lang.String" id="uploadPath">
+		<beans:constructor-arg value="\\192.168.0.127\shared\upload_team2"/>
+	</beans:bean>
+	
+<<<<<<< HEAD
+	<!-- 스프링이 자동으로 읽도록 등록 -->
+	<context:component-scan base-package="com.kh.firsttravel" />
+	<context:component-scan base-package="com.kh.kdw.controller" />
+	<context:component-scan base-package="com.kh.kdw.persistence" />
 	<context:component-scan base-package="com.kh.nds.controller" />
 	<context:component-scan base-package="com.kh.nds.persistence" />
 	<context:component-scan base-package="com.kh.nds.service" />
@@ -57,8 +79,16 @@
 	<!-- 10 * 1024 * 1024 : 10MB -->
 <!-- 	<beans:property name="maxUploadSize" value="10485760"/> -->
 <!-- 	</beans:bean> -->
+=======
+	<beans:bean id="multipartResolver" 
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+<!-- 	10 * 1024 * 1024 : 10MB -->
+	<beans:property name="maxUploadSize" value="10485760"/>
+	</beans:bean>
+>>>>>>> branch 'master' of https://github.com/seah-ga/FirstTravel.git
 	
 	<!-- 인터셉터 -->
 	
 	<!-- **, * 패턴 사용가능 --><!-- mapping path가 할 것을 가로 채서 먼저 할일을 정한다. -->
+	
 </beans:beans>

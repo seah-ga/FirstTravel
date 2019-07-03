@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="review">
+<!-- 리뷰 글목록 -->
+<select id="selectAllreview" resultType="com.kh.nds.domain.ReviewVo">
+	select *
+	from (select rownum rnum, a.*
+		from (select * from tbl_review
+				<include refid="search"/>
+			order by review_num desc) a)
+			where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+</select>
+<!-- 리뷰 글목록 개수 -->
+<select id="reviewCount" resultType="int">
+	select count(*)
+	from tbl_review
+	<include refid="search"/>
+</select>
+
+<!-- 검색 -->
+<sql id="search">
+	<if test="searchType != null">
+		<if test="searchType == 'review_name'">
+			where review_name like '%' || #{keyword} || '%'
+		</if>
+		<if test="searchType == 'review_writer'">
+			where review_writer like '%' || #{keyword} || '%'
+		</if>
+		<if test="searchType == 'review_country'">
+			where review_country like '%' || #{keyword} || '%'
+		</if>
+		<if test="searchType == 'review_city'">
+			where review_city like '%' || #{keyword} || '%'
+		</if>
+	</if>
+</sql>
+<insert id="reviewregist">
+	insert into tbl_review(review_num, user_code, review_class, review_country, review_city, review_name, review_content, review_image, review_writer)
+	values (seq_review.nextval, #{user_code}, #{review_class}, #{review_country}, #{review_city}, #{review_name}, #{review_content}, #{review_image}, #{review_writer})
+</insert>
+</mapper>
