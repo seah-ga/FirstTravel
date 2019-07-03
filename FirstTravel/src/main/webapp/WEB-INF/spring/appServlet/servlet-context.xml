@@ -36,9 +36,11 @@
 	<context:component-scan base-package="com.kh.nds.persistence" />
 	<context:component-scan base-package="com.kh.nds.service" />
 	<context:component-scan base-package="com.kh.psj.controller" />
-	<context:component-scan base-package="com.kh.ljh.controller" />
 	<context:component-scan base-package="com.kh.psj.persistence" />
 	<context:component-scan base-package="com.kh.psj.service" />
+	<context:component-scan base-package="com.kh.ljh.controller" />
+	<context:component-scan base-package="com.kh.ljh.persistence" />
+	<context:component-scan base-package="com.kh.ljh.service" />
 <!-- 	<context:component-scan base-package="com.kh.persistence" /> -->
 <!-- 	<context:component-scan base-package="com.kh.service" /> -->
 	
