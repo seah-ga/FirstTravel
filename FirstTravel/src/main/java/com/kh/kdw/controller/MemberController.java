@@ -88,10 +88,22 @@ public class MemberController {
 		return entity;
 	}
 	
-	@RequestMapping(value="/memberinfo", method=RequestMethod.POST)
-	public void memberInfo(HttpSession session) throws Exception {
-		MemberVo vo = (MemberVo)session.getAttribute("memberVo");
-		System.out.println(vo);
+	@RequestMapping(value="/join-run", method=RequestMethod.POST)
+	public String joinRun(MemberVo memberVo, HttpSession session) throws Exception {
+		System.out.println("memberVo1" + memberVo);
+		String search_address = memberVo.getSearch_address();
+		String detail_address = memberVo.getDetail_address();
+		memberVo.setUser_address(search_address, detail_address);
+		memberVo = memberService.memberJoin(memberVo);
+		System.out.println("memberVo2" + memberVo);
+		session.setAttribute("memberVo", memberVo);
+		
+		return "redirect:/kdw/memberinfo";
+	}
+	
+	@RequestMapping(value="/memberinfo")
+	public void memberInfo() throws Exception {
+		
 	}
 	
 	@RequestMapping(value="/memberinfo-run", method=RequestMethod.POST)
@@ -99,6 +111,8 @@ public class MemberController {
 		memberService.memberModify(memberVo);
 		return "redirect:/kdw/listcart";
 	}
+	
+
 	
 
 }

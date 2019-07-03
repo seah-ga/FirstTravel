@@ -389,7 +389,7 @@ $(document).ready(function() {
               <!--Card content-->
               <div class="card-body">
 			<!-- Default form register -->
-<form class="text-left border border-light p-5" action="/kdw/memberinfo" method="post" id="joinForm">
+<form class="text-left border border-light p-5" action="/kdw/join-run" method="post" id="joinForm">
 
     <p class="h4 mb-4">회원가입</p>
 
@@ -491,7 +491,7 @@ $(document).ready(function() {
 
     <!-- 광고 수신동의 -->
 	<div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="chk_ad" name="chk_ad">
+    <input type="checkbox" class="custom-control-input" id="chk_ad" name="chk_ad" value="N">
     <label class="custom-control-label" for="chk_ad">여행정보 / 이벤트 / 쿠폰 수신에 동의합니다.</label>
 	</div>
 

@@ -3,6 +3,7 @@ package com.kh.kdw.service;
 import java.util.List;
 
 import com.kh.kdw.domain.GBoardVo;
+import com.kh.kdw.domain.PagingDto;
 
 public interface IGalleryService {
 
@@ -19,5 +20,8 @@ public interface IGalleryService {
 	public void GBoardDelete(int g_no) throws Exception;
 	
 	// 글목록
-	public List<GBoardVo> GBoardList() throws Exception;
+	public List<GBoardVo> GBoardList(PagingDto pagingDto) throws Exception;
+	
+	// 글개수 얻기
+	public int totalListCount(PagingDto pagingDto) throws Exception;
 }

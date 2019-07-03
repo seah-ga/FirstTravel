@@ -13,7 +13,7 @@ public class MemberVo {
 	private String detail_address;	// 상세주소
 	private String user_phone;		// 전화번호
 	private String user_email;		//이메일
-	private String chk_ad;			// 광고 수신 여부
+	private String chk_ad = "N";	// 광고 수신 여부
 	private int user_point;			//포인트
 	private Timestamp joindate;		// 가입일
 	

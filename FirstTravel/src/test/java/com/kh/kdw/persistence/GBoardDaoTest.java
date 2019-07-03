@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.kdw.domain.GBoardVo;
+import com.kh.kdw.domain.PagingDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
@@ -56,7 +57,17 @@ public class GBoardDaoTest {
 	
 	@Test
 	public void gBoardList() throws Exception {
-		List<GBoardVo> list = galleryDao.gBoardList();
+		PagingDto pagingDto = new PagingDto();
+		List<GBoardVo> list = galleryDao.gBoardList(pagingDto);
 		System.out.println(list);
+	}
+	
+	@Test
+	public void totalListCountTest() throws Exception {
+		PagingDto pagingDto = new PagingDto();
+		pagingDto.setSearchType("title");
+		pagingDto.setKeyword("1");
+		int count = galleryDao.totalListCount(pagingDto);
+		System.out.println(count);
 	}
 }
