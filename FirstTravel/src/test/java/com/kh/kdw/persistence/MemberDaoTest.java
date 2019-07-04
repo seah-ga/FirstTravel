@@ -27,9 +27,9 @@ public class MemberDaoTest {
 	@Test
 	public void memberJoinTest() throws Exception {
 		MemberVo memberVo = new MemberVo();
-		memberVo.setUser_id("user12");
+		memberVo.setUser_id("user2");
 		memberVo.setUser_name("user12name");
-		memberVo.setUser_pw("12345678");
+		memberVo.setUser_pw("1234");
 		memberVo.setUser_address("울산 123-23번지", "123");
 		memberVo.setUser_phone("1234-3456-34252");
 		memberVo.setUser_email("234@3214");
