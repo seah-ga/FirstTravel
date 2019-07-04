@@ -146,6 +146,14 @@ $(document).ready(function() {
 		$("input[name=searchType]").val(searchType);
 		$("#pageForm").submit();
 	});
+	// 이미지,제목 클릭했을때 폼으로 리드 보내기
+	$(".readloaction").click(function() {
+		var review_num = $(this).attr("data-num");
+		$("input[name=review_num]").val(review_num);
+		$("#pageForm").attr("action", "/nds/reviewread");
+		$("#pageForm").submit();
+	});
+	
 });
 </script>
 </head>
@@ -163,13 +171,16 @@ $(document).ready(function() {
 	<input type="hidden" name="keyword"
 		value="${paginationDto.pagingDto.keyword}">
 </form>
+
 <!-- 헤드 제목 -->
-<section style="background-color: #a5e3ff;">
+<section class="page">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
 					<h1 class="page-name">여행 후기</h1>
+					<ol class="breadcrumb">
+					</ol>
 				</div>
 			</div>
 		</div>
@@ -183,20 +194,20 @@ $(document).ready(function() {
       		<div class="col-md-6">
 		        <div class="post">
 		          <div class="post-thumb">
-		            <a href="">
-		              <img class="img-responsive" src="
+		            <a href="#">
+		              <img class="img-responsive readloaction" data-num="${reviewVo.review_num}" src="
 		              <c:choose>
-		              <c:when test="${reviewVo.review_image != null}">
-		              /ndsupload/displayFile?fileName=${reviewVo.review_image}
+		              <c:when test="${reviewVo.review_image != 'null'}">
+		              /ndsupload/display?fileName=${reviewVo.review_image}
 		              </c:when>
-		              <c:when test="${reviewVo.review_image == null}">
-		              /ndsupload/displayFile?fileName=nullImg.jpg
+		              <c:when test="${reviewVo.review_image == 'null'}">
+		              /resources/nds/images/b_nullImage.jpg
 		              </c:when>
 		              </c:choose>
 		              ">
 		            </a>
 		          </div>
-		          <h2 class="post-title"><a href="">${reviewVo.review_name}</a></h2>
+		          <h2 class="post-title"><a href="#" class="readloaction" data-num="${reviewVo.review_num}">[${reviewVo.review_country}:${reviewVo.review_city}]${reviewVo.review_name}</a></h2>
 		          <div class="post-meta">
 		            <ul>
 		              <li>

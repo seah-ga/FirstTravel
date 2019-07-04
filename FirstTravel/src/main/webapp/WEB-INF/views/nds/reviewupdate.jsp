@@ -219,28 +219,31 @@ $(document).ready(function(){
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<form id="review_form" action="/nds/reviewregist-run" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="user_code" value=111>
-					<input type="hidden" name="review_writer" value="first">
+					<form id="review_form" action="/nds/reviewupdate-run" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="user_code" value="${reviewVo.user_code}">
+					<input type="hidden" name="review_writer" value="${reviewVo.review_writer}">
+					<input type="hidden" name="review_num" value="${reviewVo.review_num}">
 					<div style="float: left;">				
 						<select id="review_class" class="selectinsert" name="review_class">
-							<option>클래스(선택)</option>
-							<option>국내</option>
-							<option>해외</option>
+						<option selected="selected">${reviewVo.review_class}</option>
+						<option>국내</option>						
+						<option>해외</option>
 						</select>
 						<select id="review_country" class="selectinsert" name="review_country">
 							<option>클래스를 선택해주세요.</option>
+							<option selected="selected">${reviewVo.review_country}</option>
 						</select>
 						<select id="review_city" class="selectinsert" name="review_city">
 							<option>국가를 선택해주세요.</option>
+							<option selected="selected">${reviewVo.review_city}</option>
 						</select>
 					</div>
 						<div class="form" style="width: 400px;">
-							<input style="background-color: #ffffff;  margin-top: 40px;" type="text" placeholder="제목" class="form-control" id="review_name" name="review_name">
+							<input style="background-color: #ffffff;  margin-top: 40px;" type="text" placeholder="제목" class="form-control" id="review_name" name="review_name" value="${reviewVo.review_name}">
 						</div>
 						
 						<div class="form" style="height:400px;">
-							<textarea style="height:400px;" rows="20" placeholder="내용" class="form-control" id="review_content" name="review_content"></textarea>	
+							<textarea style="height:400px;" rows="20" placeholder="내용" class="form-control" id="review_content" name="review_content"> ${reviewVo.review_content}</textarea>	
 						</div>
 						<div class="form-group" id="file">
 							<input type="file" id="review_image">

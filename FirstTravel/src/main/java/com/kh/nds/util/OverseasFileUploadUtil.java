@@ -1,5 +1,6 @@
 package com.kh.nds.util;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,34 +15,23 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 public class OverseasFileUploadUtil {
-	// 다른 곳에있는 파일을 불러올때는 서버를 통해서 넣어줘야함?
 	
 	public static String uploadFile(String uploadPath, String originalName, 
 			byte[] fileData) throws Exception {
-		// 고유이름
 		UUID uuid = UUID.randomUUID();
-		System.out.println(uuid);
-		// H:/upload/uuid_오리지널파일명
-		// H:/upload/2019/05/19/uuid_오리지널파일명
 		String uuidName = uuid + "_" + originalName; 
-		// -> fb94d409-77e4-4ed1-a6b1-24253ffcf3c6_Chrysanthemum.jpg
 		String datePath = calcPath(uploadPath); 
-		// -> 2019/5/17
-		System.out.println("datePath:" + datePath);
 		String filePath = uploadPath + File.separator + datePath + File.separator + uuidName;
-		// -> H:/upload/2019/5/17/fb94d409-77e4-4ed1-a6b1-24253ffcf3c6_Chrysanthemum.jpg
-		System.out.println("filePath:" + filePath);
 		File target = new File(filePath);
 		FileCopyUtils.copy(fileData, target);
 		
 		String formatName = getFormatName(originalName); // 확장명 얻기
 		boolean isImage = isImage(formatName); // 확장명으로 이미지여부 체크
-		System.out.println("isImage:" + isImage);
 		if (isImage) { // 이미지인 경우에
 			makeThumbnail(uploadPath, datePath, uuidName); // 썸네일 이미지 생성
+			makebickThumbnail(uploadPath, datePath, uuidName);
 		}
 		return datePath + File.separator + uuidName;
-		// -> 2019/5/17/fb94d409-77e4-4ed1-a6b1-24253ffcf3c6_Chrysanthemum.jpg
 	}
 	
 	// 작은이미지 만들기 - 더블 버퍼링
@@ -50,7 +40,6 @@ public class OverseasFileUploadUtil {
 		// 원본이미지를 불러다가 메모리상에서 작은 이미지 생성
 		// 메모리에 생성된 작은 이미지를 파일에 저장
 		String uploadedPath = uploadPath + File.separator + dirPath + File.separator + uuidName; 
-		System.out.println("makeThumbnail, uploadedName:" + uploadedPath);
 		// -> 업로드가 된 원본이미지 경로
 		
 		
@@ -69,6 +58,57 @@ public class OverseasFileUploadUtil {
 		String formatName = getFormatName(uuidName);
 		File target = new File(thumbnailName);
 		ImageIO.write(destImg, formatName, target);
+	}
+	
+	// 큰 섬네일
+	public static void makebickThumbnail(String uploadPath, String dirPath, String uuidName) throws Exception {
+		String uploadedPath = uploadPath + File.separator + dirPath + File.separator + uuidName; 
+		
+		// 원본 이미지 입니다.
+	    BufferedImage srcImg = ImageIO.read(new File(uploadedPath));
+
+	    // 썸네일 크기 입니다.
+	    int dw = 600, dh = 400;
+		
+	    // 원본이미지 크기 입니다.
+	    int ow = srcImg.getWidth();
+	    int oh = srcImg.getHeight();
+		
+	    // 늘어날 길이를 계산하여 패딩합니다.
+	    int pd = 0;
+	    if(ow > oh) {
+	 	pd = (int)(Math.abs((dh * ow / (double)dw) - oh) / 2d);
+	    } else {
+		pd = (int)(Math.abs((dw * oh / (double)dh) - ow) / 2d);
+	    }
+	    srcImg = Scalr.pad(srcImg, pd, Color.WHITE, Scalr.OP_ANTIALIAS);
+		
+	    // 이미지 크기가 변경되었으므로 다시 구합니다.
+	    ow = srcImg.getWidth();
+	    oh = srcImg.getHeight();
+		
+	    // 썸네일 비율로 크롭할 크기를 구합니다.
+	    int nw = ow;
+	    int nh = (ow * dh) / dw;
+	    if(nh > oh) {
+		nw = (oh * dw) / dh;
+		nh = oh;
+	    }
+		
+	    // 늘려진 이미지의 중앙을 썸네일 비율로 크롭 합니다.
+	    BufferedImage cropImg = Scalr.crop(srcImg, (ow-nw)/2, (oh-nh)/2, nw, nh);
+		
+	    // 리사이즈(썸네일 생성)
+	    BufferedImage destImg = Scalr.resize(cropImg, dw, dh);
+		
+	    // 이미지 출력
+	    String thumbnailName = uploadPath + File.separator + dirPath + File.separator 
+	    		+ "b_" + uuidName;
+	    File target = new File(thumbnailName);
+		String formatName = getFormatName(uuidName);
+		ImageIO.write(destImg, formatName, target);
+
+
 	}
 	
 	public static String calcPath(String uploadPath) {

@@ -322,19 +322,20 @@ table.calendar td{
 </head>
 <body>
 <!-- 헤드부분 국가,도시 출력 -->
-<section style="background-color: #a5e3ff;">
+<section class="page">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
-					<h1 class="page-name">${overseasVo.overseas_Country}</h1>
-					<h2>${overseasVo.overseas_City}</h2>
+					<h1 class="page-name">해외상품 상세보기</h1>
+					<ol class="breadcrumb">
+					</ol>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 </section>
+	
 <!-- 도시에 따른 이미지 출력 -->
  <div class="row mt-20">
 			<div class="col-md-5">

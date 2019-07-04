@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.nds.domain.OverseasHotelVo;
 import com.kh.nds.domain.OverseasVo;
+import com.kh.nds.domain.ReviewReplyVo;
 import com.kh.nds.service.IOverseasService;
+import com.kh.nds.service.IReviewService;
 import com.kh.psj.domain.CityVo;
 import com.kh.psj.service.ICityService;
 
@@ -34,6 +36,9 @@ public class NdsRestController {
 	
 	@Inject
 	private ICityService cityService;
+	
+	@Inject
+	private IReviewService reviewService;
 	
 	// 항공 API
 	@RequestMapping(value="/overseasapi", produces = "application/json; charset=utf-8")
@@ -134,6 +139,41 @@ public class NdsRestController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<List<OverseasHotelVo>>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	// 리뷰 댓글 사용
+	@RequestMapping(value="/reviewreply-regist", method=RequestMethod.POST)
+	public ResponseEntity<List<ReviewReplyVo>> reviewReplyRegist(@RequestBody ReviewReplyVo reviewReplyVo) throws Exception {
+		ResponseEntity<List<ReviewReplyVo>> entity = null;
+		reviewReplyVo.setUser_code(111);
+		reviewReplyVo.setReview_reply_writer("first");
+		try {
+			reviewService.replyRegist(reviewReplyVo);
+			List<ReviewReplyVo> list = reviewService.replySelect(reviewReplyVo.getReview_num());
+			System.out.println(list);
+			entity = new ResponseEntity<List<ReviewReplyVo>>(list , HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<List<ReviewReplyVo>>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	// 리뷰 댓글 삭제
+	@RequestMapping(value="/reviewreply-delete", method=RequestMethod.POST)
+	public ResponseEntity<List<ReviewReplyVo>> reviewReplyDelete(@RequestBody ReviewReplyVo reviewReplyVo) throws Exception {
+		ResponseEntity<List<ReviewReplyVo>> entity = null;
+		
+		try {
+			reviewService.replyDelete(reviewReplyVo.getReview_reply_num());
+			List<ReviewReplyVo> list = reviewService.replySelect(reviewReplyVo.getReview_num());
+			System.out.println(list);
+			entity = new ResponseEntity<List<ReviewReplyVo>>(list , HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<List<ReviewReplyVo>>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}

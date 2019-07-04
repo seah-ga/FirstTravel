@@ -9,7 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.kh.nds.domain.PagingDto;
+import com.kh.nds.domain.NdsPagingDto;
+import com.kh.nds.domain.ReviewReplyVo;
 import com.kh.nds.domain.ReviewVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,13 +22,13 @@ public class ReviewDaoTest {
 	
 	@Test
 	public void selectAllReviewTest() throws Exception {
-		PagingDto pagingDto = new PagingDto();
+		NdsPagingDto pagingDto = new NdsPagingDto();
 		List<ReviewVo> list = reviewDao.selectAllReview(pagingDto);
 		System.out.println(list);
 	}
 	@Test
 	public void reviewCountTest() throws Exception {
-		PagingDto pagingDto = new PagingDto();
+		NdsPagingDto pagingDto = new NdsPagingDto();
 		pagingDto.setSearchType("review_city");
 		pagingDto.setKeyword("ge");
 		pagingDto.setPerPage(3);
@@ -49,5 +50,62 @@ public class ReviewDaoTest {
 		reviewVo.setReview_name("테스트를 해봅시다");
 		reviewVo.setReview_image("test1.jpg");
 		reviewDao.reviewRegist(reviewVo);
+	}
+	
+	@Test
+	public void reviewRead() throws Exception {
+		int review_num = 629;
+		ReviewVo vo = reviewDao.reviewRead(review_num);
+		System.out.println(vo);
+	}
+	
+	@Test
+	public void replyRegist() throws Exception {
+		ReviewReplyVo vo = new ReviewReplyVo();
+		vo.setReview_reply_content("안녕하세요");
+		vo.setReview_num(629);
+		vo.setUser_code(111);
+		vo.setReview_reply_writer("first");
+		reviewDao.replyRegist(vo);
+	}
+	
+	@Test
+	public void replySelect() throws Exception {
+		int review_num = 629;
+		List<ReviewReplyVo> list = reviewDao.replySelect(review_num);
+		System.out.println(list);
+	}
+	
+	@Test
+	public void replyDelete() throws Exception {
+		int review_reply_num = 104;
+		reviewDao.replyDelete(review_reply_num);
+	}
+	
+	@Test
+	public void reviewDelete() throws Exception {
+		int review_num = 631;
+		reviewDao.reviewDelete(review_num);
+	}
+	
+	@Test
+	public void reviewUpdate() throws Exception {
+		ReviewVo reviewVo = new ReviewVo();
+		reviewVo.setReview_num(672);
+		reviewVo.setReview_class("국내");
+		reviewVo.setReview_country("대만");
+		reviewVo.setReview_city("타이페이");
+		reviewVo.setReview_content("이건 테스트의 내용");
+		reviewVo.setReview_name("테스트를 해봅시다");
+		reviewVo.setReview_image("test1.jpg");
+		reviewDao.reviewUpdate(reviewVo);
+	}
+	
+	@Test
+	public void reviewReading() throws Exception {
+		ReviewVo reviewVo = new ReviewVo();
+		reviewVo.setReview_reading(0);
+		reviewVo.setReview_num(676);
+		reviewDao.reviewReading(reviewVo);
 	}
 }

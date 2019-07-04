@@ -88,9 +88,9 @@ public class UploadController {
 		}
 		return entity;
 	}
+	
 	@RequestMapping(value="/display")
 	public ResponseEntity<byte[]> display(@RequestParam("fileName") String fileName) throws Exception {
-//		System.out.println("fileName:" + fileName);
 		// -> /2019/5/17/58d2f428-feb3-4c57-9d67-350dd294b25e_Chrysanthemum.jpg
 		String realPath = uploadPath + File.separator + fileName;
 		// -> H:/upload/2019/5/17/58d2f428-feb3-4c57-9d67-350dd294b25e_Chrysanthemum.jpg
@@ -127,7 +127,6 @@ public class UploadController {
 			}
 			realPath = uploadPath + File.separator + fileName;
 			FileInputStream is = new FileInputStream(realPath);
-			System.out.println(headers);
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(is), headers, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
