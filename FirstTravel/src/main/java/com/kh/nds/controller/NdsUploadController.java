@@ -23,7 +23,7 @@ import com.kh.nds.util.OverseasFileUploadUtil;
 
 @Controller
 @RequestMapping("/ndsupload")
-public class UploadController {
+public class NdsUploadController {
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
