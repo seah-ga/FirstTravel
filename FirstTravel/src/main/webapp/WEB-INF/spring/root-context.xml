@@ -32,7 +32,7 @@
 	</bean>	
 	
 	<!-- SQL Templete -->
-	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession" destroy-method="clearCache">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 	

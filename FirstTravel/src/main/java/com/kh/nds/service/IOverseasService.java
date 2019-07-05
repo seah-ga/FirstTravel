@@ -6,6 +6,10 @@ import com.kh.nds.domain.OverseasHotelVo;
 import com.kh.nds.domain.OverseasVo;
 
 public interface IOverseasService {
+	
+	// 해외테이블 모두 불러오기
+	public List<OverseasVo> selectAlloverseas() throws Exception;
+	
 	// 검색 나라
 	public List<OverseasVo> selectAllcountry() throws Exception;
 	// 검색 나라에 따른 도시

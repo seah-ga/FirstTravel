@@ -26,7 +26,6 @@ public class GBoardDaoTest {
 		gBoardVo.setG_location("미국");
 		gBoardVo.setG_content("여행기록2");
 		gBoardVo.setG_writer("작성자2");
-		gBoardVo.setG_file_path("12");
 		galleryDao.gBoardWrite(gBoardVo);
 		System.out.println(gBoardVo);
 	}
@@ -44,7 +43,6 @@ public class GBoardDaoTest {
 		gBoardVo.setG_title("제목1-1");
 		gBoardVo.setG_location("미국");
 		gBoardVo.setG_content("여행기록1-1");
-		gBoardVo.setG_file_path("121");
 		gBoardVo.setG_no(2);
 		galleryDao.gBoardUpdate(gBoardVo);
 		System.out.println(gBoardVo);

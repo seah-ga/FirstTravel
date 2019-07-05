@@ -10,9 +10,13 @@ public class OverseasVo {
 	private String image4;
 	private String image5;
 	private String image6;
-	
+	private String overseas_promotioncontent;
+	public OverseasVo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public OverseasVo(String overseas_Country, String overseas_City, String airPort, String image1, String image2,
-			String image3, String image4, String image5, String image6) {
+			String image3, String image4, String image5, String image6, String overseas_promotioncontent) {
 		super();
 		this.overseas_Country = overseas_Country;
 		this.overseas_City = overseas_City;
@@ -23,6 +27,25 @@ public class OverseasVo {
 		this.image4 = image4;
 		this.image5 = image5;
 		this.image6 = image6;
+		this.overseas_promotioncontent = overseas_promotioncontent;
+	}
+	public String getOverseas_Country() {
+		return overseas_Country;
+	}
+	public void setOverseas_Country(String overseas_Country) {
+		this.overseas_Country = overseas_Country;
+	}
+	public String getOverseas_City() {
+		return overseas_City;
+	}
+	public void setOverseas_City(String overseas_City) {
+		this.overseas_City = overseas_City;
+	}
+	public String getAirPort() {
+		return airPort;
+	}
+	public void setAirPort(String airPort) {
+		this.airPort = airPort;
 	}
 	public String getImage1() {
 		return image1;
@@ -60,41 +83,20 @@ public class OverseasVo {
 	public void setImage6(String image6) {
 		this.image6 = image6;
 	}
-	public OverseasVo() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getOverseas_promotioncontent() {
+		return overseas_promotioncontent;
 	}
-	public OverseasVo(String overseas_Country, String overseas_City, String airPort) {
-		super();
-		this.overseas_Country = overseas_Country;
-		this.overseas_City = overseas_City;
-		this.airPort = airPort;
+	public void setOverseas_promotioncontent(String overseas_promotioncontent) {
+		this.overseas_promotioncontent = overseas_promotioncontent;
 	}
-	public String getOverseas_Country() {
-		return overseas_Country;
-	}
-	public void setOverseas_Country(String overseas_Country) {
-		this.overseas_Country = overseas_Country;
-	}
-	public String getOverseas_City() {
-		return overseas_City;
-	}
-	public void setOverseas_City(String overseas_City) {
-		this.overseas_City = overseas_City;
-	}
-	public String getAirPort() {
-		return airPort;
-	}
-	public void setAirPort(String airPort) {
-		this.airPort = airPort;
-	}
-	
 	@Override
 	public String toString() {
 		return "OverseasVo [overseas_Country=" + overseas_Country + ", overseas_City=" + overseas_City + ", airPort="
 				+ airPort + ", image1=" + image1 + ", image2=" + image2 + ", image3=" + image3 + ", image4=" + image4
-				+ ", image5=" + image5 + ", image6=" + image6 + "]";
+				+ ", image5=" + image5 + ", image6=" + image6 + ", overseas_promotioncontent="
+				+ overseas_promotioncontent + "]";
 	}
+	
 	
 	
 }
