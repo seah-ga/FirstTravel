@@ -21,7 +21,7 @@ $(document).ready(function() {
 		$("#page_form").attr("action", href).submit();
 	});
 	
-	// 이전글 클릭시
+	// 다음글 클릭시
 	$("#go_next").click(function(e) {
 		e.preventDefault();
 		var g_no = $(this).attr("data-g_no");
@@ -33,7 +33,9 @@ $(document).ready(function() {
 	
 	// 목록으로 가기 버튼 클릭시
 	$("#btn_list").click(function() {
-		location.href = "/kdw/gallery/gallery_list";
+		var href = "/kdw/gallery/gallery_list";
+		$("#page_form").attr("action", href);
+		$("#page_form").submit();
 	});
 	
 	// 수정 버튼 클릭시
@@ -44,6 +46,26 @@ $(document).ready(function() {
 	// 삭제 버튼 클릭시
 	$("#btn_delete").click(function() {
 		location.href = "/kdw/gallery/gallery_delete?g_no=${gBoardVo.g_no}";
+		var g_no = "${gBoardVo.g_no}";
+		var url = "/kdw/gallery/gallery_delete/" + g_no;
+		$.ajax({
+			"type" : "delete",
+			"url" : url,
+			"headers" : {
+				"content-type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			"success" : function(rData) {
+				console.log(rData);
+				if (rData == "success") {
+					var href = "/kdw/gallery/gallery_list";
+					$("#page_form").attr("action", href);
+					$("#page_form").submit();
+				} else {
+					alter("삭제 실패");
+				}
+			}
+		});
 	});
 	
 	// 댓글 목록 불러오기
