@@ -13,6 +13,19 @@
 <script>
 $(document).ready(function() {
 	
+	// 글 제목 클릭시
+	$(".a_title").click(function(e) {
+		e.preventDefault();
+		var href = $(this).attr("href");
+		var g_no = $(this).attr("data-g_no");
+		var index = $(this).attr("data-index");
+		searchType_select();
+		$("input[name=g_no]").val(g_no);
+		$("input[name=index]").val(index);
+		$("#list_form").attr("action", href).submit();
+		
+	});
+	
 	// 글쓰기 버튼 클릭시
 	$("#btn_write").click(function() {
 		location.href = "/kdw/gallery/gallery_write";
@@ -21,18 +34,7 @@ $(document).ready(function() {
 	// 검색 버튼 클릭시
 	$("#btn_search").click(function() {
 		console.log("검색 버튼 클릭");
-		var keyword = $("#keyword").val();
-// 		if (keyward == null || keyward == "") {
-// 			return;
-// 		}
-		$("input[name=keyword]").val(keyword);
-		console.log("검색 버튼 클릭2");
 		searchType_select();
-		console.log("keyword" + $("input[name=keyword]").val());
-		console.log("searchType" + $("input[name=searchType]").val());
-		console.log("page" + $("input[name=page]").val());
-		console.log("g_location" + $("input[name=g_location]").val());
-		console.log("검색 버튼 클릭3");
 		$("input[name=page]").val(1);
 		$("#list_form").submit();
 	});
@@ -50,6 +52,8 @@ $(document).ready(function() {
 			$("input[name=searchType]").val("type");
 		}
 		$("input[name=searchType]").val(searchType);
+		var keyword = $("#keyword").val();
+		$("input[name=keyword]").val(keyword);
 		var page = "${pagingDto.page}";
 		if (page == "") {
 			page = 1;
@@ -91,7 +95,8 @@ $(document).ready(function() {
 ${paginationDto}
 ${pagingDto }
 <form id="list_form">
-	<input type="hidden" name="b_no" value="${param.b_no}">
+	<input type="hidden" name="g_no" value="${param.g_no}">
+	<input type="hidden" name="index" value="${param.g_no}">
 	<input type="hidden" name="keyword" value="${pagingDto.keyword }">
 	<input type="hidden" name="searchType" value="${pagingDto.searchType }">
 	<input type="hidden" name="page" value="${pagingDto.page }">
@@ -184,12 +189,13 @@ ${pagingDto }
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${list}" var="gBoardVo">
+						<c:forEach items="${list}" var="gBoardVo" varStatus="status">
 							<tr>
-								<td>${gBoardVo.g_no }</td>
+								<td>${status.index} - ${gBoardVo.g_no }</td>
 								<td>${gBoardVo.g_location }</td>
 								<td>${gBoardVo.files[0] }</td>
-								<td><a href="/kdw/gallery/gallery_read?g_no=${gBoardVo.g_no }">${gBoardVo.g_title }</a></td>
+								<td><a href="/kdw/gallery/gallery_read" class="a_title" data-g_no="${gBoardVo.g_no }" 
+								data-index=${status.index }>${gBoardVo.g_title }</a></td>
 								<td>${gBoardVo.g_writer }</td>
 								<td>${gBoardVo.g_regdate }</td>
 								<td>${gBoardVo.g_viewcnt }</td>

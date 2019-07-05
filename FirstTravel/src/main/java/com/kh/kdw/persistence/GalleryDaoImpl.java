@@ -79,4 +79,25 @@ public class GalleryDaoImpl implements IGalleryDao {
 		return new String[] {path};
 	}
 
+	@Override
+	public GBoardVo prevBoard(int g_no) throws Exception {
+		// 이전글 얻기
+		GBoardVo gBoardVo = sqlSession.selectOne(NAMESPACE + "go_prev", g_no);
+		return gBoardVo;
+	}
+
+	@Override
+	public GBoardVo nextBoard(int g_no) throws Exception {
+		// 다음글 얻기
+		GBoardVo gBoardVo = sqlSession.selectOne(NAMESPACE + "go_next", g_no);
+		return gBoardVo;
+	}
+
+	@Override
+	public void replycountUpdate(int g_no) throws Exception {
+		// 답글 개수 갱신
+		sqlSession.update(NAMESPACE + "replyCountUpdate", g_no);
+		
+	}
+
 }

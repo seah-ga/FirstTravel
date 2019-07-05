@@ -1,6 +1,6 @@
 package com.kh.nds.domain;
 
-public class PagingDto {
+public class NdsPagingDto {
 	private int page = 1; // 현재 페이지
 	private int perPage = 6; // 한 페이지당 보여질 글 갯수
 	private int startRow = 1;
@@ -49,7 +49,7 @@ public class PagingDto {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	public PagingDto(int page, int perPage, int startRow, int endRow, String searchType, String keyword) {
+	public NdsPagingDto(int page, int perPage, int startRow, int endRow, String searchType, String keyword) {
 		super();
 		this.page = page;
 		this.perPage = perPage;
@@ -58,7 +58,7 @@ public class PagingDto {
 		this.searchType = searchType;
 		this.keyword = keyword;
 	}
-	public PagingDto() {
+	public NdsPagingDto() {
 		// TODO Auto-generated constructor stub
 	}
 	@Override

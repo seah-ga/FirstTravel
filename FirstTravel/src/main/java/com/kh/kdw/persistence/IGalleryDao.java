@@ -32,8 +32,15 @@ public interface IGalleryDao {
 	
 	// 첨부파일 경로 가져오기
 	public String[] getFile(int g_no) throws Exception;
-	// 댓글 개수 업데이트
 	
+	// 이전글 내용
+	public GBoardVo prevBoard(int g_no) throws Exception;
+	
+	// 다음글 내용
+	public GBoardVo nextBoard(int g_no) throws Exception;
+	
+	// 댓글 개수 업데이트
+	public void replycountUpdate(int g_no) throws Exception;
 	
 	// 첨부파일 삭제(파일명으로)
 	// 첨부파일테이블에서 삭제(글번호로)

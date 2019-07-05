@@ -43,5 +43,11 @@ public class OverseasDaoImpl implements IOverseasDao {
 		return vo;
 	}
 
+	@Override
+	public List<OverseasVo> selectAlloverseas() throws Exception {
+		List<OverseasVo> list = sqlSession.selectList(NAMESPACE + "selectAlloverseas");
+		return list;
+	}
+
 
 }

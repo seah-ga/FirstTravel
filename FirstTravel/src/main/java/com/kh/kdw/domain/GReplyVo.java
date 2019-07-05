@@ -7,6 +7,7 @@ public class GReplyVo {
 	private int g_no;					// 겔러리 글번호
 	private String r_text;				// 리플 내용
 	private String r_replyer;			// 리플 작성자
+	private int user_code;				// 작성자 멤버 코드
 	private Timestamp r_regdate;		// 작성일
 	private Timestamp r_update_date;	// 수정일
 	public int getR_no() {
@@ -33,6 +34,12 @@ public class GReplyVo {
 	public void setR_replyer(String r_replyer) {
 		this.r_replyer = r_replyer;
 	}
+	public int getUser_code() {
+		return user_code;
+	}
+	public void setUser_code(int user_code) {
+		this.user_code = user_code;
+	}
 	public Timestamp getR_regdate() {
 		return r_regdate;
 	}
@@ -48,7 +55,8 @@ public class GReplyVo {
 	@Override
 	public String toString() {
 		return "GReplyVo [r_no=" + r_no + ", g_no=" + g_no + ", r_text=" + r_text + ", r_replyer=" + r_replyer
-				+ ", r_regdate=" + r_regdate + ", r_update_date=" + r_update_date + "]";
+				+ ", user_code=" + user_code + ", r_regdate=" + r_regdate + ", r_update_date=" + r_update_date + "]";
 	}
+	
 	
 }

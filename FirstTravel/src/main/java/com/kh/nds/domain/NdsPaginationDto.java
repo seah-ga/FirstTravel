@@ -1,6 +1,6 @@
 package com.kh.nds.domain;
 
-public class PaginationDto {
+public class NdsPaginationDto {
 	private int totalCount; // 데이터 갯수
 	private int startPage; // 시작 페이지
 	private int endPage; // 끝 페이지
@@ -8,9 +8,9 @@ public class PaginationDto {
 	private boolean next; // 페이지 출력 개수
 	private int paginationCount = 5;
 	private int pageCount;
-	private PagingDto pagingDto;
+	private NdsPagingDto pagingDto;
 	
-	public PaginationDto() {
+	public NdsPaginationDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -80,14 +80,14 @@ public class PaginationDto {
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
-	public PagingDto getPagingDto() {
+	public NdsPagingDto getPagingDto() {
 		return pagingDto;
 	}
-	public void setPagingDto(PagingDto pagingDto) {
+	public void setPagingDto(NdsPagingDto pagingDto) {
 		this.pagingDto = pagingDto;
 	}
-	public PaginationDto(int totalCount, int startPage, int endPage, boolean prev, boolean next, int paginationCount,
-			int pageCount, PagingDto pagingDto) {
+	public NdsPaginationDto(int totalCount, int startPage, int endPage, boolean prev, boolean next, int paginationCount,
+			int pageCount, NdsPagingDto pagingDto) {
 		super();
 		this.totalCount = totalCount;
 		this.startPage = startPage;

@@ -40,5 +40,11 @@ public class OverseasServiceImpl implements IOverseasService {
 		return vo;
 	}
 
+	@Override
+	public List<OverseasVo> selectAlloverseas() throws Exception {
+		List<OverseasVo> list = overseasDao.selectAlloverseas();
+		return list;
+	}
+
 
 }

@@ -73,4 +73,18 @@ public class GalleryServiceImpl implements IGalleryService {
 		return count;
 	}
 
+	@Override
+	public GBoardVo nextBoard(int g_no) throws Exception {
+		// 다음글 얻기
+		GBoardVo gBoardVo = galleryDao.nextBoard(g_no);
+		return gBoardVo;
+	}
+
+	@Override
+	public GBoardVo prevBoard(int g_no) throws Exception {
+		// 이전글 얻기
+		GBoardVo gBoardVo = galleryDao.prevBoard(g_no);
+		return gBoardVo;
+	}
+
 }

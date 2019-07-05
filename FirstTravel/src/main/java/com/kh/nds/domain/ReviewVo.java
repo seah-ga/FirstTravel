@@ -12,7 +12,6 @@ public class ReviewVo {
 	private String review_content;
 	private String review_image;
 	private Timestamp review_date;
-	private int review_like;
 	private int review_reading;
 	private String review_writer;
 	
@@ -74,12 +73,6 @@ public class ReviewVo {
 	public void setReview_date(Timestamp review_date) {
 		this.review_date = review_date;
 	}
-	public int getReview_like() {
-		return review_like;
-	}
-	public void setReview_like(int review_like) {
-		this.review_like = review_like;
-	}
 	public int getReview_reading() {
 		return review_reading;
 	}
@@ -93,7 +86,7 @@ public class ReviewVo {
 		this.review_writer = review_writer;
 	}
 	public ReviewVo(int review_num, String user_code, String review_class, String review_country, String review_city,
-			String review_name, String review_content, String review_image, Timestamp review_date, int review_like,
+			String review_name, String review_content, String review_image, Timestamp review_date, 
 			int review_reading, String review_writer) {
 		super();
 		this.review_num = review_num;
@@ -105,7 +98,6 @@ public class ReviewVo {
 		this.review_content = review_content;
 		this.review_image = review_image;
 		this.review_date = review_date;
-		this.review_like = review_like;
 		this.review_reading = review_reading;
 		this.review_writer = review_writer;
 	}
@@ -114,7 +106,7 @@ public class ReviewVo {
 		return "ReviewVo [review_num=" + review_num + ", user_code=" + user_code + ", review_class=" + review_class
 				+ ", review_country=" + review_country + ", review_city=" + review_city + ", review_name=" + review_name
 				+ ", review_content=" + review_content + ", review_image=" + review_image + ", review_date="
-				+ review_date + ", review_like=" + review_like + ", review_reading=" + review_reading
+				+ review_date + ", review_reading=" + review_reading
 				+ ", review_writer=" + review_writer + "]";
 	}
 	
