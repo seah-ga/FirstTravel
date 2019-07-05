@@ -220,8 +220,8 @@ $(document).ready(function(){
 			<div class="row">
 				<div class="col-md-12">
 					<form id="review_form" action="/nds/reviewregist-run" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="user_code" value=111>
-					<input type="hidden" name="review_writer" value="first">
+					<input type="hidden" name="user_code" value="${memberVo.user_code}">
+					<input type="hidden" name="review_writer" value="${memberVo.user_id}">
 					<div style="float: left;">				
 						<select id="review_class" class="selectinsert" name="review_class">
 							<option>클래스(선택)</option>

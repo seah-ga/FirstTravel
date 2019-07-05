@@ -104,4 +104,9 @@ public class ReviewServiceTest {
 		reviewVo.setReview_num(676);
 		reviewService.reviewReading(reviewVo);
 	}
+	@Test
+	public void reviewBestList() throws Exception {
+		List<ReviewVo> list = reviewService.reviewBestList();
+		System.out.println(list);
+	}
 }

@@ -46,4 +46,10 @@ public class OverseasDaoTest {
 		OverseasVo vo = overseasDao.cityImage(airPort);
 		System.out.println(vo + "리스트를 보자꾸나");
 	}
+	
+	@Test
+	public void selectAlloverseas() throws Exception {
+		List<OverseasVo> list = overseasDao.selectAlloverseas();
+		System.out.println(list);
+	}
 }

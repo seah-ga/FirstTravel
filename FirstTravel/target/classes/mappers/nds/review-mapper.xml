@@ -13,6 +13,15 @@
 			order by review_num desc) a)
 			where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 </select>
+
+<!-- 리뷰 조회수에 따른 베스트 글목록 해외 -->
+<select id="reviewbestlist" resultType="com.kh.nds.domain.ReviewVo">
+	select *
+	from tbl_review
+	where review_class = '해외'
+	order by review_reading desc
+</select>
+
 <!-- 리뷰 글목록 개수 -->
 <select id="reviewCount" resultType="int">
 	select count(*)

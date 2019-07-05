@@ -187,6 +187,7 @@ $(document).ready(function() {
 	</div>
 </section>
 <!-- 글 내용 -->
+
 <div class="page-wrapper">
 	<div class="container">
 		<div class="row">
@@ -195,7 +196,7 @@ $(document).ready(function() {
 		        <div class="post">
 		          <div class="post-thumb">
 		            <a href="#">
-		              <img class="img-responsive readloaction" data-num="${reviewVo.review_num}" src="
+		              <img class="img-responsive readloaction" style="width: 600px; height: 400px;" data-num="${reviewVo.review_num}" src="
 		              <c:choose>
 		              <c:when test="${reviewVo.review_image != 'null'}">
 		              /ndsupload/display?fileName=${reviewVo.review_image}
@@ -264,7 +265,9 @@ $(document).ready(function() {
 			<!-- 검색 값 -->
 				<fieldset><input type="search" id="keyword"/><button id="searchbtn"><i class="fa fa-search"></i></button></fieldset>
 			<!-- 글쓰기 버튼 -->
+			<c:if test="${memberVo != null}">
 				<a class="btn btn-main mt-10" id="btnregist" style="margin-bottom: 40px; float: right;" onclick="location.href='/nds/reviewregist'">리뷰 작성</a>
+			</c:if>
 			</div>
   		</div> 	
 	</div>

@@ -29,6 +29,9 @@ public interface IReviewService {
 	// 리뷰 조회수
 	public void reviewReading(ReviewVo reviewVo) throws Exception;
 	
+	// 리뷰 조회수에 따른 베스트 글
+	public List<ReviewVo> reviewBestList() throws Exception;
+	
 	// 리뷰 댓글 쓰기
 	public void replyRegist(ReviewReplyVo reviewReplyVo) throws Exception;
 	

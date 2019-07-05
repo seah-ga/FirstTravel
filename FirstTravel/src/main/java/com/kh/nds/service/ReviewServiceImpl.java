@@ -71,4 +71,10 @@ public class ReviewServiceImpl implements IReviewService {
 		reviewDao.reviewReading(reviewVo);
 	}
 
+	@Override
+	public List<ReviewVo> reviewBestList() throws Exception {
+		List<ReviewVo> list = reviewDao.reviewBestList();
+		return list;
+	}
+
 }

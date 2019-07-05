@@ -59,34 +59,33 @@ $(document).ready(function(){
               </div>
           </div>
       </div>
-      
 <div class="container latest">
   <div class="one_third">
-    <figure class="shadow"><a href="#" class="thumb"><img src="/resources/nds/images/portfolio/a.jpg" alt="alt" /></a>
-      <figcaption> <a href="#">
-        <h3 class="heading">Retro Movie</h3>
+    <figure class="shadow"><a href="/nds/itemoverseasread?overseas_Country=${overseas[10].overseas_Country}&overseas_City=${overseas[10].overseas_City}&airPort=${overseas[10].airPort}" class="thumb"><img src="/ndsupload/displayFile?fileName=${overseas[10].image1}" alt="alt" /></a>
+      <figcaption> <a href="/nds/itemoverseasread?overseas_Country=${overseas[10].overseas_Country}&overseas_City=${overseas[10].overseas_City}&airPort=${overseas[10].airPort}" class="thumb">
+        <h3 class="heading">${overseas[10].overseas_City}</h3>
         </a>
-        <p class="bioquote">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </p>
+        <p class="bioquote">${overseas[10].overseas_promotioncontent}</p>
       </figcaption>
     </figure>
   </div>
   <!-- one_third ends here -->
   <div class="one_third">
-    <figure class="shadow"><a href="#" class="thumb"><img src="/resources/nds/images/portfolio/b.jpg" alt="alt" /></a>
-      <figcaption> <a href="#">
-        <h3 class="heading">Retro Movie</h3>
+    <figure class="shadow"><a href="/nds/itemoverseasread?overseas_Country=${overseas[25].overseas_Country}&overseas_City=${overseas[25].overseas_City}&airPort=${overseas[25].airPort}" class="thumb"><img src="/ndsupload/displayFile?fileName=${overseas[25].image1}" alt="alt" /></a>
+      <figcaption> <a href="/nds/itemoverseasread?overseas_Country=${overseas[25].overseas_Country}&overseas_City=${overseas[25].overseas_City}&airPort=${overseas[25].airPort}" class="thumb">
+        <h3 class="heading">${overseas[25].overseas_City}</h3>
         </a>
-        <p class="bioquote">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </p>
+        <p class="bioquote">${overseas[25].overseas_promotioncontent}</p>
       </figcaption>
     </figure>
   </div>
   <!-- one_third ends here -->
   <div class="one_third lastcolumn">
-    <figure class="shadow"><a href="#" class="thumb"><img src="/resources/nds/images/portfolio/c.jpg" alt="alt" /></a>
-      <figcaption> <a href="#">
-        <h3 class="heading">Retro Movie</h3>
+    <figure class="shadow"><a href="/nds/itemoverseasread?overseas_Country=${overseas[26].overseas_Country}&overseas_City=${overseas[26].overseas_City}&airPort=${overseas[26].airPort}" class="thumb"><img src="/ndsupload/displayFile?fileName=${overseas[26].image1}" alt="alt" /></a>
+      <figcaption> <a href="/nds/itemoverseasread?overseas_Country=${overseas[26].overseas_Country}&overseas_City=${overseas[26].overseas_City}&airPort=${overseas[26].airPort}" class="thumb">
+        <h3 class="heading">${overseas[26].overseas_City}</h3>
         </a>
-        <p class="bioquote">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </p>
+        <p class="bioquote">${overseas[26].overseas_promotioncontent}</p>
       </figcaption>
     </figure>
   </div>
@@ -100,35 +99,27 @@ $(document).ready(function(){
           </div>
       </div>
       <div class="container latest">
-  <div class="one_third">
-    <figure class="shadow"><a href="#" class="thumb"><img src="/resources/nds/images/portfolio/a.jpg" alt="alt" /></a>
-      <figcaption> <a href="#">
-        <h3 class="heading">Retro Movie</h3>
+      <c:forEach items="${reviewbestlist}" begin="0" end="2" var="reviewVo">
+  <div class="col-md-4">
+    <figure class="shadow">
+    				  <a href="/nds/reviewread?review_num=${reviewVo.review_num}" class="thumb"><img src="
+	    				  <c:choose>
+		          		    <c:when test="${reviewVo.review_image != 'null'}">
+		           			   /ndsupload/display?fileName=${reviewVo.review_image}
+ 		           		   </c:when>
+		             		 <c:when test="${reviewVo.review_image == 'null'}">
+ 		            		  /resources/nds/images/b_nullImage.jpg
+		             	    </c:when>
+		             		 </c:choose>" alt="alt" /></a>
+    		  <figcaption>
+       <a href="/nds/reviewread?review_num=${reviewVo.review_num}">
+        <h3 class="heading">${reviewVo.review_name}</h3>
         </a>
-        <p class="bioquote">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </p>
+        <p class="bioquote">${reviewVo.review_content}</p>
       </figcaption>
     </figure>
   </div>
-  <!-- one_third ends here -->
-  <div class="one_third">
-    <figure class="shadow"><a href="#" class="thumb"><img src="/resources/nds/images/portfolio/b.jpg" alt="alt" /></a>
-      <figcaption> <a href="#">
-        <h3 class="heading">Retro Movie</h3>
-        </a>
-        <p class="bioquote">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </p>
-      </figcaption>
-    </figure>
-  </div>
-  <!-- one_third ends here -->
-  <div class="one_third lastcolumn">
-    <figure class="shadow"><a href="#" class="thumb"><img src="/resources/nds/images/portfolio/c.jpg" alt="alt" /></a>
-      <figcaption> <a href="#">
-        <h3 class="heading">Retro Movie</h3>
-        </a>
-        <p class="bioquote">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </p>
-      </figcaption>
-    </figure>
-  </div>
+  </c:forEach>
   <!-- one_third ends here --> 
 </div>
 <section class="category-area section-padding">
@@ -144,14 +135,14 @@ $(document).ready(function(){
                 <div class="col-lg-3 col-md-6">
                     <div class="single-category text-center mb-4">
                         <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>accounting & Finance</h4>
+                        <h4>accounting  Finance</h4>
                         <h5>250 open job</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="single-category text-center mb-4">
                         <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>production & operation</h4>
+                        <h4>production  operation</h4>
                         <h5>250 open jobㄹㄹㄹ</h5>
                     </div>
                 </div>
@@ -165,7 +156,7 @@ $(document).ready(function(){
                 <div class="col-lg-3 col-md-6">
                     <div class="single-category text-center mb-4">
                         <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>garments & textile</h4>
+                        <h4>garments  textile</h4>
                         <h5>250 open job</h5>
                     </div>
                 </div>
@@ -179,14 +170,14 @@ $(document).ready(function(){
                 <div class="col-lg-3 col-md-6">
                     <div class="single-category text-center mb-4 mb-lg-0">
                         <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>engineer & architech</h4>
+                        <h4>engineer  architech</h4>
                         <h5>250 open job</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="single-category text-center mb-4 mb-md-0">
                         <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>design & crative</h4>
+                        <h4>design  crative</h4>
                         <h5>250 open job</h5>
                     </div>
                 </div>

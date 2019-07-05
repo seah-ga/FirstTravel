@@ -73,5 +73,11 @@ public class ReviewDaoImpl implements IReviewDao {
 		sqlSession.update(NAMESPACE + "reviewreading", reviewVo);
 	}
 
+	@Override
+	public List<ReviewVo> reviewBestList() throws Exception {
+		List<ReviewVo> list = sqlSession.selectList(NAMESPACE + "reviewbestlist");
+		return list;
+	}
+
 
 }

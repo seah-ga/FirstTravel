@@ -108,4 +108,10 @@ public class ReviewDaoTest {
 		reviewVo.setReview_num(676);
 		reviewDao.reviewReading(reviewVo);
 	}
+	
+	@Test
+	public void reviewBestList() throws Exception {
+		List<ReviewVo> list = reviewDao.reviewBestList();
+		System.out.println(list);
+	}
 }

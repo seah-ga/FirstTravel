@@ -8,6 +8,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.json.XML;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.kdw.domain.MemberVo;
 import com.kh.nds.domain.OverseasHotelVo;
 import com.kh.nds.domain.OverseasVo;
 import com.kh.nds.domain.ReviewReplyVo;
@@ -143,12 +145,15 @@ public class NdsRestController {
 		return entity;
 	}
 	
-	// 리뷰 댓글 사용
+	// 리뷰 댓글 작성
 	@RequestMapping(value="/reviewreply-regist", method=RequestMethod.POST)
-	public ResponseEntity<List<ReviewReplyVo>> reviewReplyRegist(@RequestBody ReviewReplyVo reviewReplyVo) throws Exception {
+	public ResponseEntity<List<ReviewReplyVo>> reviewReplyRegist(@RequestBody ReviewReplyVo reviewReplyVo, HttpSession session) throws Exception {
 		ResponseEntity<List<ReviewReplyVo>> entity = null;
-		reviewReplyVo.setUser_code(111);
-		reviewReplyVo.setReview_reply_writer("first");
+		MemberVo memberVo = (MemberVo) session.getAttribute("memberVo");
+		String user_id = memberVo.getUser_id();
+		int user_code = memberVo.getUser_code();
+		reviewReplyVo.setUser_code(user_code);
+		reviewReplyVo.setReview_reply_writer(user_id);
 		try {
 			reviewService.replyRegist(reviewReplyVo);
 			List<ReviewReplyVo> list = reviewService.replySelect(reviewReplyVo.getReview_num());

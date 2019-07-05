@@ -99,7 +99,7 @@ public class ReviewController {
 		model.addAttribute("paginationDto",paginationDto);
 		model.addAttribute("reviewReplyList", reviewReplyList);
 	}
-	
+	// 리뷰 글 수정
 	@RequestMapping(value="/reviewupdate-run", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
 	public String reviewUpdateRun(ReviewVo reviewVo,Model model) throws Exception {
 		// 데이터 베이스에 넣을때 이미지이름 앞에 b_ 붙혀서 빅섬네일 붙히기 리스트에 

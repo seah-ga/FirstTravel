@@ -28,6 +28,9 @@ public interface IReviewDao {
 	
 	// 리뷰 조회수
 	public void reviewReading(ReviewVo reviewVo) throws Exception;
+
+	// 리뷰 조회수에 따른 베스트 글
+	public List<ReviewVo> reviewBestList() throws Exception;
 	
 	// 리뷰 댓글 쓰기
 	public void replyRegist(ReviewReplyVo reviewReplyVo) throws Exception;
@@ -37,7 +40,6 @@ public interface IReviewDao {
 	
 	// 리뷰 글번호에 따른 댓글 삭제
 	public void replyDelete(int review_reply_num) throws Exception;
-	
 	
 	
 	

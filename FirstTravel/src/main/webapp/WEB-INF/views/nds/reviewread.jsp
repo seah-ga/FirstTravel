@@ -53,17 +53,19 @@
 $(document).ready(function(){
 	
 	// 리플레이 리스트 불러오기
-	function replylist (review_reply_writer, review_reply_content, review_reply_date, review_reply_num) {
+	function replylist (review_reply_writer, review_reply_content, review_reply_date, review_reply_num, review_reply_user_code) {
 	var str = "";	
     str +=  "<tr>"
           +    "<td>"+ review_reply_writer +"</td>"
           +    "<td>"+ review_reply_content +"</td>"
           +   "<td>"+ review_reply_date +"</td>";
-    str +=     "<td>"
- 		  +   	 "<div class='btn-group' role='group'>"
+    str +=     "<td>";
+    		if("${memberVo.user_code}" == review_reply_user_code) {
+ 	str +=   	 "<div class='btn-group' role='group'>"
           +        "<button type='button' class='btn btn-default btnreplydelete' data-num='"+ review_reply_num +"'><i class='tf-ion-close' aria-hidden='true'></i></button>"
-          +      "</div>"
-          +   "</td>"
+          +      "</div>";
+    		}
+    str +=    "</td>"
           + "</tr>";
     return str;
 	}
@@ -96,7 +98,8 @@ $(document).ready(function(){
 			 str += replylist (parsedJson[i].review_reply_writer,
 							   parsedJson[i].review_reply_content,
 							   parsedJson[i].review_reply_date,
-							   parsedJson[i].review_reply_num);
+							   parsedJson[i].review_reply_num,
+							   parsedJson[i].user_code);
 					
 					$("#replytable").html(str);
 				}
@@ -130,7 +133,8 @@ $(document).ready(function(){
 			 	str += replylist (parsedJson[i].review_reply_writer,
 							   parsedJson[i].review_reply_content,
 							   parsedJson[i].review_reply_date,
-							   parsedJson[i].review_reply_num);
+							   parsedJson[i].review_reply_num,
+							   parsedJson[i].user_code);
 					
 					$("#replytable").html(str);
 				}
@@ -184,7 +188,7 @@ $(document).ready(function(){
 		              ">
 			</div>
 			<div class="col-md-5">
-				<h2 class="mt-40">${reviewVo.review_name}</h2>
+				<h2 class="mt-40">[${reviewVo.review_country}:${reviewVo.review_city}]${reviewVo.review_name}</h2>
 				<p>${reviewVo.review_content}</p>
 			</div>
 		</div>
@@ -193,10 +197,17 @@ $(document).ready(function(){
 			
 <section class="about section">
 <div class="container">
+	<c:if test="${memberVo.user_code == reviewVo.user_code}">
 	<a class="btn btn-main" id="btnreivewdelete">삭제</a>
 	<a class="btn btn-main" id="btnreviewupdate">수정</a>
+	</c:if>
 	<h2>댓글작성</h2>
+	<c:if test="${memberVo == null}">
+		<input type="text" id="replytext" style="float:left; background-color: #ffffff; width:20cm;" disabled="disabled" value="로그인 후 작성가능"><a class="btn btn-main" style="height: 45px;" >등록</a>
+	</c:if>	
+	<c:if test="${memberVo != null}">
 		<input type="text" id="replytext" style="float:left; background-color: #ffffff; width:20cm;"><a class="btn btn-main" id="btnreply" style="height: 45px;">등록</a>
+	</c:if>	
 	<div class="dashboard-wrapper user-dashboard">
           <div class="table-responsive">
             <table class="table">
@@ -216,7 +227,9 @@ $(document).ready(function(){
 		    	   	<td>${reviewReplyVo.review_reply_date}</td>
 		  		  <td>
          		 	<div class='btn-group' role='group'>
+         		 		<c:if test="${memberVo.user_code == reviewReplyVo.user_code}">
 	           			<button type='button' class='btn btn-default btnreplydelete' data-num="${reviewReplyVo.review_reply_num}"><i class='tf-ion-close' aria-hidden='true'></i></button>
+	           			</c:if>
 	            	</div>
 	             </td>
 	            </tr>

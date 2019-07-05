@@ -45,4 +45,9 @@ public class OverseasServiceTest {
 		OverseasVo vo = overseasService.cityImage(airPort);
 		System.out.println(vo + "리스트를 보자꾸나");
 	}
+	@Test
+	public void selectAlloverseas() throws Exception {
+		List<OverseasVo> list = overseasService.selectAlloverseas();
+		System.out.println(list);
+	}
 }
