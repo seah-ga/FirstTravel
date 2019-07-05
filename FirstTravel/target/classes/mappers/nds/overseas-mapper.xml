@@ -5,6 +5,11 @@
   	
 <mapper namespace="overseas">
 <!-- 검색창에 띄울 해외 모든 국가 -->
+<select id="selectAlloverseas" resultType="com.kh.nds.domain.OverseasVo">
+	select *
+	from tbl_overseas
+</select>
+
 <select id="selectAllcountry" resultType="com.kh.nds.domain.OverseasVo">
 	select DISTINCT overseas_country
 	from tbl_overseas

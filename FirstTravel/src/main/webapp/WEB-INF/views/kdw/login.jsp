@@ -51,15 +51,103 @@
 <script>
 $(document).ready(function() {
 	console.log("123");
+	
+	// 회원가입 버튼 클릭시
 	$("#btn_join").click(function() {
 		location.href = "/kdw/join";
 		console.log("12355");
+	});
+	
+	// 로그인 유지 체크시
+	$("#chk_id").click(function() {
+		console.log("유지 체크");
+		var chk_status = $(this).val();
+		if (chk_status == "N") {
+			$(this).val("Y");
+		} else {
+			$(this).val("N");
+		}
+		console.log("체크상태: " + $(this).val());
+	});
+	
+	// 아이디 비밀번호 찾기 클릭시 모달창
+	$("#search_id").click(function(e) {
+		e.preventDefault();
+		console.log("아이디 비밀번호 찾기");
+		$("#btn_modal").trigger("click");
+	});
+	
+	// 아이디/비밀번호 발송
+	$("#btn_search_id").click(function() {
+		var user_id = $("#user_id").val();
+		var user_email = $("#user_email").val();
+		var data = {
+				"user_id" : user_id,
+				"user_email" : user_email
+		};
+		var url = "/kdw/search_id";
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"headers" : {
+				"content-type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			"data" : JSON.stringify(data),
+			"dataType" : "text",
+			"success" : function(receivedData) {
+				console.log("아이디 비밀번호 발송");
+				console.log(receivedData);
+				if (receivedData == "success") {
+					alert("새로운 비밀번호를 메일로 발송했습니다.");
+				} else if (receivedData == "non-success") {
+					alert("아이디 또는 메일을 확인해 주세요.");
+				} else if (receivedData == "bad") {
+					alert("아이디/메일을 입력해 주세요.");
+				}
+			}
+			
+		});
+		
 	});
 });
 </script>  
 </head>
 
 <body>
+<!-- 아이디/비번 찾기 모달창 -->
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">아이디/비밀번호 찾기</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-user prefix grey-text"></i>
+          <input type="text" class="form-control validate" id="user_id" name="user_id">
+          <label data-error="wrong" data-success="right" for="orangeForm-name">아이디</label>
+        </div>
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" class="form-control validate" id="user_email" name="user_email">
+          <label data-error="wrong" data-success="right" for="orangeForm-email">이메일</label>
+        </div>
+
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-deep-orange" id="btn_search_id">보내기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // 모달창 -->
+
 
 
   <!-- Full Page Intro -->
@@ -133,9 +221,10 @@ $(document).ready(function() {
                     <input type="submit" class="btn btn-main-color" value="로그인">
                     <hr>
                     <fieldset class="form-check">
-                      <input type="checkbox" class="form-check-input" id="chk_id" name="chk_id">
+                      <input type="checkbox" class="form-check-input" id="chk_id" name="chk_id" value="N">
                       <label for="chk_id" class="form-check-label dark-grey-text">로그인 유지</label>
-                      <a href="" class="form-check-label dark-grey-text">아이디/비밀번호 찾기</a>
+                      <a href="" class="form-check-label dark-grey-text" id="search_id">아이디/비밀번호 찾기</a>
+                      <input type="button" style="display:none;" id="btn_modal" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm" value="모달">
                     </fieldset>
                   </div>
 

@@ -21,4 +21,12 @@ public interface IMemberDao {
 	// 이메일 인증 키 생성
 	public void chkEmail(String user_email, String authkey) throws Exception;
 	
+	// 아이디 얻기
+	public MemberVo memberId(int user_code) throws Exception;
+	
+	// 아이디/비번 찾기
+	public MemberVo idSearch(String user_id, String user_email) throws Exception;
+	
+	// 비밀번호 변경
+	public void passwoardUpdate(int user_code, String user_pw) throws Exception;
 }

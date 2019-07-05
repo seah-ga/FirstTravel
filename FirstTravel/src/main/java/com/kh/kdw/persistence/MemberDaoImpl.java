@@ -67,4 +67,30 @@ public class MemberDaoImpl implements IMemberDao {
 		sqlSession.insert(NAMESPACE + "createAuthKey", map);
 	}
 
+	@Override
+	public MemberVo memberId(int user_code) throws Exception {
+		// 아이디 얻기
+		MemberVo memberVo = sqlSession.selectOne(NAMESPACE + "getUserInfo", user_code);
+		return memberVo;
+	}
+
+	@Override
+	public MemberVo idSearch(String user_id, String user_email) throws Exception {
+		// 아이디/비번 찾기
+		Map<String, Object> userInfoMap = new HashMap<>();
+		userInfoMap.put("user_id", user_id);
+		userInfoMap.put("user_email", user_email);
+		MemberVo memberVo = sqlSession.selectOne(NAMESPACE + "idSearch", userInfoMap);
+		return memberVo;
+	}
+
+	@Override
+	public void passwoardUpdate(int user_code, String user_pw) throws Exception {
+		// 비밀번호 변경
+		Map<String, Object> userInfoMap = new HashMap<>();
+		userInfoMap.put("user_code", user_code);
+		userInfoMap.put("user_pw", user_pw);
+		sqlSession.update(NAMESPACE + "passwoardUpdate", userInfoMap);
+	}
+
 }

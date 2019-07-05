@@ -415,13 +415,13 @@
 		
 	           		
 <!-- 	           			<a href="javascript:void(0);" onclick="goLogin()" class="topAreaLogIn"><span>로그인</span></a> -->
-						<a href="javascript:void(0);" onclick="viewLoginOpen()" class="topAreaLogIn"><span>로그인</span></a>
+						<a href="/kdw/login" onclick="viewLoginOpen()" class="topAreaLogIn"><span>로그인</span></a>
 	           	
 				<!-- 아이콘들-->
 				<div class="topAreaIcon">
 					<a href="https://www.tour2000.co.kr/departure/index.do" class="topAreaIcon01">출발확정</a>
 				
-		           			<a href="https://www.tour2000.co.kr/member_join/agree.do" class="topAreaIcon02">회원가입</a>
+		           			<a href="/kdw/join" class="topAreaIcon02">회원가입</a>
 		          
 				</div>	
                 
@@ -437,54 +437,62 @@
               <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
               
                 <li class="has-children">
-                  <a href="index.html">국내</a>
+                  <a href="/psj/index">국내</a>
                    <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">수도권</a></li>
+                    <li><a href="#">제주도</a></li>
+                    <li><a href="#">경기권</a></li>
+                    <li><a href="#">경상도</a></li>
+                    <li><a href="#">전라도</a></li>
+                    <li><a href="#">충청도</a></li>
                   </ul>
                 </li>
                 <li class="has-children">
-                  <a href="destination.html">해외</a>
+                  <a href="/nds/itemoverseasmain">해외</a>
                   <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">일본</a></li>
+                    <li><a href="#">유럽</a></li>
+                    <li><a href="#">동남아/대만/서남아</a></li>
+                    <li><a href="#">중국/극동러시아/홍콩</a></li>
+                    <li><a href="#">남태평양</a></li>
+                    <li><a href="#">미주/중남미/하와이</a></li>
                   </ul>
                 </li>
                 
                 <li class="has-children">
                 <a href="discount.html">커뮤니티</a>
                 <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">여행Tip</a></li>
+                    <li><a href="#">포토갤러리</a></li>
+                    <li><a href="#">여행후기게시판</a></li>
+                    <li><a href="/ljh/companion">동행자구하기</a></li>
                   </ul>
                   </li>
                 
                 <li class="has-children"><a href="about.html">날씨정보</a>
                 <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">일본</a></li>
+                    <li><a href="#">유럽</a></li>
+                    <li><a href="#">동남아/대만/서남아</a></li>
+                    <li><a href="#">중국/극동러시아/홍콩</a></li>
+                    <li><a href="#">남태평양</a></li>
+                    <li><a href="#">미주/중남미/하와이</a></li>
                   </ul></li>
-                <li class="has-children"><a href="blog.html">숙박정보</a>
+                <li class="has-children"><a href="/ljh/hotel">숙박정보</a>
                 <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">일본</a></li>
+                    <li><a href="#">유럽</a></li>
+                    <li><a href="#">동남아/대만/서남아</a></li>
+                    <li><a href="#">중국/극동러시아/홍콩</a></li>
+                    <li><a href="#">남태평양</a></li>
+                    <li><a href="#">미주/중남미/하와이</a></li>
                   </ul></li>
                 <li class="has-children"><a href="contact.html">이벤트</a>
                 <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">항공권이벤트</a></li>
+                    <li><a href="#">숙박권이벤트</a></li>
+                    <li><a href="#">여행상품이벤트</a></li>
+                    <li><a href="#">가이드이벤트</a></li>
                   </ul></li>
                 
                 <!-- <li><a href="booking.html">Book Online</a></li> -->
@@ -534,7 +542,7 @@
 
               <h1 class="text-white font-weight-light">해외</h1>
               <p class="mb-5">세계속으로 발걸음을 딛여보아요</p>
-              <p><a href="#" class="btn btn-primary py-3 px-5 text-white">지금 당장 예약하세요!<br>Book Now!</a></p>
+              <p><a href="/nds/itemoverseasmain" class="btn btn-primary py-3 px-5 text-white">지금 당장 예약하세요!<br>Book Now!</a></p>
 
             </div>
           </div>
@@ -548,7 +556,7 @@
             <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
               <h1 class="text-white font-weight-light">국내</h1>
               <p class="mb-5">주변의 전통을 둘러보아요</p>
-              <p><a href="#" class="btn btn-primary py-3 px-5 text-white">지금 당장 예약하세요!<br>Book Now!</a></p>
+              <p><a href="/psj/index" class="btn btn-primary py-3 px-5 text-white">지금 당장 예약하세요!<br>Book Now!</a></p>
             </div>
           </div>
         </div>
@@ -562,7 +570,7 @@
       <div class="container overlap-section">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-            <a href="#" class="unit-1 text-center">
+            <a href="/nds/itemoverseasmain" class="unit-1 text-center">
               <img src="/resources/ljh/images/europe.jpg" alt="Image" class="img-fluid">
               <div class="unit-1-text">
                 <h3 class="unit-1-heading">유럽 인기</h3>
@@ -570,7 +578,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-            <a href="#" class="unit-1 text-center">
+            <a href="/nds/itemoverseasmain" class="unit-1 text-center">
               <img src="/resources/ljh/images/japan.jpg" alt="Image" class="img-fluid">
               <div class="unit-1-text">
                 <h3 class="unit-1-heading">일본 인기</h3>
@@ -578,7 +586,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-            <a href="#" class="unit-1 text-center">
+            <a href="/nds/itemoverseasmain" class="unit-1 text-center">
               <img src="/resources/ljh/images/china.jpg" alt="Image" class="img-fluid">
               <div class="unit-1-text">
                 <h3 class="unit-1-heading">중국 인기</h3>
@@ -602,7 +610,7 @@
         </div>
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
+            <a href="/nds/itemoverseasmain" class="unit-1 text-center">
               <img src="/resources/ljh/images/01-greece.jpg" alt="Image" class="img-fluid">
               <div class="unit-1-text">
                 <strong class="text-primary mb-2 d-block">60만원</strong>
@@ -611,7 +619,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
+            <a href="/nds/itemoverseasmain" class="unit-1 text-center">
               <img src="/resources/ljh/images/02-rome.jpg" alt="Image" class="img-fluid">
               <div class="unit-1-text">
                 <strong class="text-primary mb-2 d-block">40만원</strong>
@@ -620,7 +628,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
+            <a href="/nds/itemoverseasmain" class="unit-1 text-center">
               <img src="/resources/ljh/images/03-japan.jpg" alt="Image" class="img-fluid">
               <div class="unit-1-text">
                 <strong class="text-primary mb-2 d-block">40만원</strong>
@@ -630,7 +638,7 @@
           </div>
 
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
+            <a href="/nds/itemoverseasmain" class="unit-1 text-center">
               <img src="/resources/ljh/images/04-dubai.jpg" alt="Image" class="img-fluid">
               <div class="unit-1-text">
                 <strong class="text-primary mb-2 d-block">33만원</strong>
@@ -639,7 +647,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
+            <a href="/nds/itemoverseasmain" class="unit-1 text-center">
               <img src="/resources/ljh/images/05-london.jpg" alt="Image" class="img-fluid">
               <div class="unit-1-text">
                 <strong class="text-primary mb-2 d-block">30만원</strong>
@@ -648,7 +656,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
+            <a href="/nds/itemoverseasmain" class="unit-1 text-center">
               <img src="/resources/ljh/images/06-australia.jpg" alt="Image" class="img-fluid">
               <div class="unit-1-text">
                 <strong class="text-primary mb-2 d-block">40만원</strong>
@@ -677,7 +685,7 @@
           <div class="col-md-4 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
               <img src="/resources/ljh/images/taiwan.jpg" alt="Image" class="img-fluid">
-              <h2 class="font-size-regular"><a href="#">1위 타이완</a></h2>
+              <h2 class="font-size-regular"><a href="/nds/itemoverseasmain">1위 타이완</a></h2>
               
               <p>대만4일 #아동 #가족온라인박람회 대만4일 실속있는 가격과 알찬 일정 가볍게 떠나고 싶다면! #가성비 #비교불가</p>
             </div> 
@@ -685,7 +693,7 @@
           <div class="col-md-4 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
               <img src="/resources/ljh/images/canada.jpg" alt="Image" class="img-fluid">
-              <h2 class="font-size-regular"><a href="#">2위 캐나다</a></h2>
+              <h2 class="font-size-regular"><a href="/nds/itemoverseasmain">2위 캐나다</a></h2>
               
               <p>캐나다 항공일주 #가족여행 퀘벡 숙박 로키, 퀘벡, 나이아가라 등 캐나다를 완벽하게 느낄 수 있는 여행!</p>
             </div>
@@ -693,7 +701,7 @@
           <div class="col-md-4 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
               <img src="/resources/ljh/images/thai.jpg" alt="Image" class="img-fluid">
-              <h2 class="font-size-regular"><a href="#">3위 태국</a></h2>
+              <h2 class="font-size-regular"><a href="/nds/itemoverseasmain">3위 태국</a></h2>
               
               <p>방콕/파타야 #가족 #모임 베스트셀러 TOP 온라인박람회 최저가 보장 대표관광지와 맛있는 특식 포함 박람회 전용상품 깜짝선물 제공</p>
             </div>
@@ -724,8 +732,8 @@
                   <img src="/resources/ljh/images/img_1.jpg" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;노르웨이 피오라 산맥을 따라가면 나오는 자연이 빗은 웅장함에 감탄했습니다&rdquo;</p>
-                  <p class="">&mdash; <em>제임스 마틴</em>, <a href="#">여행자</a></p>
+                  <p class="text-black lead">&ldquo;<a href="#">노르웨이 피오라 산맥을 따라가면 나오는 자연이 빗은 웅장함에 감탄했습니다&rdquo;</a></p>
+                  <p class="">&mdash; <em>제임스 마틴</em>, 노르웨이 여행중</p>
                 </div>
               </div>
             </div>
@@ -738,8 +746,8 @@
                   <img src="/resources/ljh/images/img_2.jpg" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;배낭여행을 꿈꾸신다면 스위스 융프라우 로오세요&rdquo;</p>
-                  <p class="">&mdash; <em>클레어 어거스틴</em>, <a href="#">여행자</a></p>
+                  <p class="text-black lead">&ldquo;<a href="#">배낭여행을 꿈꾸신다면 스위스 융프라우 로 오세요&rdquo;</a></p>
+                  <p class="">&mdash; <em>클레어 어거스틴</em>, 스위스 여행중</p>
                 </div>
               </div>
             </div>
@@ -752,8 +760,8 @@
                   <img src="/resources/ljh/images/img_4.jpg" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;여기 물로 라면끓여먹고싶다 &rdquo;</p>
-                  <p class="">&mdash; <em>신드라 캠벨</em>, <a href="#">여행자</a></p>
+                  <p class="text-black lead">&ldquo;<a href="#">여기 물로 라면끓여먹고싶다 &rdquo;</a></p>
+                  <p class="">&mdash; <em>신드라 캠벨</em>, 백두산 여행중</p>
                 </div>
               </div>
             </div>
@@ -785,33 +793,36 @@
         <div class="row align-items-stretch">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary flaticon-airplane"></span></div>
+<!--               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-airplane"></span></div> -->
+				<img src="/resources/ljh/images/trip1.jpg" alt="Image" class="img-fluid">
               <div>
-               <p><a href="#">쓴글보기</a></p>
-                <h3>제임스</h3>
-                <p>환상적인 경험</p>
+               &nbsp;<p><a href="#">&nbsp;&nbsp;작성된 글보기</a></p>
+                &nbsp;<h3>&nbsp;&nbsp;제임스</h3>
+                &nbsp;<p>&nbsp;&nbsp;"좋은 경치 와 좋은 음식"</p>
                
               </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary flaticon-ship"></span></div>
+             <div class="unit-4 d-flex"> 
+<!--               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-ship"></span></div> -->
+			<img src="/resources/ljh/images/trip2.jpg" alt="Image" class="img-fluid">
               <div>
-               <p><a href="#">쓴글보기</a></p>
-                <h3>마이클</h3>
-                <p>추천 또 추천</p>
+               &nbsp;<p><a href="#">&nbsp;&nbsp;작성된 글보기</a></p>
+                &nbsp;<h3>&nbsp;&nbsp;신디</h3>
+                &nbsp;<p>&nbsp;&nbsp;"환상적인 경험"</p>
                
               </div>
-            </div>
+            </div> 
           </div>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary flaticon-route"></span></div>
+<!--               <div class="unit-4-icon mr-4"><span class="text-primary flaticon-route"></span></div> -->
+			<img src="/resources/ljh/images/trip3.jpg" alt="Image" class="img-fluid">
               <div>
-               <p><a href="#">쓴글보기</a></p>
-                <h3>신디</h3>
-                <p>생각보다 괜찮은 곳이었습니다</p>
+               &nbsp;<p><a href="#">&nbsp;&nbsp;작성된 글보기</a></p>
+                &nbsp;<h3>&nbsp;&nbsp;톰</h3>
+                &nbsp;<p>&nbsp;&nbsp;"추천 또 추천"</p>
                
               </div>
             </div>
@@ -1070,7 +1081,7 @@ if (objCommercialFooter.isCommercialSite()) {
                         </p><a href="http://www.hanatour.com/asp/mypage/ps-10000.asp?hanacode=main_rb_mileage" class="mlg_inquiry y" style="display:none;">
                             FirstTravel 마일리지<strong class="go_inq">조회하기</strong></a><a href="https://www.hanatour.com/asp/member/me-20000.asp" class="mlg_inquiry n" style="display:none;">
                            	FirstTravel 마일리지<strong class="go_inq">회원가입하기</strong></a></li>
-<li class="myinfo"><a class="loginN" href="http://www.hanatour.com/asp/login/lg-00000.asp?hanacode=main_rb_login">로그인</a><a class="loginN" href="http://www.hanatour.com/asp/member/me-00000.asp?hanacode=main_rb_member">회원가입</a><a class="loginN" href="http://www.hanatour.com/asp/booking/bookmgr/book-main.asp?hanacode=main_rb_confirmcancel">예약확인/결제</a><a class="loginN" href="http://www.hanatour.com/asp/mypage/cp-10000.asp">쿠폰</a><a class="loginN" href="http://www.hanatour.com/asp/mypage/ps-20000.asp">나의 혜택 확인</a><a class="loginY" href="http://www.hanatour.com/asp/weblog/main/mshop.html?hanacode=main_rb_mshop" target="_blank">마일리지샵</a><a class="loginY" href="http://www.hanatour.com/asp/mypage/my_cart.asp?hanacode=main_rb_basket">장바구니</a><a class="loginY" href="http://www.hanatour.com/asp/booking/bookmgr/book-main.asp?hanacode=main_rb_confirmcancel">예약확인/결제</a><a class="loginY" href="http://www.hanatour.com/asp/mypage/cp-10000.asp">쿠폰<span class="CPnum"></span></a><a class="loginY" href="http://www.hanatour.com/asp/mypage/ps-20000.asp">나의 혜택 확인</a></li>
+<li class="myinfo"><a class="loginN" href="/kdw/login">로그인</a><a class="loginN" href="/kdw/join">회원가입</a><a class="loginN" href="http://www.hanatour.com/asp/booking/bookmgr/book-main.asp?hanacode=main_rb_confirmcancel">예약확인/결제</a><a class="loginN" href="http://www.hanatour.com/asp/mypage/cp-10000.asp">쿠폰</a><a class="loginN" href="http://www.hanatour.com/asp/mypage/ps-20000.asp">나의 혜택 확인</a><a class="loginY" href="http://www.hanatour.com/asp/weblog/main/mshop.html?hanacode=main_rb_mshop" target="_blank">마일리지샵</a><a class="loginY" href="http://www.hanatour.com/asp/mypage/my_cart.asp?hanacode=main_rb_basket">장바구니</a><a class="loginY" href="http://www.hanatour.com/asp/booking/bookmgr/book-main.asp?hanacode=main_rb_confirmcancel">예약확인/결제</a><a class="loginY" href="http://www.hanatour.com/asp/mypage/cp-10000.asp">쿠폰<span class="CPnum"></span></a><a class="loginY" href="http://www.hanatour.com/asp/mypage/ps-20000.asp">나의 혜택 확인</a></li>
 <li class="view_product">
 <p class="tit" style="display:none;"><strong>최근 본 상품</strong><span class="num"></span></p>
 <p class="non_view" style="display:none;">

@@ -1,6 +1,7 @@
 package com.kh.kdw.domain;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class GBoardVo {
 	private int g_no;				// 겔러리 글번호
@@ -11,7 +12,10 @@ public class GBoardVo {
 	private int g_viewcnt;			// 조회수
 	private int g_replycnt;			// 리플수
 	private Timestamp g_regdate;	// 작성일
-	private String g_file_path;	// 파일 위치
+	private int user_code;			// 작성자 멤버 코드
+	private String fileone;
+	private String[] files;			// 파일 담을 배열
+	
 	public int getG_no() {
 		return g_no;
 	}
@@ -61,17 +65,32 @@ public class GBoardVo {
 	public void setG_regdate(Timestamp g_regdate) {
 		this.g_regdate = g_regdate;
 	}
-	public String getG_file_path() {
-		return g_file_path;
+
+	public int getUser_code() {
+		return user_code;
 	}
-	public void setG_file_path(String g_file_path) {
-		this.g_file_path = g_file_path;
+	public void setUser_code(int user_code) {
+		this.user_code = user_code;
+	}
+	public String getFileone() {
+		return fileone;
+	}
+	public void setFileone(String fileone) {
+		this.fileone = fileone;
+	}
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
 	}
 	@Override
 	public String toString() {
 		return "GBoardVo [g_no=" + g_no + ", g_title=" + g_title + ", g_location=" + g_location + ", g_content="
 				+ g_content + ", g_writer=" + g_writer + ", g_viewcnt=" + g_viewcnt + ", g_replycnt=" + g_replycnt
-				+ ", g_regdate=" + g_regdate + ", g_file_path=" + g_file_path + "]";
+				+ ", g_regdate=" + g_regdate + ", user_code=" + user_code + ", fileone=" + fileone + ", files="
+				+ Arrays.toString(files) + "]";
 	}
+	
 	
 }

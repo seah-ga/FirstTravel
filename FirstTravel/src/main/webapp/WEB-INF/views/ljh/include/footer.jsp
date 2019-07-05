@@ -112,9 +112,9 @@ if (objCommercialFooter.isCommercialSite()) {
                     </a></li>
 <li><a href="http://www.hanatour.com/asp/mobile/mb-00000.asp?hanacode=main_mobile"><span class="ico free_hotel"><span class="ir"></span></span>모바일 전용 특가 + 호텔앱 예약 시 2000마일 적립!
                     </a></li>
-<li><a href="http://www.hanatour.com/asp/mobile/mb-00000.asp?hanacode=main_mobile"><span class="ico free_airtel"><span class="ir">하나프리 에어텔앱</span></span>특가 에어텔(항공+호텔+보험) 실속 예약!
+<li><a href="http://www.hanatour.com/asp/mobile/mb-00000.asp?hanacode=main_mobile"><span class="ico free_airtel"><span class="ir"></span></span>특가 에어텔(항공+호텔+보험) 실속 예약!
                     </a></li>
-<li><a href="http://www.hanatour.com/asp/mobile/mb-00000.asp?hanacode=main_mobile"><span class="ico free_free"><span class="ir">하나프리 프리앱</span></span>나만의 자유여행 만들면, 최대 30% 할인!
+<li><a href="http://www.hanatour.com/asp/mobile/mb-00000.asp?hanacode=main_mobile"><span class="ico free_free"><span class="ir"></span></span>나만의 자유여행 만들면, 최대 30% 할인!
                     </a></li>
 </ul>
 </div>

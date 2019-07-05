@@ -40,6 +40,8 @@
 	<context:component-scan base-package="com.kh.psj.persistence" />
 	<context:component-scan base-package="com.kh.psj.service" />
 	<context:component-scan base-package="com.kh.ljh.controller" />
+	<context:component-scan base-package="com.kh.ljh.persistence" />
+	<context:component-scan base-package="com.kh.ljh.service" />
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
@@ -49,6 +51,7 @@
 		<beans:constructor-arg value="\\192.168.0.127\shared\upload_team2"/>
 	</beans:bean>
 	
+
 	<beans:bean id="multipartResolver" 
 	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 <!-- 	10 * 1024 * 1024 : 10MB -->
@@ -56,7 +59,12 @@
 	</beans:bean>
 	
 	<!-- 인터셉터 -->
-	
+	<beans:bean id="LoginInterceptor" class="com.kh.kdw.intercepter.LoginInterceptor"/>
 	<!-- **, * 패턴 사용가능 --><!-- mapping path가 할 것을 가로 채서 먼저 할일을 정한다. -->
-	
+	<interceptors>
+		<interceptor>
+			<mapping path="/kdw/login-run"/>
+			<beans:ref bean="LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

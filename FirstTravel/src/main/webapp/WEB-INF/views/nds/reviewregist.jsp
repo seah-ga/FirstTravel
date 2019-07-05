@@ -83,7 +83,7 @@ $(document).ready(function(){
 			str += "<option>한국</option>";
 			$("#review_country").html(str);
 						
-		} else if (review_class == "국외") { // 국외 일때
+		} else if (review_class == "해외") { // 해외 일때
 		var countrylisturl = "/ndsrest/countrylist";
 		
 			$.ajax ({
@@ -174,22 +174,18 @@ $(document).ready(function(){
             	var front = fullName.substring(0, slashIndex + 1);
             	var rear = fullName.substring(slashIndex + 1);
             	var thumbnailName = front + "s_" + rear;
-            	console.log(thumbnailName);
             	var startIndex = fullName.indexOf("_");
             	var fileName = fullName.substring(startIndex + 1);
             	var str = "";
-            	console.log(thumbnailName);
             	
             	if (isImagestr == ".jpg" || isImagestr == ".png" || isImagestr == ".gif") {
             		str = "<div data-filename='"+ fullName +"'>" + fileName
-            			+  "<img src='/ndsupload/display?fileName='"+ thumbnailName +"'>"
+            			+  "<img src='/ndsupload/display?fileName="+ thumbnailName +"'>"
             			+  "</div>";
-            				console.log("이프");
             	} else {
-            		str = "<div data-filename='" + fullName + "'>" + fileName
+            		str = "<div data-filename='null'>" + fileName
             			+ "<img src='/resources/nds/images/file_image.png'>"
             			+ "</div>";
-							console.log("엘스");            		
             	}
             	$("#file_image").html(str);
             }
@@ -197,18 +193,24 @@ $(document).ready(function(){
 	});
 	
 	$("#btnregist").click(function(){
+		var filename = $("#file_image > div").attr("data-filename");
+		var hiddenstr = "<input type='hidden' name='review_image' value='"+ filename +"'>";
+		
+		$("#review_form").append(hiddenstr);
 		$("#review_form").submit();
 	});
 });
 </script>
 </head>
 <body>
-<section class="page-header" style="background-color: #a5e3ff;">
+<section class="page">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
-					<h1 class="page-name">리뷰 작성</h1>
+					<h1 class="page-name">후기 작성</h1>
+					<ol class="breadcrumb">
+					</ol>
 				</div>
 			</div>
 		</div>
@@ -218,11 +220,13 @@ $(document).ready(function(){
 			<div class="row">
 				<div class="col-md-12">
 					<form id="review_form" action="/nds/reviewregist-run" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="user_code" value="${memberVo.user_code}">
+					<input type="hidden" name="review_writer" value="${memberVo.user_id}">
 					<div style="float: left;">				
 						<select id="review_class" class="selectinsert" name="review_class">
 							<option>클래스(선택)</option>
 							<option>국내</option>
-							<option>국외</option>
+							<option>해외</option>
 						</select>
 						<select id="review_country" class="selectinsert" name="review_country">
 							<option>클래스를 선택해주세요.</option>
@@ -239,7 +243,7 @@ $(document).ready(function(){
 							<textarea style="height:400px;" rows="20" placeholder="내용" class="form-control" id="review_content" name="review_content"></textarea>	
 						</div>
 						<div class="form-group" id="file">
-							<input type="file" name="review_image" id="review_image">
+							<input type="file" id="review_image">
 						</div>
 						<div id="file_image">
 						</div>						

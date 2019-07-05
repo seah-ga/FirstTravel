@@ -13,6 +13,15 @@
 			order by review_num desc) a)
 			where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 </select>
+
+<!-- 리뷰 조회수에 따른 베스트 글목록 해외 -->
+<select id="reviewbestlist" resultType="com.kh.nds.domain.ReviewVo">
+	select *
+	from tbl_review
+	where review_class = '해외'
+	order by review_reading desc
+</select>
+
 <!-- 리뷰 글목록 개수 -->
 <select id="reviewCount" resultType="int">
 	select count(*)
@@ -20,6 +29,12 @@
 	<include refid="search"/>
 </select>
 
+<!-- 리뷰 상세보기  -->
+<select id="reviewread" resultType="com.kh.nds.domain.ReviewVo">
+	select *
+	from tbl_review
+	where review_num = #{review_num}
+</select>
 <!-- 검색 -->
 <sql id="search">
 	<if test="searchType != null">
@@ -37,8 +52,51 @@
 		</if>
 	</if>
 </sql>
+<!-- 리뷰 글 쓰기 -->
 <insert id="reviewregist">
 	insert into tbl_review(review_num, user_code, review_class, review_country, review_city, review_name, review_content, review_image, review_writer)
 	values (seq_review.nextval, #{user_code}, #{review_class}, #{review_country}, #{review_city}, #{review_name}, #{review_content}, #{review_image}, #{review_writer})
 </insert>
+
+<!-- 리뷰 글 삭제 -->
+<delete id="reviewdelete">
+	delete from tbl_review
+	where review_num = #{review_num}
+</delete>
+
+<!-- 리뷰 글 수정 -->
+<update id="reviewupdate">
+	update tbl_review set
+		review_class = #{review_class},
+		review_country = #{review_country},
+		review_city = #{review_city},
+		review_name = #{review_name},
+		review_content = #{review_content},
+		review_image = #{review_image}
+	where review_num = #{review_num}
+</update>
+<!-- 리뷰 조회수 올리기 -->
+<update id="reviewreading">
+	update tbl_review set
+		review_reading = #{review_reading} + 1
+	where review_num = #{review_num}
+</update>
+<!-- 리뷰 댓글 쓰기 -->
+<insert id="replyregist">
+	insert into tbl_review_reply(review_reply_num, review_num, user_code, review_reply_content, review_reply_writer)
+	values (seq_review_reply.nextval, #{review_num}, #{user_code}, #{review_reply_content}, #{review_reply_writer})
+</insert>
+
+<!-- 리뷰글번호에 따른 리뷰댓글 리스트 -->
+<select id="replyselect" resultType="com.kh.nds.domain.ReviewReplyVo">
+	select *
+	from tbl_review_reply
+	where review_num = #{review_num}
+	order by review_reply_num desc
+</select>
+<!-- 리뷰글번호에 따른 리뷰댓글 삭제 -->
+<delete id="replydelete">
+	delete from tbl_review_reply
+	where review_reply_num = #{review_reply_num}
+</delete>
 </mapper>

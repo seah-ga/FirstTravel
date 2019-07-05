@@ -16,6 +16,8 @@
     -webkit-appearance: none; /* 네이티브 외형 감추기 */
     -moz-appearance: none;
     appearance: none;
+    margin-top: 30px;
+    float: left;
 }
 </style>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/nds/ndsread/images/favicon.png" />
@@ -80,17 +82,18 @@ $(document).ready(function() {
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
+                    		<h2>해외 검색</h2>
                             <select id="country" class="search">
                             	<option>국가(선택)</option>
 	                            <c:forEach var="overseasVo" items="${countrylist}">
                                 <option value="${overseasVo.overseas_Country}">${overseasVo.overseas_Country}</option>
                                 </c:forEach>
                             </select>
-                            <select id="city" class="search">
-                           
+                            <select id="city" class="search" style="margin-left: 20px;">
+                           		<option>(도시)국가를 선택해주세요.</option>
                             </select>
                      
-                            <input type="button" value="검색" id="btnsearch">
+                            <input type="button" value="검색" id="btnsearch" style="margin-top: 30px; height: 44px;">
                     </div>
                 </div>
             </div>

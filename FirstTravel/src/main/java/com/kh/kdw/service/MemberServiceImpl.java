@@ -72,4 +72,35 @@ public class MemberServiceImpl implements IMemberService {
 		sendMail.send();
 	}
 
+	@Override
+	public MemberVo memberId(int user_code) throws Exception {
+		// 아이디 얻기
+		MemberVo memberVo = memberDao.memberId(user_code);
+		return memberVo;
+	}
+
+	@Override
+	public String searchId(String user_id, String user_email) throws Exception {
+		// 아이디 비번 찾기
+		String message = "non-success";
+		MemberVo memberVo = memberDao.idSearch(user_id, user_email);
+		if (memberVo != null) {
+			int user_code = memberVo.getUser_code();
+			TempKey tempKey = new TempKey();
+			String key = tempKey.getKey(12, false);
+			String user_pw = key;	
+			memberDao.passwoardUpdate(user_code, user_pw);
+			memberVo = memberDao.memberId(user_code);
+			System.out.println("수정된 비밀번호 : " + memberVo);
+			MailHandler sendMail = new MailHandler(mailSender);
+			sendMail.setSubject("비밀번호 변경");
+			sendMail.setText(new StringBuffer().append("<h1>비밀번호 변경</h1><br>").append("[" + key + "] 로 변경되었습니다.").toString());
+			sendMail.setForm("FirstTravel@naver.com", "(주)First Travel");
+			sendMail.setTo(user_email);
+			sendMail.send();
+			message = "success";
+		}
+		return message;
+	}
+
 }

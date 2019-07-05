@@ -8,6 +8,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  
+<!--   	<script type="text/javascript"> -->
+<!--    	//호텔정보 -->
+<!--    	$(".unit-1 text-center").click(function(){ -->
+<!--    		$.ajax({ -->
+<!--    			"type" : "get", -->
+<!--    			"url" : "rest/restapi", -->
+<!--    			"headers" : { -->
+<!--   			 "content-type" : "application/json", -->
+<!--   			 "X-HTTP-Method-Override" : "get" -->
+  			 		
+<!--   			}, -->
+<!--    			"success" : function(rData){ -->
+<!--    				console.log(rData); -->
+<!--   				var data = rData.response.body.items.item; -->
+<!--   				console.log(data); -->
+  				
+  				
+  				
+<!--    			} -->
+<!--    		}); -->
+<!--    	}); -->
+  	
+  	
+  	
+<!--   	</script> -->
+  
+  
     <title>First Travel &mdash; Colorlib Website Template</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,6 +83,9 @@
 	<script type="text/javascript" src="//www.tour2000.co.kr/js/json2.js?ver=20171220"></script>
 	<script type="text/javascript" src="//www.tour2000.co.kr/js/utils.js?ver=20171220"></script>
 	<script type="text/javascript" src="//www.tour2000.co.kr/js/main.js?ver=20181121"></script>
+	
+	
+	
 	
   </head>
   <body>
@@ -554,7 +585,7 @@
 
     </div>
 
-
+	
     <div class="site-section">
       
       <div class="container overlap-section">

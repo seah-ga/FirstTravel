@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kdw.domain.GBoardVo;
+import com.kh.kdw.domain.PagingDto;
 
 @Repository
 public class GalleryDaoImpl implements IGalleryDao {
@@ -43,22 +44,60 @@ public class GalleryDaoImpl implements IGalleryDao {
 	}
 
 	@Override
-	public List<GBoardVo> gBoardList() throws Exception {
+	public List<GBoardVo> gBoardList(PagingDto pagingDto) throws Exception {
 		// 글목록
-		List<GBoardVo> list = sqlSession.selectList(NAMESPACE + "gBoardList");
+		List<GBoardVo> list = sqlSession.selectList(NAMESPACE + "gBoardList", pagingDto);
+		System.out.println("dao list:" + list);
 		return list;
 	}
 
 	@Override
-	public int listCount() throws Exception {
+	public int totalListCount(PagingDto pagingDto) throws Exception {
 		// 글개수
-		return 0;
+		int count = sqlSession.selectOne(NAMESPACE + "totalListCount", pagingDto);
+		return count;
 	}
 
 	@Override
 	public void gViewCount(int g_no) throws Exception {
 		// 조회수 증가
 		sqlSession.update(NAMESPACE + "gViewCount", g_no);
+	}
+
+	@Override
+	public void fileAttach(String file_path) throws Exception {
+		// 첨부파일 위치 저장
+		sqlSession.insert(NAMESPACE + "fileAttach", file_path);
+		
+	}
+
+	@Override
+	public String[] getFile(int g_no) throws Exception {
+		// 첨부파일 경로 가져오기
+		String path = sqlSession.selectOne(NAMESPACE + "getFile", g_no);
+		System.out.println("path:" + path);
+		return new String[] {path};
+	}
+
+	@Override
+	public GBoardVo prevBoard(int g_no) throws Exception {
+		// 이전글 얻기
+		GBoardVo gBoardVo = sqlSession.selectOne(NAMESPACE + "go_prev", g_no);
+		return gBoardVo;
+	}
+
+	@Override
+	public GBoardVo nextBoard(int g_no) throws Exception {
+		// 다음글 얻기
+		GBoardVo gBoardVo = sqlSession.selectOne(NAMESPACE + "go_next", g_no);
+		return gBoardVo;
+	}
+
+	@Override
+	public void replycountUpdate(int g_no) throws Exception {
+		// 답글 개수 갱신
+		sqlSession.update(NAMESPACE + "replyCountUpdate", g_no);
+		
 	}
 
 }

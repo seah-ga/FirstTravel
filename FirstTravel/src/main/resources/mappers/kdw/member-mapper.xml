@@ -12,11 +12,33 @@
 		where user_id = #{user_id}
 	</select>
 	
+	<!-- 아이디 얻기 -->
+	<select id="getUserInfo" resultType="MemberVo">
+		select *
+		from tbl_user
+		where user_code = #{user_code}
+	</select>
+	
 	<!-- 이메일 인증번호 -->
 	<insert id="createAuthKey">
 		insert into tbl_chk_email(email_code, user_email, authkey)
 		values(seq_email.nextval, #{user_email}, #{authkey})
 	</insert>
+	
+	<!-- 아이디/비번 찾기 -->
+	<select id="idSearch" resultType="MemberVo">
+		select *
+		from tbl_user
+		where user_email = #{user_email}
+		and user_id = #{user_id}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="passwoardUpdate">
+		update tbl_user set
+			user_pw = #{user_pw}
+		where user_code = #{user_code}			
+	</update>
 	
 	<!-- 회원가입 -->
 	<insert id="memberJoin">

@@ -1,6 +1,8 @@
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 
 <!-- header -->
 <!DOCTYPE html>
@@ -35,7 +37,6 @@
 <!--      <link rel="stylesheet" type="text/css" href="http://image1.hanatour.com/2010/css/jquery-ui.hanatour.css">   -->
 <!--     <link rel="stylesheet" type="text/css" href="//www.hanatour.com/_css/hana/common/tnb.css">   -->
 <!--      <link rel="stylesheet" type="text/css" href="//www.hanatour.com/_css/2011/hanatour.css"><script type="text/javascript" src="//www.hanatour.com/_script/util/jquery-1.8.3.min.js"></script>   -->
-
 <link rel="stylesheet" type="text/css" href="//www.tour2000.co.kr/css/reset.css?ver=20181226" />
 	<link rel="stylesheet" type="text/css" href="//www.tour2000.co.kr/css/swiper.min.css">
 	<link rel="stylesheet" type="text/css" href="//www.tour2000.co.kr/css/jquery-ui.css" />
@@ -55,11 +56,14 @@
 	<script type="text/javascript" src="//www.tour2000.co.kr/js/utils.js?ver=20171220"></script>
 	<script type="text/javascript" src="//www.tour2000.co.kr/js/main.js?ver=20181121"></script>
 	
+		<!-- 부트스트랩 cdn -->
+<!--  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">					 -->
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>						 -->
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>		 -->
+	
  
  
   </head>
-  
-  
   <body>
    
   <div class="site-wrap">
@@ -416,13 +420,13 @@
 		
 	           		
 <!-- 	           			<a href="javascript:void(0);" onclick="goLogin()" class="topAreaLogIn"><span>로그인</span></a> -->
-						<a href="javascript:void(0);" onclick="viewLoginOpen()" class="topAreaLogIn"><span>로그인</span></a>
+						<a href="/kdw/login" onclick="viewLoginOpen()" class="topAreaLogIn"><span>로그인</span></a>
 	           	
 				<!-- 아이콘들-->
 				<div class="topAreaIcon">
 					<a href="https://www.tour2000.co.kr/departure/index.do" class="topAreaIcon01">출발확정</a>
 				
-		           			<a href="https://www.tour2000.co.kr/member_join/agree.do" class="topAreaIcon02">회원가입</a>
+		           			<a href="/kdw/join" class="topAreaIcon02">회원가입</a>
 		          
 				</div>	
                 
@@ -438,54 +442,62 @@
               <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
               
                 <li class="has-children">
-                  <a href="index.html">국내</a>
+                  <a href="/psj/index">국내</a>
                    <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">수도권</a></li>
+                    <li><a href="#">제주도</a></li>
+                    <li><a href="#">경기권</a></li>
+                    <li><a href="#">경상도</a></li>
+                    <li><a href="#">전라도</a></li>
+                    <li><a href="#">충청도</a></li>
                   </ul>
                 </li>
                 <li class="has-children">
-                  <a href="destination.html">해외</a>
+                  <a href="/nds/itemoverseasmain">해외</a>
                   <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">일본</a></li>
+                    <li><a href="#">유럽</a></li>
+                    <li><a href="#">동남아/대만/서남아</a></li>
+                    <li><a href="#">중국/극동러시아/홍콩</a></li>
+                    <li><a href="#">남태평양</a></li>
+                    <li><a href="#">미주/중남미/하와이</a></li>
                   </ul>
                 </li>
                 
                 <li class="has-children">
                 <a href="discount.html">커뮤니티</a>
                 <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">여행Tip</a></li>
+                    <li><a href="#">포토갤러리</a></li>
+                    <li><a href="#">여행후기게시판</a></li>
+                    <li><a href="/ljh/companion">동행자구하기</a></li>
                   </ul>
                   </li>
                 
                 <li class="has-children"><a href="about.html">날씨정보</a>
                 <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">일본</a></li>
+                    <li><a href="#">유럽</a></li>
+                    <li><a href="#">동남아/대만/서남아</a></li>
+                    <li><a href="#">중국/극동러시아/홍콩</a></li>
+                    <li><a href="#">남태평양</a></li>
+                    <li><a href="#">미주/중남미/하와이</a></li>
                   </ul></li>
-                <li class="has-children"><a href="blog.html">숙박정보</a>
+                <li class="has-children"><a href="/ljh/hotel">숙박정보</a>
                 <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">일본</a></li>
+                    <li><a href="#">유럽</a></li>
+                    <li><a href="#">동남아/대만/서남아</a></li>
+                    <li><a href="#">중국/극동러시아/홍콩</a></li>
+                    <li><a href="#">남태평양</a></li>
+                    <li><a href="#">미주/중남미/하와이</a></li>
                   </ul></li>
                 <li class="has-children"><a href="contact.html">이벤트</a>
                 <ul class="dropdown">
-                    <li><a href="#">Japan</a></li>
-                    <li><a href="#">Europe</a></li>
-                    <li><a href="#">China</a></li>
-                    <li><a href="#">France</a></li>
+                    <li><a href="#">항공권이벤트</a></li>
+                    <li><a href="#">숙박권이벤트</a></li>
+                    <li><a href="#">여행상품이벤트</a></li>
+                    <li><a href="#">가이드이벤트</a></li>
                   </ul></li>
                 
                 <!-- <li><a href="booking.html">Book Online</a></li> -->
@@ -521,4 +533,7 @@
       </div>
       
     </header>
-<!--/header -->
+<!-- header -->
+  
+
+    
