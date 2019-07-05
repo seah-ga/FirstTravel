@@ -13,11 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.nds.domain.OverseasVo;
+import com.kh.nds.service.IOverseasService;
 import com.kh.psj.domain.CityVo;
+import com.kh.psj.domain.PsjPagingDto;
 import com.kh.psj.domain.SchTitleVo;
 import com.kh.psj.domain.SchVo;
+import com.kh.psj.domain.SearchDto;
+import com.kh.psj.domain.TipVo;
 import com.kh.psj.service.ICityService;
 import com.kh.psj.service.ISchService;
+import com.kh.psj.service.ITipService;
 
 @Controller
 @RequestMapping(value="/psj/*")
@@ -27,6 +33,12 @@ public class PsjController {
 	
 	@Inject
 	ISchService schService;
+	
+	@Inject
+	ITipService tipService;
+	
+	@Inject
+	IOverseasService overseaService; // 동석씨 파일
 
 	//	@RequestMapping(value="/test")
 //	public void test() {
@@ -109,8 +121,28 @@ public class PsjController {
 	}
 	
 	@RequestMapping(value="/wiki")
-	public void wiki() {
-		
+	public void wiki(Model model) {
+		try {
+			List<OverseasVo> overseaList = overseaService.selectAllcountry();
+			model.addAttribute("overseaList", overseaList);
+			
+//			String firstCountry = "미국";
+//			TipVo tipVo = new TipVo();
+//			tipVo.setTip_country(firstCountry);
+//			SearchDto searchDto = new SearchDto();
+//			searchDto.setTip_country(firstCountry);
+//			int scriptCount = tipService.getCount(searchDto);
+//			PsjPagingDto psjPagingDto= new PsjPagingDto(1, scriptCount);
+//			psjPagingDto.setSearchDto(searchDto);
+//			tipVo.setPsjPagingDto(psjPagingDto);
+//			System.out.println("위키컨트롤러 tipVo" + tipVo);
+//			List<TipVo> tipList = tipService.showList(tipVo); // parameter == 입장했을때의 나라( 고정값 )
+//			model.addAttribute("tipList", tipList);
+//			model.addAttribute("firstCountry",firstCountry);
+//			model.addAttribute("pagingDto", psjPagingDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

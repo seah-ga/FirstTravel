@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="tip">
+<insert id="insert">
+insert into tbl_tip_board (    
+	tip_no,
+    tip_content,
+	tip_writer_code,
+	tip_country,
+	tip_writer_id
+ 
+)values (
+	SEQ_TIPBOARD.NEXTVAL,
+	#{tip_content},
+	#{tip_writer_code},
+	#{tip_country},
+	#{tip_writer_id}
+) 
+
+</insert>
+<select id="select" resultType="TipVo">
+
+    select * 
+    from(select rownum r, a.* 
+		from (select * 
+			  from tbl_tip_board 
+			  where tip_country = #{tip_country}
+			 <if test="psjPagingDto.searchDto.search_type != null">
+			    <if test="psjPagingDto.searchDto.search_type == 'content'">
+			      and tip_content like '%' ||#{psjPagingDto.searchDto.search_val}||'%'
+			    </if>
+			     <if test="psjPagingDto.searchDto.search_type == 'writer'">
+			       and tip_writer_id like '%'||#{psjPagingDto.searchDto.search_val}||'%'
+			     </if>
+			</if>
+			  order by tip_no desc
+			) a	
+		) 
+	where r &gt;= #{psjPagingDto.startRow} and r &lt;= #{psjPagingDto.endRow}
+
+	
+</select>
+<select id="selectCount" resultType="int">
+	select count(*) from tbl_tip_board
+	where tip_country = #{tip_country}
+	 <include refid="search"/>
+</select>
+<update id="update">
+update tbl_tip_board
+set tip_content = #{tip_content}
+where tip_no = #{tip_no}	
+</update>
+<update id="update_tipUp_plus">
+update tbl_tip_board
+set tip_up = tip_up + 1
+where tip_no = #{tip_no}
+</update>
+<update id="update_tipUp_minus">
+update tbl_tip_board
+set tip_up = tip_up - 1
+where tip_no = #{tip_no}
+</update>
+<update id="update_tipDown_plus">
+update tbl_tip_board
+set tip_down = tip_down + 1
+where tip_no = #{tip_no}
+</update>
+<update id="update_tipDown_minus">
+update tbl_tip_board
+set tip_down = tip_down - 1
+where tip_no = #{tip_no}
+</update>
+<insert id="insert_tbl_tipUpDown">
+insert into tbl_tip_updown(user_code,tip_no,tip_sort)
+values(#{updownVo.user_code},#{updownVo.tip_no}, #{updownVo.tip_sort})
+</insert>
+
+<select id="select_tbl_updown" resultType="TipUpDownVo">
+select * from tbl_tip_updown where user_code = #{user_code}
+</select>
+<delete id="delete_tbl_updown">
+delete from tbl_tip_updown
+where user_code = #{updownVo.user_code}
+and tip_no = #{updownVo.tip_no}
+</delete>
+
+<delete id="delete">
+delete tbl_tip_board
+where tip_no = #{tip_no}
+</delete>
+
+<sql id="search">
+		<if test="search_type != null">
+		    <if test="search_type == 'content'">
+		      and tip_content like '%' ||#{search_val}||'%'
+		    </if>
+		     <if test="search_type == 'writer'">
+		       and tip_writer_id like '%'||#{search_val}||'%'
+		     </if>
+		</if>
+</sql>
+</mapper>

@@ -16,5 +16,9 @@
 		<typeAlias type="com.kh.psj.domain.HotelVo" alias="HotelVo"/>
 		<typeAlias type="com.kh.psj.domain.SchTitleVo" alias="SchTitleVo"/>
 		<typeAlias type="com.kh.psj.domain.CartVo" alias="CartVo"/>
+		<typeAlias type="com.kh.psj.domain.TipVo" alias="TipVo"/>
+		<typeAlias type="com.kh.psj.domain.PsjPagingDto" alias="PsjPagingDto"/>
+		<typeAlias type="com.kh.psj.domain.TipUpDownVo" alias="TipUpDownVo"/>
+		<typeAlias type="com.kh.psj.domain.SearchDto" alias="SearchDto"/>
 	</typeAliases>
 </configuration>  
