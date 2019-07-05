@@ -1,12 +1,15 @@
 package com.kh.kdw.controller;
 
+
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,8 +29,23 @@ public class MemberController {
 	private IMemberService memberService;
 	
 	@RequestMapping(value = "/login")
-	public void login() throws Exception {
-		
+	public String login(HttpServletRequest request) throws Exception {
+		Cookie[] cookies = request.getCookies();
+		String user_cookie = null;
+		for (Cookie cookie : cookies) {
+			String cookieName = cookie.getName();
+			String cookieValue = cookie.getValue();
+			if (cookieName.equals("user_cookie")) {
+				user_cookie = cookieValue;
+			}
+		}
+		if (user_cookie != null) {
+			MemberVo memberVo = memberService.memberId(Integer.parseInt(user_cookie));
+			HttpSession session = request.getSession();
+			session.setAttribute("MemberVo", memberVo);
+			return "redirect:/ljh/main";
+		}
+		return "/kdw/login";
 	}
 	
 	@RequestMapping(value = "/login-run", method=RequestMethod.POST)
@@ -37,10 +55,10 @@ public class MemberController {
 		System.out.println("memberVo" + memberVo);
 		if (memberVo != null) {
 			session.setAttribute("memberVo", memberVo);
-			System.out.println("실행됨1");
+			System.out.println("멤버 세션에 담김");
 			return "redirect:/kdw/gallery/gallery_list";
 		}
-		System.out.println("실행됨 2");
+		System.out.println("멤버 세션에 담기지 않음");
 		return "redirect:/kdw/join";
 	}
 	
@@ -112,7 +130,39 @@ public class MemberController {
 		return "redirect:/kdw/listcart";
 	}
 	
-
 	
+	@RequestMapping(value="/logout")
+	public String loguot(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception {
+		session.invalidate();
+		Cookie user_cookie = new Cookie("user_code", null);
+		user_cookie.setMaxAge(0);
+		response.addCookie(user_cookie);
+		return "redirect:/ljh/main";
+	}
+
+	// 회원 아이디/비밀번호 찾기
+	@RequestMapping(value="/search_id", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> searchId(@RequestBody MemberVo memberVo) throws Exception {
+		System.out.println("회원 아이디 비번 찾기");
+		System.out.println(memberVo);
+		ResponseEntity<String> entity = null;
+		String message = "";
+		String user_id = memberVo.getUser_id();
+		String user_email = memberVo.getUser_email();
+		try {
+			if (user_id.equals("") || user_email.equals("")) {
+				message = "bad";
+			}
+			if (!user_id.equals("") && !user_email.equals("")) {
+				message = memberService.searchId(user_id, user_email);
+			}
+			entity = new ResponseEntity<String>(message, HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 
 }

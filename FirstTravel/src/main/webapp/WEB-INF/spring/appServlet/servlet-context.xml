@@ -56,7 +56,12 @@
 	</beans:bean>
 	
 	<!-- 인터셉터 -->
-	
+	<beans:bean id="LoginInterceptor" class="com.kh.kdw.intercepter.LoginInterceptor"/>
 	<!-- **, * 패턴 사용가능 --><!-- mapping path가 할 것을 가로 채서 먼저 할일을 정한다. -->
-	
+	<interceptors>
+		<interceptor>
+			<mapping path="/kdw/login-run"/>
+			<beans:ref bean="LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

@@ -3,6 +3,7 @@ package com.kh.kdw.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.kdw.domain.GBoardVo;
+import com.kh.kdw.domain.MemberVo;
 import com.kh.kdw.domain.PaginationDto;
 import com.kh.kdw.domain.PagingDto;
 import com.kh.kdw.service.IGalleryService;
@@ -41,7 +43,13 @@ public class GalleryController {
 	public void galleryRead(@RequestParam("g_no") int g_no, Model model) throws Exception {
 		System.out.println("read page" + g_no);
 		GBoardVo gBoardVo = galleryService.GBoardRead(g_no);
+		GBoardVo prevBoardVo = galleryService.prevBoard(g_no);
+		GBoardVo nextBoardVo = galleryService.nextBoard(g_no);
+		System.out.println("이전글:" + prevBoardVo);
+		System.out.println("다음글:" + nextBoardVo);
 		model.addAttribute("gBoardVo", gBoardVo);
+		model.addAttribute("prevBoardVo", prevBoardVo);
+		model.addAttribute("nextBoardVo", nextBoardVo);
 	}
 	
 	// 겔러리 쓰기 폼
@@ -52,11 +60,27 @@ public class GalleryController {
 	
 	// 겔러리 쓰기 처리
 	@RequestMapping(value="/gallery_write_run", method=RequestMethod.POST)
-	public String galleryWriteRun(GBoardVo gBoardVo) throws Exception {
+	public String galleryWriteRun(GBoardVo gBoardVo, HttpSession session) throws Exception {
 		System.out.println("gallery_write_run 실행됨");
 		System.out.println("GalleryController, gallery_write_run, GBoardVo: " + gBoardVo);
+		MemberVo memberVo = (MemberVo)session.getAttribute("memberVo");
+		System.out.println("GalleryController, gallery_write_run, memberVo: " + memberVo);
+		if(memberVo == null) {
+			return "redirect:/kdw/login";
+		}
+		int user_code = memberVo.getUser_code();
+		gBoardVo.setUser_code(user_code);
 		galleryService.GBoardwrite(gBoardVo);
 		return "redirect:/kdw/gallery/gallery_list";
+	}
+	
+	// 겔러리 수정 폼
+	@RequestMapping(value="/gallery_modify", method=RequestMethod.GET)
+	public void galleryModify(@RequestParam("g_no") int g_no, Model model) throws Exception {
+		System.out.println("gallery_modify, g_no : " + g_no);
+		GBoardVo gBoardVo = galleryService.GBoardRead(g_no);
+		System.out.println("GalleryController, modify, gBoardVo :" + gBoardVo);
+		model.addAttribute("gBoardVo", gBoardVo);
 	}
 	
 }

@@ -12,6 +12,7 @@ public class GBoardVo {
 	private int g_viewcnt;			// 조회수
 	private int g_replycnt;			// 리플수
 	private Timestamp g_regdate;	// 작성일
+	private int user_code;			// 작성자 멤버 코드
 	private String fileone;
 	private String[] files;			// 파일 담을 배열
 	
@@ -64,8 +65,13 @@ public class GBoardVo {
 	public void setG_regdate(Timestamp g_regdate) {
 		this.g_regdate = g_regdate;
 	}
-	
 
+	public int getUser_code() {
+		return user_code;
+	}
+	public void setUser_code(int user_code) {
+		this.user_code = user_code;
+	}
 	public String getFileone() {
 		return fileone;
 	}
@@ -82,7 +88,8 @@ public class GBoardVo {
 	public String toString() {
 		return "GBoardVo [g_no=" + g_no + ", g_title=" + g_title + ", g_location=" + g_location + ", g_content="
 				+ g_content + ", g_writer=" + g_writer + ", g_viewcnt=" + g_viewcnt + ", g_replycnt=" + g_replycnt
-				+ ", g_regdate=" + g_regdate + ", fileone=" + fileone + ", files=" + Arrays.toString(files) + "]";
+				+ ", g_regdate=" + g_regdate + ", user_code=" + user_code + ", fileone=" + fileone + ", files="
+				+ Arrays.toString(files) + "]";
 	}
 	
 	

@@ -23,7 +23,7 @@ import com.kh.kdw.util.FileUploadUtil;
 
 @RestController
 @RequestMapping(value="/kdw/upload/*")
-public class UploadController {
+public class KdwUploadController {
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
