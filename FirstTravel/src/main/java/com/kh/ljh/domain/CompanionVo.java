@@ -3,24 +3,17 @@ package com.kh.ljh.domain;
 import java.sql.Timestamp;
 
 public class CompanionVo {
-	private int companion_number; //유저가 쓴 글의 번호
-	private int companion_usercode; //글의 유저코드
+	private int companion_numbercode; //유저가 쓴 글의 번호
 	private String companion_title; // 글의 제목
 	private String companion_writer; //글의 작성자
 	private String companion_content; //글의 내용
 	private Timestamp companion_date; //글의 올린시간
 	private int companion_reading; //글의 조회수
-	public int getCompanion_number() {
-		return companion_number;
+	public int getCompanion_numbercode() {
+		return companion_numbercode;
 	}
-	public void setCompanion_number(int companion_number) {
-		this.companion_number = companion_number;
-	}
-	public int getCompanion_usercode() {
-		return companion_usercode;
-	}
-	public void setCompanion_usercode(int companion_usercode) {
-		this.companion_usercode = companion_usercode;
+	public void setCompanion_numbercode(int companion_numbercode) {
+		this.companion_numbercode = companion_numbercode;
 	}
 	public String getCompanion_title() {
 		return companion_title;
@@ -54,11 +47,11 @@ public class CompanionVo {
 	}
 	@Override
 	public String toString() {
-		return "CompanionVo [companion_number=" + companion_number + ", companion_usercode=" + companion_usercode
-				+ ", companion_title=" + companion_title + ", companion_writer=" + companion_writer
-				+ ", companion_content=" + companion_content + ", companion_date=" + companion_date
-				+ ", companion_reading=" + companion_reading + "]";
+		return "CompanionVo [companion_numbercode=" + companion_numbercode + ", companion_title=" + companion_title
+				+ ", companion_writer=" + companion_writer + ", companion_content=" + companion_content
+				+ ", companion_date=" + companion_date + ", companion_reading=" + companion_reading + "]";
 	}
+	
 	
 	
 	

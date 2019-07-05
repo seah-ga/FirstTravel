@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.kdw.domain.MemberVo;
 import com.kh.ljh.domain.CompanionVo;
+import com.kh.ljh.domain.PagingDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
@@ -20,12 +21,45 @@ public class CompanionServiceTest {
 	@Test
 	public void testInsert() throws Exception{
 		CompanionVo vo = new CompanionVo();
-		vo.setCompanion_usercode(111);
-		vo.setCompanion_title("동행자제목3");
-		vo.setCompanion_writer("동행자작성자3");
-		vo.setCompanion_content("동행자글내용3");
+		vo.setCompanion_title("동행자제목");
+		vo.setCompanion_writer("동행자작성자");
+		vo.setCompanion_content("동행자글내용");
 		companionService.insert(vo);
 		
+	}
+	@Test
+	public void testList() throws Exception{
+		PagingDto pagingDto = new PagingDto();
+		pagingDto.setPage(2);
+		companionService.list(pagingDto);
+	}
+	@Test
+	public void testListCount() throws Exception{
+		PagingDto pagingDto = new PagingDto();
+		pagingDto.setPage(1);
+		pagingDto.setPerPage(10);
+		pagingDto.setSearchType("title");
+		pagingDto.setKeyword("50");
+		companionService.listCount(pagingDto);
+		
+	}
+	@Test
+	public void testRead() throws Exception{
+		int numbercode = 4;
+		companionService.read(numbercode);
+	}
+	@Test 
+	public void testUpdate() throws Exception{
+		CompanionVo companionVo = new CompanionVo();
+		companionVo.setCompanion_title("제목서비스테스트");
+		companionVo.setCompanion_content("내용서비스테스트");
+		companionVo.setCompanion_writer("작성자서비스테스트");
+		companionVo.setCompanion_numbercode(1);
+		companionService.update(companionVo);
+	}
+	@Test
+	public void testDelete() throws Exception{
+		companionService.delete(541);
 	}
 	
 	

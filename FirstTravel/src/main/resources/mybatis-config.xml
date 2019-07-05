@@ -13,5 +13,8 @@
 		<typeAlias type="com.kh.psj.domain.SchVo" alias="SchVo"/>
 		<typeAlias type="com.kh.psj.domain.AirVo" alias="AirVo"/>
 		<typeAlias type="com.kh.psj.domain.HotelVo" alias="HotelVo"/>
+		<typeAlias type="com.kh.ljh.domain.CompanionVo" alias="CompanionVo"/>
+		<typeAlias type="com.kh.ljh.domain.PagingDto" alias="PagingDto"/>
+		<typeAlias type="com.kh.ljh.domain.PaginationDto" alias="PaginationDto"/>
 	</typeAliases>
 </configuration>  

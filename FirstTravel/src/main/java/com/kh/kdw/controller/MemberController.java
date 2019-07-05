@@ -38,7 +38,7 @@ public class MemberController {
 		if (memberVo != null) {
 			session.setAttribute("memberVo", memberVo);
 			System.out.println("실행됨1");
-			return "redirect:/kdw/gallery/gallery_list";
+			return "redirect:/ljh/companion";
 		}
 		System.out.println("실행됨 2");
 		return "redirect:/kdw/join";

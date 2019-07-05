@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ include file="../ljh/include/header.jsp" %>								
+<%@ include file="../include/header.jsp" %>								
 
 <script>
 $(document).ready(function(){
@@ -27,17 +27,16 @@ $(document).ready(function(){
 				</div>
 				<div class="form-group">
 					<label for="companion_writer">작성자</label>
-					<input type="text" class="form-control" name="companion_writer" id="companion_writer">
+					<input type="text" class="form-control" name="companion_writer" id="companion_writer" value="${memberVo.user_id}" readonly/>
 				</div>
 				<div class="form-group">
 					<label for="companion_content">내용</label>
 					<textarea rows="10" cols="80" class="form-control" name="companion_content" id="companion_content"></textarea>
 				</div>
-				<input type="button" class="btn btn-danger" value="작성완료" id="btnSubmit">
+				<input type="button" class="btn btn-warning" value="작성완료" id="btnSubmit">
 			</form>
 		</div>
 	</div>
-	
 </div>
-<%@ include file="../ljh/include/footer.jsp" %>
+<%@ include file="../include/footer.jsp" %>
     
