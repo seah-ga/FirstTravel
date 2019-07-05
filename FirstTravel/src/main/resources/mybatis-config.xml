@@ -9,7 +9,6 @@
 
 		<typeAlias type="com.kh.kdw.domain.MemberVo" alias="MemberVo"/>
 		<typeAlias type="com.kh.kdw.domain.GBoardVo" alias="GBoardVo"/>
-
 		<typeAlias type="com.kh.kdw.domain.GReplyVo" alias="GReplyVo"/>
 		
 		<typeAlias type="com.kh.psj.domain.CityVo" alias="CityVo"/>
@@ -22,6 +21,7 @@
 		<typeAlias type="com.kh.psj.domain.PsjPagingDto" alias="PsjPagingDto"/>
 		<typeAlias type="com.kh.psj.domain.TipUpDownVo" alias="TipUpDownVo"/>
 		<typeAlias type="com.kh.psj.domain.SearchDto" alias="SearchDto"/>
+		<typeAlias type="com.kh.psj.domain.TipRepVo" alias="TipRepVo"/>
 
 		<typeAlias type="com.kh.ljh.domain.CompanionVo" alias="CompanionVo"/>
 		<typeAlias type="com.kh.ljh.domain.PagingDto" alias="PagingDto"/>

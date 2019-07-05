@@ -125,25 +125,13 @@ public class PsjController {
 		try {
 			List<OverseasVo> overseaList = overseaService.selectAllcountry();
 			model.addAttribute("overseaList", overseaList);
-			
-//			String firstCountry = "미국";
-//			TipVo tipVo = new TipVo();
-//			tipVo.setTip_country(firstCountry);
-//			SearchDto searchDto = new SearchDto();
-//			searchDto.setTip_country(firstCountry);
-//			int scriptCount = tipService.getCount(searchDto);
-//			PsjPagingDto psjPagingDto= new PsjPagingDto(1, scriptCount);
-//			psjPagingDto.setSearchDto(searchDto);
-//			tipVo.setPsjPagingDto(psjPagingDto);
-//			System.out.println("위키컨트롤러 tipVo" + tipVo);
-//			List<TipVo> tipList = tipService.showList(tipVo); // parameter == 입장했을때의 나라( 고정값 )
-//			model.addAttribute("tipList", tipList);
-//			model.addAttribute("firstCountry",firstCountry);
-//			model.addAttribute("pagingDto", psjPagingDto);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
+	
+
 
 }

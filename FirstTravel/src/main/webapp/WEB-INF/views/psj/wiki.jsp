@@ -192,7 +192,18 @@ main section h1 {
 .down{
 	cursor:pointer;
 }
+.replyTable th{
 
+   width: 100px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    background: #eee;
+}
 
 
 
@@ -227,7 +238,10 @@ function getPageInfo(country_name,search_val,search_type) {
 			$(rData).each(function(i) {
 				innerHtml += "<tr>";
 					innerHtml += "<td>" + rData[i].tip_no + "</td>";
-					innerHtml += "<td>" + rData[i].tip_content + "</td>";
+					innerHtml += "<td>" + rData[i].tip_content + space 
+							  +   "<span class='glyphicon glyphicon-chevron-down gldown' style='float:right;cursor:pointer'></span>"
+					          + "<span class='glyphicon glyphicon-chevron-up glup' style='display:none;float:right;cursor:pointer'></span>" ;
+					          + "</td>";
 					innerHtml += "<td>" + rData[i].tip_regdate + "</td>";
 					innerHtml += "<td data-writer-code = '"+ rData[i].tip_writer_code 
 								+ "'>" + rData[i].tip_writer_id + "</td>";
@@ -574,6 +588,42 @@ function getPageInfo(country_name,search_val,search_type) {
 			search_val = $("#txt_search").val();
 			getPageInfo(country_name,search_val,search_type);
 // 			console.log(search_type + " ::" + search_val);
+		});
+		
+		///댓글펼치기
+		$("#table_tip_list").on('click','span.gldown', function() {
+// 			console.log($(this).parent().parent());
+			var tip_no = $(this).parent().parent().children().eq(0).text();
+			console.log(tip_no);
+			var thisEl = $(this);
+			var tr = $(this).parent().parent();
+			var url = "/wiki/reply/" + tip_no;
+			var replyHtml ="<td></td>";  // td 한칸을 비우고싶어서.. 다른 방법 강구해볼것
+			replyHtml += "<td><input type='text' class='txt-reply' placeholder='댓글을 입력해주세요.' size='50'>";
+			replyHtml += "<input type='button' class='btn-primary btn-xs' value='입력'>";
+			replyHtml += "<table class='replyTable'>";
+			$.getJSON(url, function(rData){
+				console.log(rData);
+				$(rData).each(function(i){
+					console.log(rData[i].tip_rep_writer_id + " ㅇㅇ");
+					
+					replyHtml += "<tr>";
+					replyHtml += "<th>"+ rData[i].tip_rep_writer_id +"</th>";
+					replyHtml += "<td>" + rData[i].tip_rep_content + "</td>";
+					replyHtml += "</tr>";
+					
+				});
+				replyHtml += "</table></td>";
+				console.log(replyHtml);
+				tr.after(replyHtml); // 다음 tr에 붙이기
+				thisEl.attr("class","glyphicon glyphicon-chevron-up glup");
+			});
+			
+			
+		});
+		$("#table_tip_list").on('click', 'span.glup', function() {
+			$(this).parent().parent().next().next().remove(); // 댓글 목록 삭제
+			$(this).attr("class","glyphicon glyphicon-chevron-down gldown");
 		});
 		
 		$("#txt_tip").click(function() {

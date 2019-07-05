@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.kdw.domain.MemberVo;
+
 import com.kh.psj.domain.PsjPagingDto;
 import com.kh.psj.domain.SearchDto;
+import com.kh.psj.domain.TipRepVo;
 import com.kh.psj.domain.TipUpDownVo;
 import com.kh.psj.domain.TipVo;
+import com.kh.psj.service.ITipRepService;
 import com.kh.psj.service.ITipService;
 
 @RestController
@@ -158,6 +161,24 @@ public class WikiController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@Inject
+	ITipRepService tipRepService;
+	
+	@RequestMapping(value="/reply/{tip_no}", method=RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public ResponseEntity<List<TipRepVo>> getReplyList(@PathVariable("tip_no") int tip_no){
+		ResponseEntity<List<TipRepVo>> entity = null;
+		try {
+			System.out.println("rep.get.tip_no : " + tip_no);
+			List<TipRepVo> list = tipRepService.getRepList(tip_no);
+			System.out.println(list);
+			entity = new ResponseEntity<List<TipRepVo>>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}
