@@ -5,11 +5,15 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.kdw.domain.GBoardVo;
 import com.kh.kdw.domain.MemberVo;
@@ -26,7 +30,7 @@ public class GalleryController {
 	
 	// 겔러리 목록 폼
 	@RequestMapping(value="/gallery_list")
-	public void galleryList(PagingDto pagingDto, Model model) throws Exception {
+	public void galleryList(PagingDto pagingDto, Model model, HttpSession session) throws Exception {
 		List<GBoardVo> list = galleryService.GBoardList(pagingDto);
 		int count = galleryService.totalListCount(pagingDto);
 		PaginationDto paginationDto = new PaginationDto();
@@ -37,7 +41,6 @@ public class GalleryController {
 		model.addAttribute("paginationDto", paginationDto);
 		model.addAttribute("pagingDto", pagingDto);
 	}
-	
 	// 겔러리 조회 폼
 	@RequestMapping(value="/gallery_read")
 	public void galleryRead(@RequestParam("g_no") int g_no, Model model) throws Exception {
@@ -81,6 +84,22 @@ public class GalleryController {
 		GBoardVo gBoardVo = galleryService.GBoardRead(g_no);
 		System.out.println("GalleryController, modify, gBoardVo :" + gBoardVo);
 		model.addAttribute("gBoardVo", gBoardVo);
+	}
+	
+	// 겔러리 삭제
+	@RequestMapping(value="/gallery_delete/{g_no}", method=RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<String> galleryDelete(@PathVariable("g_no") int g_no) throws Exception {
+		System.out.println("gallery_delete, g_no: " + g_no);
+		ResponseEntity<String> entity =null;
+		try {
+			galleryService.GBoardDelete(g_no);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 	
 }

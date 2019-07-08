@@ -80,8 +80,18 @@ public class KdwReplyController {
 	}
 	
 	// 댓글 수정
-	@RequestMapping(value="/reply_update")
-	public ResponseEntity<String> replyModify() throws Exception{
-		return null;
+	@RequestMapping(value="/reply_update/{r_no}", method=RequestMethod.PUT)
+	public ResponseEntity<String> replyModify(@PathVariable int r_no, @RequestBody GReplyVo gReplyVo) throws Exception{
+		ResponseEntity<String> entity = null;
+		System.out.println("r_no : " + r_no);
+		System.out.println("gReplyVo : " + gReplyVo);
+		try {
+			replyService.replyUpdate(gReplyVo);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 }
