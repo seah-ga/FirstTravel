@@ -99,6 +99,27 @@ $(document).ready(function() {
 			var r_no = $("#modal_text").attr("data-r_no");
 			var r_text = $("#modal_text").val();
 			console.log("m-text : " + r_text);
+			var data = {
+					"r_no" : r_no,
+					"r_text" : r_text
+			};
+			var url = "/kdw/reply/reply_update/" + r_no;
+			$.ajax({
+				"type" : "put",
+				"url" : url,
+				"headers" : {
+					"content-type" : "application/json",
+					"X-HTTP-Method-Override" : "put"
+				},
+				"dataType" : "text",
+				"data" : JSON.stringify(data),
+				"success" : function(rData) {
+					console.log("rData : " + rData);
+					if (rData == "success") {
+						getReplyList();
+					}
+				}
+			});
 		});
 		
 		// 답글 수정 버튼 클릭시
@@ -107,8 +128,8 @@ $(document).ready(function() {
 			var r_no = $(this).attr("data-r_no");
 			var r_text = $(this).attr("data-r_text");
 			console.log("text : " + r_text);
-			$("#modal_text").val(r_text);
 			$("#modal_text").attr("data-r_no", r_no);
+			$("#modal_text").val(r_text);
 			$("#btn_modal").trigger("click");
 		});
 		// 답글 삭제 버튼 클릭시
@@ -225,7 +246,7 @@ p {
         <input type="text" id="modal_text" data-r_no="">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="btn_modal_modify" data-dismiss="modal">수정</button>
+        <button type="button" class="btn btn-primary" id="btn_modal_modify" data-dismiss="modal">수정</button>
       </div>
     </div>
     

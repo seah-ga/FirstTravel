@@ -38,7 +38,7 @@ $(document).ready(function() {
     <div class="container wow fadeIn">
 
       <!-- Heading -->
-      <h2 class="my-5 h2 text-center">회원 정보</h2>
+      <h2 class="my-5 h2 text-center">개인정보수정</h2>
 
       <!--Grid row-->
       <div class="row">
@@ -117,8 +117,8 @@ $(document).ready(function() {
 
           <!-- Heading -->
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">포인트 내역</span>
-            <span class="badge badge-secondary badge-pill">3</span>
+            <span class="text-muted">마이페이지</span>
+            <span class="badge badge-secondary badge-pill">0</span>
           </h4>
 
           <!-- Cart -->
@@ -126,34 +126,26 @@ $(document).ready(function() {
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">보유 포인트</h6>
-                <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$12</span>
+              <span class="text-muted">${memberVo.user_point}point</span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
+                <h6 class="my-0">여행예약</h6>
               </div>
-              <span class="text-muted">$8</span>
+              <span class="text-muted">0건</span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
+                <h6 class="my-0">관심상품</h6>
               </div>
-              <span class="text-muted">$5</span>
+              <span class="text-muted">0건</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">1:1문의</h6>
               </div>
-              <span class="text-success">-$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
+              <span class="text-muted">0건</span>
             </li>
           </ul>
           <!-- Cart -->

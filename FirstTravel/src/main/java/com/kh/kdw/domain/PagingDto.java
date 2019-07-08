@@ -2,7 +2,7 @@ package com.kh.kdw.domain;
 
 public class PagingDto {
 	 private int page = 1; // 현재 페이지
-	 private int perPage = 10; // 한 페이지당 보여질 글 갯수
+	 private int perPage = 12; // 한 페이지당 보여질 글 갯수
 	 private int startRow = 1;
 	 private int endRow = startRow + perPage - 1;
 	 private String searchType;

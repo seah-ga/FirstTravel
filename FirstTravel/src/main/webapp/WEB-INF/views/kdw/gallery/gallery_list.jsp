@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="/resources/kdw/css/mystyle.css">
 <script>
 $(document).ready(function() {
 	
@@ -82,9 +83,11 @@ $(document).ready(function() {
 		var type = $(this).attr("data-type");
 		if (type == "list") {
 			$("#boardList").css("display", "block");
+			$("#galleryList").css("display", "none");
 			searchType_select();
 		} else if (type == "gallery") {
 			$("#boardList").css("display", "none");
+			$("#galleryList").css("display", "block");
 			searchType_select();
 		}
 	});
@@ -114,17 +117,17 @@ ${pagingDto }
 				<div class="col-md-12">
 					<div class="tabbable" id="tabs-847237">
 						<ul class="nav nav-tabs">
-							<li class="nav-item active">
-								<a class="nav-link active a_list" href="#tab1" data-toggle="tab" data-type="list">게시판보기</a>
-							</li>
 							<li class="nav-item">
-								<a class="nav-link a_list" href="#tab2" data-toggle="tab" data-type="gallery">겔러리보기</a>
+								<a class="nav-link a_list" href="#tab1" data-toggle="tab" data-type="list">게시판보기</a>
+							</li>
+							<li class="nav-item active">
+								<a class="nav-link active a_list" href="#tab2" data-toggle="tab" data-type="gallery">겔러리보기</a>
 							</li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="panel-749780">
+							<div class="tab-pane" id="panel-749780">
 							</div>
-							<div class="tab-pane" id="tab2">
+							<div class="tab-pane active" id="tab2">
 							</div>
 						</div>
 					</div>
@@ -135,10 +138,10 @@ ${pagingDto }
 					<nav>
 						<ol class="breadcrumb" style="background-color:#ffffff;">
 							<li class="breadcrumb-item">
-								<a href="#">메인</a>
+								<a href="/ljh/main">메인</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="#">커뮤니티</a>
+								<a href="/kdw/memberinfo">커뮤니티</a>
 							</li>
 							<li class="breadcrumb-item active">
 								겔러리
@@ -173,10 +176,12 @@ ${pagingDto }
 					<button type="button" class="btn btn-success" id="btn_write">글쓰기</button>
 				</div>
 			</div>
-			<div class="row"  style="display:block;" id="boardList">
+			<div class="row"  style="display:none;" id="boardList">
+	        
+			
 				<div class="col-md-12" >
 				<!-- 게시판 -->
-					<table class="table">
+					<table class="table" style="width:80%;margin:auto;text-align:center;">
 						<thead>
 							<tr>
 								<th>번호</th>
@@ -194,7 +199,16 @@ ${pagingDto }
 							<tr>
 								<td>${status.index} - ${gBoardVo.g_no }</td>
 								<td>${gBoardVo.g_location }</td>
-								<td><img src="/kdw/upload/displayFile?fileName=${gBoardVo.fileone }" style="width:100px;"></td>
+								<td>
+									<c:choose>
+										<c:when test="${gBoardVo.fileone != null }">
+											<img src="/kdw/upload/displayFile?fileName=${gBoardVo.fileone }" style="width:100px;">
+										</c:when>
+										<c:otherwise>
+											<img src="/resources/kdw/img/baseImage.jpg" style="width:100px;">
+										</c:otherwise>								
+									</c:choose>
+								</td>
 								<td><a href="/kdw/gallery/gallery_read" class="a_title" data-g_no="${gBoardVo.g_no }" 
 								data-index=${status.index }>${gBoardVo.g_title }</a></td>
 								<td>${gBoardVo.g_writer }</td>
@@ -206,6 +220,27 @@ ${pagingDto }
 					</table>
 				</div>
 			</div>
+			<div class="row" id="galleryList" style="display:block table;width:80%;margin:auto;">
+			<c:forEach items="${list}" var="gBoardVo" varStatus="status">
+	          <div class="col-md-2 col-lg-3 mb-3 mb-lg-2" style="dispaly:table-cell;text-align:center; margin-bottom: 50px;">
+	            <a href="/kdw/gallery/gallery_read" class="unit-1 text-center a_title" data-g_no="${gBoardVo.g_no }">
+	              <c:choose>
+					<c:when test="${gBoardVo.fileone != null }">
+						<img src="/kdw/upload/displayFile?fileName=${gBoardVo.fileone }" style="width:719px;height:300px;">
+					</c:when>
+					<c:otherwise>
+						<img src="/resources/kdw/img/baseImage.jpg" style="width:719px;height:300px;">
+					</c:otherwise>								
+				</c:choose>
+	              <div class="unit-1-text">
+	                <h3>${gBoardVo.g_title }</h3>
+	                <h4 style="color:#aaa;">${gBoardVo.g_writer }</h4>
+	              </div>
+	            </a>
+	          </div>
+	          
+	          </c:forEach>
+	        </div>
 			<!-- 페이지네이션 -->
 			<nav>
 				<ul class="pagination">

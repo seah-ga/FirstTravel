@@ -1,5 +1,6 @@
 package com.kh.kdw.controller;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -53,7 +54,8 @@ public class KdwUploadController {
 	
 	@RequestMapping(value="/displayFile")
 	public ResponseEntity<byte[]> displayFile(@RequestParam("fileName") String fileName) throws Exception {
-		String realPath = uploadPath + File.separator + fileName;
+		String realPath = "";
+		realPath = uploadPath + File.separator + fileName;
 		System.out.println("dispalyFile, dirPath : " + realPath);
 		
 		String formatType = FileUploadUtil.getFormatName(fileName);
@@ -76,13 +78,57 @@ public class KdwUploadController {
 				is = new FileInputStream(realPath);
 				headers.setContentType(mediaType);
 			} else {
-				int underScoreIndex = fileName.indexOf("_", 2);
-				String downloadName = fileName.substring(underScoreIndex + 1);
+				int underScoreIndex = 0;
+				String downloadName = "";
+				underScoreIndex = fileName.indexOf("_", 2);
+				downloadName = fileName.substring(underScoreIndex + 1);
 				is = new FileInputStream(realPath);
 				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 				headers.add("Content-disposition", "attachment; filename=\"" + downloadName + "\"");
 			}
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(is), headers, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	public ResponseEntity<byte[]> thumnailFile(@RequestParam("fileName") String fileName, @RequestParam("url") String url) throws Exception {
+		ResponseEntity<byte[]> entity = null;
+		try {
+			if (fileName == null || fileName.equals("")) {
+				
+			} else {
+				String thumnailName = FileUploadUtil.getThumnail(fileName);
+				String realPath = uploadPath + File.separator + thumnailName;
+				
+				String formatType = FileUploadUtil.getFormatName(thumnailName);
+				MediaType mediaType = null;
+				if (formatType.equals("jpg")) {
+					mediaType = MediaType.IMAGE_JPEG;
+				} else if (formatType.equals("gif")) {
+					mediaType = MediaType.IMAGE_GIF;
+				} else if (formatType.equals("png")) {
+					mediaType = MediaType.IMAGE_PNG;
+				}
+				
+				InputStream is = null;
+				
+				HttpHeaders headers = new HttpHeaders();
+				boolean isImage = FileUploadUtil.isImage(thumnailName);
+				if (isImage) {
+					is = new FileInputStream(realPath);
+					headers.setContentType(mediaType);
+				} else {
+					int underScoreIndex = fileName.indexOf("_", 2);
+					String downloadName = fileName.substring(underScoreIndex + 1);
+					is = new FileInputStream(realPath);
+					headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+					headers.add("Content-disposition", "attachment; filename=\"" + downloadName + "\"");
+				}
+				entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(is), headers, HttpStatus.OK);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
