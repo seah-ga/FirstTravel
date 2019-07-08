@@ -5,12 +5,20 @@
   	
 <mapper namespace="tip_rep">
 <insert id="insert">
-
+	insert into tbl_tip_reply(tip_rep_no, tip_rep_content, tip_rep_writer_code,
+	tip_no, tip_rep_writer_id)
+	values(seq_tip_rep.nextval,#{tip_rep_content},#{tip_rep_writer_code},
+	#{tip_no},#{tip_rep_writer_id})
+	
 </insert>
 <delete id="delete">
-
+	delete from tbl_tip_reply
+	where tip_rep_no = #{tip_rep_no}
 </delete>
 <update id="update">
+	update tbl_tip_reply
+	set tip_rep_content = #{tip_rep_content}
+	where tip_rep_no = #{tip_rep_no}
 </update>
 <select id="select" resultType="TipRepVo">
 	select * from tbl_tip_reply

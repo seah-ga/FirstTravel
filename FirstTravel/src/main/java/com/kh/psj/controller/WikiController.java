@@ -178,9 +178,50 @@ public class WikiController {
 			entity = new ResponseEntity<List<TipRepVo>>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<List<TipRepVo>>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value="/reply/{tip_no}", method=RequestMethod.PUT, produces = "application/json; charset=utf-8" )
+	public ResponseEntity<String> insertReply(@PathVariable("tip_no") int tip_no, @RequestBody TipRepVo tipRepVo){
+		ResponseEntity<String> entity = null;
+		try {
+			System.out.println(tipRepVo);
+			tipRepService.writeRepList(tipRepVo);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value="/reply/{tip_rep_no}", method=RequestMethod.DELETE, produces = "application/json; charset=utf-8" )
+	public ResponseEntity<String> deleteReply(@PathVariable("tip_rep_no") int tip_rep_no){
+		ResponseEntity<String> entity = null;
+		try {
+			TipRepVo tipRepVo = new TipRepVo();
+			tipRepVo.setTip_rep_no(tip_rep_no);
+			tipRepService.deleteRepList(tipRepVo);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}
 	
+	@RequestMapping(value="/reply/{tip_rep_no}", method=RequestMethod.POST, produces = "application/json; charset=utf-8" )
+	public ResponseEntity<String> updateReply(@PathVariable("tip_rep_no") int tip_rep_no,  @RequestBody TipRepVo tipRepVo){
+		ResponseEntity<String> entity = null;
+		try {
+			
+			tipRepVo.setTip_rep_no(tip_rep_no);
+			tipRepService.modifyRepList(tipRepVo);;
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

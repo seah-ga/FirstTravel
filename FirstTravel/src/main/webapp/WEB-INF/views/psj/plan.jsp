@@ -566,7 +566,7 @@
 					"url" : url,
 					"headers" :  {
 						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "get"
+						"X-HTTP-Method-Override" : "put"
 					},
 					"data" : jsonData,
 					"success" : function(rData) {

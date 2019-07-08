@@ -22,19 +22,19 @@ public class TipRepServiceImpl implements ITipRepService{
 
 	@Override
 	public void deleteRepList(TipRepVo tipRepVo) throws Exception {
-		// TODO Auto-generated method stub
+		tipRepDao.delete(tipRepVo);
 		
 	}
 
 	@Override
 	public void writeRepList(TipRepVo tipRepVo) throws Exception {
-		// TODO Auto-generated method stub
+		tipRepDao.insert(tipRepVo);
 		
 	}
 
 	@Override
 	public void modifyRepList(TipRepVo tipRepVo) throws Exception {
-		// TODO Auto-generated method stub
+		tipRepDao.update(tipRepVo);
 		
 	}
 	

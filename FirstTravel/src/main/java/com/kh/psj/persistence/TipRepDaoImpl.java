@@ -25,19 +25,19 @@ public class TipRepDaoImpl implements ITipRepDao{
 
 	@Override
 	public void delete(TipRepVo tipRepVo) throws Exception {
-		// TODO Auto-generated method stub
+		sqlSession.delete(NAME_SPACE + "delete", tipRepVo);
 		
 	}
 
 	@Override
 	public void insert(TipRepVo tipRepVo) throws Exception {
-		// TODO Auto-generated method stub
+		sqlSession.insert(NAME_SPACE + "insert", tipRepVo); 
 		
 	}
 
 	@Override
 	public void update(TipRepVo tipRepVo) throws Exception {
-		// TODO Auto-generated method stub
+		sqlSession.update(NAME_SPACE + "update", tipRepVo); 
 		
 	}
 
