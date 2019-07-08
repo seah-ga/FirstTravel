@@ -28,6 +28,7 @@ public class MemberController {
 	@Inject
 	private IMemberService memberService;
 	
+	// 로그인 폼
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request) throws Exception {
 		Cookie[] cookies = request.getCookies();
@@ -48,6 +49,7 @@ public class MemberController {
 		return "/kdw/login";
 	}
 	
+	// 로그인 진행
 	@RequestMapping(value = "/login-run", method=RequestMethod.POST)
 	public String loginRun(LoginDto loginDto, HttpSession session) throws Exception {
 		System.out.println("LoginDto" + loginDto);
@@ -62,11 +64,13 @@ public class MemberController {
 		return "redirect:/kdw/join";
 	}
 	
+	// 회원가입 폼
 	@RequestMapping(value = "/join")
 	public void join() throws Exception {
 		
 	}
 	
+	// 아이디 체크
 	@RequestMapping(value = "/join/checkid")
 	@ResponseBody
 	public ResponseEntity<Integer> checkId(@RequestBody MemberVo memberVo) throws Exception {
@@ -84,6 +88,7 @@ public class MemberController {
 		return entity;
 	}
 	
+	// 이메일 체크시
 	@RequestMapping(value= "/join/chkemail", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> ChkEmail(@RequestBody ChkEmailVo chkEmailVo) throws Exception {
@@ -106,6 +111,7 @@ public class MemberController {
 		return entity;
 	}
 	
+	// 회원가입 진행
 	@RequestMapping(value="/join-run", method=RequestMethod.POST)
 	public String joinRun(MemberVo memberVo, HttpSession session) throws Exception {
 		System.out.println("memberVo1" + memberVo);
@@ -119,6 +125,7 @@ public class MemberController {
 		return "redirect:/kdw/memberinfo";
 	}
 	
+	// 회원정보 페이지폼
 	@RequestMapping(value="/memberinfo")
 	public void memberInfo() throws Exception {
 		
@@ -130,7 +137,7 @@ public class MemberController {
 		return "redirect:/kdw/listcart";
 	}
 	
-	
+	// 로그아웃 기능
 	@RequestMapping(value="/logout")
 	public String loguot(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception {
 		session.invalidate();
