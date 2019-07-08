@@ -28,12 +28,160 @@ $(document).ready(function(){
 	$("#btnList").click(function(){
 		$("#pageForm").submit();
 	});
+	//댓글 목록 얻어오기
+	function getCompanionReplyList(){
+		var url = "/companionreply/list/${companionReplyVo.companion_numbercode}";
+		$.getJSON(url , function(receivedData){
+			//console.log(receivedData); 밑에부터는 확인필요
+			var strHtml = "";
+			$(receivedData).each(function(i){
+				var user_id = "${memberVo.user_id}";
+				strHtml += "<tr>"
+					  +  	"<td>" + this.reply_numbercode + "</td>" 
+					  +  	"<td>" + this.reply_content + "</td>" 
+					  +  	"<td>" + this.reply_writer + "</td>"
+					  +  	"<td>" + dateString(this.reply_date) + "</td>";
+					if(user_id == this.reply_writer){
+							strHtml += "<td>"
+					  + 	"<input type='button' value='수정' class='btn-xs btn-warning'"
+					  +     " data-reply_text='" + this.reply_text + "'"
+					  +     " data-reply_writer='" + this.reply_writer + "'"
+					  +		" data-reply_numbercode='" + this.reply_numbercode + "'"
+					  +		" data-index='" + i + "'>" 
+					  + 	"</td>"
+					  +  	"<td>"
+					  + 	"<input type='button' value='삭제' class='btn-xs btn-warning'"
+					  +     " data-reply_numbercode='" + this.reply_numbercode + "'"
+					  +		" data-companion_numbercode='" + this.companion_numbercode + "'"
+					  +		" data-index='" + i + "'>"
+					  +		"</td>"
+					} else {
+						strHtml += "<td>&nbsp;</td>"
+								+  "<td>&nbsp;</td>";
+					}
+					
+					strHtml +=  "</tr>";
+				
+			});
+			
+			$("#companionReplyList").html(strHtml);
+		});//getJSON;
+		
+	}
+	
+	//댓글목록버튼
+	$("#btnCompanionReplyList").click(function(){
+		getCompanionReplyList();
+	}); //btnCompanionReplyList 클릭
+		
+	
+	//댓글쓰기버튼
+	("#btnCompanionReplyFinish").click(function(){
+		var companion_numbercode = "${companionVo.companion_numbercode}";
+		var reply_content = $("#reply_content").val();
+		var reply_writer = $("#reply_writer").val();
+		var data = {
+				"companion_numbercode" : companion_numbercode,
+				"reply_content" : reply_content,
+				"reply_writer" : reply_writer
+		};
+		var url = "comapanionreply/insert";
+// 		$.post(url, JSON.stringify(data), function(receivedData) {
+//  			console.log(receivedData);
+//  		});
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(data),
+			"success" : function(receivedData) {
+				getReplyList(); // 댓글 목록 가져오기
+			}
+		});// $.ajax
+	});//btnCompanionReplyFinish 클릭
+	//댓글 수정 버튼 (tbody 아이디를 가져와서)
+	$("#replyList").on("click",".btn-warning", function(){
+		$("#modal-721283").trigger("click"); //연쇄반응
+		var reply_content = $(this).attr("#data-reply_content");
+		var reply_writer = $(this).attr("#data-reply_writer");
+		var reply_numbercode = $(this).attr("#data-reply_numbercode");
+		var index = $(this).attr("#data-index");
+		$("modal-reply_content").val(reply_content);
+		$("modal-reply_wirter").val(reply_writer);
+		$("modal-reply_numbercode").val(reply_numbercode);
+		$("modal-comapanion_numbercode").val(companion_numbercode);
+	}); // $("#replyList").on("click")
+	//댓글 삭제 버튼
+	$("#replyList").on("click",".btn-warning", function(){
+		var reply_numbercode = $(this).attr("#data-reply_numbercode");
+		var companion_numbercode = $(this).attr("#data-companion_numbercode");
+		var index = $(this).attr("#data-index");
+		var url = "/companionreply/delete/" + reply_numbercode + "/" + companion_numbercode;
+		$.ajax({
+			"type" : 'delete',
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Overried" : "delete"
+			},
+			"success" : function(receivedData){
+				//console.log(receivedData); // success
+				if(receivedData == "success"){
+					// 1. 댓글 데이터를 새로 불러오기
+//	 				getReplyList();
+					// 2. Traversing(트래버싱)
+					$("#replyList > tr").eq(index).fadeOut("1000");
+				}
+			}
+		});
+	});
+	//모달창 작성완료 버튼
 	
 	
 });
 </script>
-
-
+<!-- modal창   -->
+	<div class="row">
+		<div class="col-md-12">
+			<a style="display:none;" id="#modal-721283" href="modal-container-721283" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+			 <div class="modal fade" id="modal-container-721283" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			 	<div class="modal-dialog" role="document">
+			 		<div class="modal-content">
+			 			<div class="header">
+			 				<h5 class="modal-title" id="myModalLabel">
+			 					글수정
+			 				</h5>
+			 			<button type="button" class="close" data-dismiss="modal">
+			 				<span aria-hidden="true">x</span>
+			 			</button>
+			 			</div>
+			 			<div class="modal-body">
+			 				<input type="hidden" id="modal-index">
+			 				<input type="hidden" id="modal-reply_numbercode">
+			 				<div class="form-group">
+			 					<label for="title">댓글내용</label>
+			 					<input type="text" class="form-control" id="modal_reply_content">
+			 				</div>
+			 				<div class="form-group">
+			 					<label for="title">작성자</label>
+			 					<input type="text" class="form-control" id="modal_reply_writer">
+			 				</div>
+			 			</div>
+			 			<div class="modal-footer">
+			 				<input type="button" class="btn btn-warning" id="btnModalReplyFinish" value="작성완료">
+			 				<button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>	
+			 			</div>
+			 		</div>
+			 	</div>
+			 </div>
+		</div>
+	</div>
+	
+<!-- /modal창 -->
 <br>
 <br>
 <br>
@@ -96,6 +244,54 @@ $(document).ready(function(){
 				</c:if>
 				<input type="button" class="btn btn-success" value="목록"
 				id="btnList"/>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	
+	<!-- 댓글 작성 -->
+	<div class="row" style="background-color: #bfd2ef">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label for="reply_content">댓글 내용</label>
+				<input type="text" class="form-control" id="reply_content"/>
+			</div>
+			
+			<div class="form-group">
+				<label for="reply_writer">작성자</label>
+				<input type="text" class="form-control" id="reply_writer"
+					value="${memberVo.user_id}"/>
+			</div>
+			
+			<div class="form-group">
+				<input type="button" class="btn-xs btn-success" id="btnCompanionReplyFinish"
+					value="작성완료"/>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- 댓글 목록 -->
+	<div class="row">
+		<div class="col-md-12">
+			<p><input type="button" id="btnCompanionReplyList" value="댓글목록"
+				class="btn btn-warning"></p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>댓글내용</th>
+						<th>작성자</th>
+						<th>날짜</th>
+						<th>수정</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody id="companionReplyList">
+					
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

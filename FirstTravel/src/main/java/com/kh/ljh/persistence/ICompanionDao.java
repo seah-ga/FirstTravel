@@ -23,5 +23,8 @@ public interface ICompanionDao {
 	
 	//글을 삭제
 	public void delete(int numbercode) throws Exception;
+	
+	//댓글개수의 업데이트 
+	public void updateReplyCount(int companion_numbercode)throws Exception;
 
 }

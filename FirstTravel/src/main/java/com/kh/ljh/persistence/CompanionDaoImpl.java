@@ -54,5 +54,11 @@ public class CompanionDaoImpl implements ICompanionDao {
 		
 	}
 	
+	//댓글수의 업데이트 
+	@Override
+	public void updateReplyCount(int companion_numbercode) throws Exception {
+		sqlSession.update(NAMESPACE + ".update", companion_numbercode);
+	}
+	
 
 }
