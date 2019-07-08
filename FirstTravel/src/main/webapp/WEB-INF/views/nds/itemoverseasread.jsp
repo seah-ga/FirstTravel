@@ -417,10 +417,10 @@ table.calendar td{
 				<div class="col-md-6">
 					<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;운행기간 선택</h4>
 					 <div class="cal_top">
-				        <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit" style="">&lt;</span></a>
+				        <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit" style="color: black;">&lt;</span></a>
 				        <span id="cal_top_year"></span>
 				        <span id="cal_top_month"></span>
-				        <a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit">&gt;</span></a>
+				        <a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit" style="color: black;">&gt;</span></a>
     				</div>
     			<div id="cal_tab" class="cal">
     		</div>
@@ -442,7 +442,7 @@ table.calendar td{
 					<h3 id="hotelmoney">호텔 : 0</h3>
 					<h3 id="airmoney">항공 : 0</h3>
 					<h3 id="moneyval">합계 : 0</h3>
-					<a class="btn btn-main mt-20">스케쥴 등록</a>
+					<a class="btn btn-main mt-20" style="color: white;">스케쥴 등록</a>
 					
 			</div>
 		</div>
@@ -526,5 +526,6 @@ table.calendar td{
     
     
     <%@ include file="../include/nds/ndsfooter.jsp" %>
+    <%@ include file="../include/nds/footer.jsp"%>
 </body>
 </html>

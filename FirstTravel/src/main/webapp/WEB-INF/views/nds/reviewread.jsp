@@ -199,8 +199,8 @@ $(document).ready(function(){
 <section class="about section">
 <div class="container">
 	<c:if test="${memberVo.user_code == reviewVo.user_code}">
-	<a class="btn btn-main" id="btnreivewdelete">삭제</a>
-	<a class="btn btn-main" id="btnreviewupdate">수정</a>
+	<a class="btn btn-main" id="btnreivewdelete" style="color: white;">삭제</a>
+	<a class="btn btn-main" id="btnreviewupdate" style="color: white;">수정</a>
 	</c:if>
 	<h2>댓글작성</h2>
 	<c:if test="${memberVo == null}">
@@ -242,5 +242,6 @@ $(document).ready(function(){
 </div>
 </section>
 <%@ include file="../include/nds/ndsfooter.jsp" %>
+<%@ include file="../include/nds/footer.jsp"%>
 </body>
 </html>
