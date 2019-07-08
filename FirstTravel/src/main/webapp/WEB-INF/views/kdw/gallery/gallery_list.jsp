@@ -188,12 +188,13 @@ ${pagingDto }
 								<th>조회수</th>
 							</tr>
 						</thead>
+						
 						<tbody>
 						<c:forEach items="${list}" var="gBoardVo" varStatus="status">
 							<tr>
 								<td>${status.index} - ${gBoardVo.g_no }</td>
 								<td>${gBoardVo.g_location }</td>
-								<td>${gBoardVo.files[0] }</td>
+								<td><img src="/kdw/upload/displayFile?fileName=${gBoardVo.fileone }" style="width:100px;"></td>
 								<td><a href="/kdw/gallery/gallery_read" class="a_title" data-g_no="${gBoardVo.g_no }" 
 								data-index=${status.index }>${gBoardVo.g_title }</a></td>
 								<td>${gBoardVo.g_writer }</td>
