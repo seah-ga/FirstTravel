@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../include/nds/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -179,8 +180,6 @@ $(document).ready(function() {
 			<div class="col-md-12">
 				<div class="content">
 					<h1 class="page-name">여행 후기</h1>
-					<ol class="breadcrumb">
-					</ol>
 				</div>
 			</div>
 		</div>
@@ -274,5 +273,6 @@ $(document).ready(function() {
            
 
 <%@ include file="../include/nds/ndsfooter.jsp" %>
+<%@ include file="../include/nds/footer.jsp"%>
 </body>
 </html>

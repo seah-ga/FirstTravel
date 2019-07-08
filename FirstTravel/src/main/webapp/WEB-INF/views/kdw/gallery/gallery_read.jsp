@@ -21,7 +21,7 @@ $(document).ready(function() {
 		$("#page_form").attr("action", href).submit();
 	});
 	
-	// 이전글 클릭시
+	// 다음글 클릭시
 	$("#go_next").click(function(e) {
 		e.preventDefault();
 		var g_no = $(this).attr("data-g_no");
@@ -33,7 +33,9 @@ $(document).ready(function() {
 	
 	// 목록으로 가기 버튼 클릭시
 	$("#btn_list").click(function() {
-		location.href = "/kdw/gallery/gallery_list";
+		var href = "/kdw/gallery/gallery_list";
+		$("#page_form").attr("action", href);
+		$("#page_form").submit();
 	});
 	
 	// 수정 버튼 클릭시
@@ -44,6 +46,26 @@ $(document).ready(function() {
 	// 삭제 버튼 클릭시
 	$("#btn_delete").click(function() {
 		location.href = "/kdw/gallery/gallery_delete?g_no=${gBoardVo.g_no}";
+		var g_no = "${gBoardVo.g_no}";
+		var url = "/kdw/gallery/gallery_delete/" + g_no;
+		$.ajax({
+			"type" : "delete",
+			"url" : url,
+			"headers" : {
+				"content-type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			"success" : function(rData) {
+				console.log(rData);
+				if (rData == "success") {
+					var href = "/kdw/gallery/gallery_list";
+					$("#page_form").attr("action", href);
+					$("#page_form").submit();
+				} else {
+					alter("삭제 실패");
+				}
+			}
+		});
 	});
 	
 	// 댓글 목록 불러오기
@@ -77,6 +99,27 @@ $(document).ready(function() {
 			var r_no = $("#modal_text").attr("data-r_no");
 			var r_text = $("#modal_text").val();
 			console.log("m-text : " + r_text);
+			var data = {
+					"r_no" : r_no,
+					"r_text" : r_text
+			};
+			var url = "/kdw/reply/reply_update/" + r_no;
+			$.ajax({
+				"type" : "put",
+				"url" : url,
+				"headers" : {
+					"content-type" : "application/json",
+					"X-HTTP-Method-Override" : "put"
+				},
+				"dataType" : "text",
+				"data" : JSON.stringify(data),
+				"success" : function(rData) {
+					console.log("rData : " + rData);
+					if (rData == "success") {
+						getReplyList();
+					}
+				}
+			});
 		});
 		
 		// 답글 수정 버튼 클릭시
@@ -85,8 +128,8 @@ $(document).ready(function() {
 			var r_no = $(this).attr("data-r_no");
 			var r_text = $(this).attr("data-r_text");
 			console.log("text : " + r_text);
-			$("#modal_text").val(r_text);
 			$("#modal_text").attr("data-r_no", r_no);
+			$("#modal_text").val(r_text);
 			$("#btn_modal").trigger("click");
 		});
 		// 답글 삭제 버튼 클릭시
@@ -203,7 +246,7 @@ p {
         <input type="text" id="modal_text" data-r_no="">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="btn_modal_modify" data-dismiss="modal">수정</button>
+        <button type="button" class="btn btn-primary" id="btn_modal_modify" data-dismiss="modal">수정</button>
       </div>
     </div>
     

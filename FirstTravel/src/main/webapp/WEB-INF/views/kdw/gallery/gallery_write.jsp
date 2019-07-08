@@ -14,6 +14,12 @@
 <script src="/resources/kdw/js/myscript.js"></script>
 <script>
 	$(document).ready(function() {
+		var url = "";
+		window.onload = function() {
+			console.log("전체주소 : " + $(location).attr("href"));
+			console.log("index : " + $(location).attr("pathname"));
+			url = $(location).attr("pathname");
+		}
 		var mouseover_image = "";
 		// textarea summernote 사용
 		 $('#g_content').summernote({
@@ -48,7 +54,7 @@
 				processData : false,  // 일반적으로 서버에 전달되는 데이터는 query string, 파일 전송의 경우 x
 				success : function(fullName) {
 					console.log("return_url" + fullName);
-					$('#g_content').summernote('editor.insertImage', '/kdw/upload/displayFile?fileName='+fullName);
+					$('#g_content').summernote('editor.insertImage', '/kdw/upload/displayFile?fileName='+ fullName);
 					var slashIndex = fullName.lastIndexOf("/");
 					var front = fullName.substring(0, slashIndex + 1);
 					console.log("front: " + front);
