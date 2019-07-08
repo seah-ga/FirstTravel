@@ -30,7 +30,7 @@ public class GalleryController {
 	
 	// 겔러리 목록 폼
 	@RequestMapping(value="/gallery_list")
-	public void galleryList(PagingDto pagingDto, Model model) throws Exception {
+	public void galleryList(PagingDto pagingDto, Model model, HttpSession session) throws Exception {
 		List<GBoardVo> list = galleryService.GBoardList(pagingDto);
 		int count = galleryService.totalListCount(pagingDto);
 		PaginationDto paginationDto = new PaginationDto();
@@ -41,7 +41,6 @@ public class GalleryController {
 		model.addAttribute("paginationDto", paginationDto);
 		model.addAttribute("pagingDto", pagingDto);
 	}
-	
 	// 겔러리 조회 폼
 	@RequestMapping(value="/gallery_read")
 	public void galleryRead(@RequestParam("g_no") int g_no, Model model) throws Exception {

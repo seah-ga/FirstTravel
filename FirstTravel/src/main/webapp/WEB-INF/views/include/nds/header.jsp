@@ -1,12 +1,10 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<!-- header -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<!-- header -->
   <head>
     <title>First Travel &mdash; Colorlib Website Template</title>
     <meta charset="utf-8">
@@ -80,7 +78,6 @@
 							<a href="/kdw/login" onclick="viewLoginOpen()" class="topAreaLogIn"><span>로그인</span></a>
 		           	
 		           	
-		           	--${memberVo}--
 					<div class="topAreaIcon">
 					<!-- 아이콘들-->
 					<c:choose>
