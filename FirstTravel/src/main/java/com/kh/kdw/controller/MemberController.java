@@ -43,7 +43,7 @@ public class MemberController {
 		if (user_cookie != null) {
 			MemberVo memberVo = memberService.memberId(Integer.parseInt(user_cookie));
 			HttpSession session = request.getSession();
-			session.setAttribute("MemberVo", memberVo);
+			session.setAttribute("memberVo", memberVo); // 동석 수정 M -> m
 			return "redirect:/ljh/main";
 		}
 		return "/kdw/login";
