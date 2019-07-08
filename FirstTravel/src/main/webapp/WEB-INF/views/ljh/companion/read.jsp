@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/nds/header.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -104,7 +104,7 @@ $(document).ready(function(){
 		});// $.ajax
 	});//btnCompanionReplyFinish 클릭
 	//댓글 수정 버튼 (tbody 아이디를 가져와서)
-	$("#replyList").on("click",".btn-warning", function(){
+	$("#companionReplyList").on("click",".btn-warning", function(){
 		$("#modal-721283").trigger("click"); //연쇄반응
 		var reply_content = $(this).attr("#data-reply_content");
 		var reply_writer = $(this).attr("#data-reply_writer");
@@ -116,7 +116,7 @@ $(document).ready(function(){
 		$("modal-comapanion_numbercode").val(companion_numbercode);
 	}); // $("#replyList").on("click")
 	//댓글 삭제 버튼
-	$("#replyList").on("click",".btn-warning", function(){
+	$("#companionReplyList").on("click",".btn-warning", function(){
 		var reply_numbercode = $(this).attr("#data-reply_numbercode");
 		var companion_numbercode = $(this).attr("#data-companion_numbercode");
 		var index = $(this).attr("#data-index");
@@ -134,12 +134,47 @@ $(document).ready(function(){
 					// 1. 댓글 데이터를 새로 불러오기
 //	 				getReplyList();
 					// 2. Traversing(트래버싱)
-					$("#replyList > tr").eq(index).fadeOut("1000");
+					$("#companionReplyList > tr").eq(index).fadeOut("1000");
 				}
 			}
 		});
 	});
 	//모달창 작성완료 버튼
+	$("#btnModalReply").click(function() {
+		var reply_content = $("#modal_reply_content").val();
+		var reply_writer = $("#modal_reply_writer").val();
+		var reply_numbercode = $("#reply_numbercode").val();
+		var data = {
+				"reply_content" : reply_content,
+				"reply_writer" : reply_writer,
+				"reply_numbercode" : reply_numbercode
+		};
+// 		console.log(data);
+		var url = "/companionreply/update/" + reply_numbercode;
+		$.ajax({
+			"type" : "put",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(data),
+			"success" : function(receivedData) {
+				$("#btnModalReply").next().trigger("click"); // 모달창 사라지기
+// 				getReplyList(); // 1. 새로 불러 들이기
+				// 2. 해당 댓글, 댓글러만 수정
+				var index = $("#modal_index").val();
+				// <tbody> 내의 해당 번째 <tr>
+				var target_tr = $("#replyList > tr").eq(index);
+				// <tr>의 1번째(두번째) <td> - 댓글내용
+				target_tr.find("td").eq(1).text(reply_text);
+				// <tr>의 2번째(세번째) <td> - 댓글러
+				target_tr.find("td").eq(2).text(replyer);
+			} // "success"
+		}); // $.ajax
+	}); // $("#btnModalReply").click
+	
 	
 	
 });

@@ -10,6 +10,7 @@ public class CompanionVo {
 	private Timestamp companion_date; //글의 올린시간
 	private int companion_reading; //글의 조회수
 	private int companion_reply_count; //댓글의 조회수
+	
 	public int getCompanion_numbercode() {
 		return companion_numbercode;
 	}
