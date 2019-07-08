@@ -83,17 +83,18 @@ $(document).ready(function() {
                 <div class="row">
                     <div class="col-lg-12">
                     		<h2>해외 검색</h2>
-                            <select id="country" class="search">
+                            <select id="country" class="search" style="border-bottom: 2px black; border-bottom-style: solid; ">
                             	<option>국가(선택)</option>
 	                            <c:forEach var="overseasVo" items="${countrylist}">
                                 <option value="${overseasVo.overseas_Country}">${overseasVo.overseas_Country}</option>
                                 </c:forEach>
                             </select>
-                            <select id="city" class="search" style="margin-left: 20px;">
+                            <select id="city" class="search" style="margin-left: 20px; border-bottom: 2px black; border-bottom-style: solid;">
                            		<option>(도시)국가를 선택해주세요.</option>
                             </select>
                      
-                            <input type="button" value="검색" id="btnsearch" style="margin-top: 30px; height: 44px;">
+                            <input type="button" value="검색" id="btnsearch" style="margin-top: 30px; height: 44px; border-bottom: 2px 
+                             black; border-style: solid;">
                     </div>
                 </div>
             </div>

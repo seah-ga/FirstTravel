@@ -61,7 +61,7 @@
     
     <header class="site-navbar py-1" role="banner" >
 
-      <div class="container"  style="border-bottom: 2px black; border-bottom-style: solid;">
+      <div class="container" style="border-bottom: 2px black; border-bottom-style: solid;">
         <div class="row align-items-left">
           
           <div class="topAreaWrap">
@@ -80,10 +80,10 @@
 		           	
 		           	
 					<c:if test="${memberVo == null}">
-							<a href="#" onclick="location='/kdw/login'" class="topAreaLogIn"><span>로그인</span></a>
+							<a href="#" onclick="location='/kdw/login'" class="topAreaLogIn" style="background-color: #ffffff;"><span>로그인</span></a>
 					</c:if>
 					<c:if test="${memberVo != null}">	
-							<a href="#" onclick="location='/kdw/logout'" class="topAreaLogOut"><span>로그아웃</span></a>
+							<a href="#" onclick="location='/kdw/logout'" class="topAreaLogOut" style="background-color: #ffffff;"><span>로그아웃</span></a>
 					</c:if>
 					<div class="topAreaIcon">
 					<!-- 아이콘들-->

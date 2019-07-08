@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ include file="../include/nds/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -248,10 +248,11 @@ $(document).ready(function(){
 						<div id="file_image">
 						</div>						
 					</form>
-					<a class="btn btn-main mt-10" id="btnregist">글 쓰기</a>
+					<a class="btn btn-main mt-10" id="btnregist" style="color: white;">글 쓰기</a>
 				</div>
 		</div>
 	</div>
  <%@ include file="../include/nds/ndsfooter.jsp" %>
+ <%@ include file="../include/nds/footer.jsp"%>
 </body>
 </html>
