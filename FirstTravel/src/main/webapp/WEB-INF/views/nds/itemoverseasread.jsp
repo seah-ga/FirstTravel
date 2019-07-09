@@ -136,6 +136,7 @@ table.calendar td{
         lastDay = new Date(year,month,0);
         drawDays();
     }
+    
     $(document).ready(function(){
     	 
     	//	검색 창
@@ -185,6 +186,19 @@ table.calendar td{
     		var airPort = urlstr.substr(urlstr.lastIndexOf("=") +1, 3);
     		var datestr = year+month+day;
     		var overseasapiurl = "/ndsrest/overseasapi?airPort="+airPort+"&datestr="+datestr;
+    		var schstr = "스케쥴 등록";
+    		var schday = "";
+    		// 스케쥴러에 들어갈 날짜
+    		if (day.length == 1) {
+    				schday = 0 + day;
+    			} else {
+    				schday = day;
+    			}
+    		// 스케쥴러 버튼에 속성값 부여
+    		$("#btnsch").attr("data-date",year + month + schday);
+    		$("#btnsch").css("background-color","black");
+    		// 스케쥴러 버튼 출력
+    		$("#btnsch").html(schstr);
     		$.ajax({
     			"type" : "get",
     			"url" : overseasapiurl,
@@ -271,6 +285,15 @@ table.calendar td{
     		});
     			
   });
+		
+		$("#btnsch").click(function(){
+// 			console.log("스케쥴가기 클릭");
+			var sch_date = $(this).attr("data-date");
+			var sch_time = "08: 00";
+			var sch_content = "출발 : (${overseasVo.overseas_Country})${overseasVo.overseas_City} 08: 00 김포공항에서 탑승";
+			location.href = "/nds/overseassch?sch_date=" +sch_date +"&sch_time=" +sch_time +"&sch_content=" + sch_content;
+		});
+    	
     	
     	// 가격 출력 function
     	function moneyresult(air_price_economy,air_price_prestige,hotel_price_adult,hotel_price_child) {
@@ -321,7 +344,8 @@ table.calendar td{
     	$(".peopleNum").change(function(){
     		moneyresult(air_price_economy,air_price_prestige,hotel_price_adult,hotel_price_child);
     	});
-    	$(".airclass").change(function(){
+    	// 클래스를 교체 했을때
+    	$(".airclass").click(function(){
     		moneyresult(air_price_economy,air_price_prestige,hotel_price_adult,hotel_price_child);
     	});
 });
@@ -336,8 +360,6 @@ table.calendar td{
 			<div class="col-md-12">
 				<div class="content">
 					<h1 class="page-name">${overseasVo.overseas_City}</h1>
-					<ol class="breadcrumb">
-					</ol>
 				</div>
 			</div>
 		</div>
@@ -434,16 +456,18 @@ table.calendar td{
 					<div class="single-product-details">
 					<h4>인원 <br>(항공은 유아와 성인 가격이 같습니다)</h4>
 					<p>성인 : <input type="number" value="1"
-									min="0" max="30" class="peopleNum" id="adultnum"></p>
+									min="0" max="30" class="peopleNum" id="adultnum" style="border: 1px black; border-style:solid;"></p>
 					<p>유아 : <input type="number" value="0"
-									min="0" max="30" class="peopleNum" id="childnum"></p>
+									min="0" max="30" class="peopleNum" id="childnum" style="border: 1px black; border-style:solid;"></p>
 					<h4>항공석 : 이코노미<input type="radio" class="airclass" name="airclass" id="economyrad" checked="checked"> 프레스티지<input type="radio" class="airclass" name="airclass" id="prestigerad"></h4>
 									
 					<h3 id="hotelmoney">호텔 : 0</h3>
 					<h3 id="airmoney">항공 : 0</h3>
 					<h3 id="moneyval">합계 : 0</h3>
-					<a class="btn btn-main mt-20" style="color: white;">스케쥴 등록</a>
-					
+					<!-- 스케쥴 등록 -->
+					<c:if test="${memberVo != null}">
+						<a class='btn btn-main mt-20' id='btnsch' data-date='' style='color: white; background-color: white;'></a>
+					</c:if>
 			</div>
 		</div>
 	</div>
