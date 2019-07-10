@@ -8,6 +8,7 @@ public class PagingDto {
 	 private String searchType;
 	 private String keyword;
 	 private String g_location;
+//	 private int user_code;
 	public int getPage() {
 		return page;
 	}
@@ -61,11 +62,20 @@ public class PagingDto {
 	public void setG_location(String g_location) {
 		this.g_location = g_location;
 	}
-	@Override
-	public String toString() {
-		return "PagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow=" + endRow
-				+ ", searchType=" + searchType + ", keyword=" + keyword + ", g_location=" + g_location + "]";
-	}
+//	public int getUser_code() {
+//		return user_code;
+//	}
+//	public void setUser_code(int user_code) {
+//		this.user_code = user_code;
+//	}
+//	@Override
+//	public String toString() {
+//		return "PagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow=" + endRow
+//				+ ", searchType=" + searchType + ", keyword=" + keyword + ", g_location=" + g_location + ", user_code="
+//				+ user_code + "]";
+//	}
+	
+
 	
 
 	 
