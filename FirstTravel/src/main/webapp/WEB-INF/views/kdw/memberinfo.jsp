@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../include/nds/header.jsp" %>      
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Font Awesome -->
@@ -28,13 +25,19 @@ $(document).ready(function() {
 	$("#btn_cancel").click(function() {
 		location.href = "/kdw/login";
 	});
+	
 });
 </script>
+<style>
+.container {
+	padding-bottom: 50px;
+}
+</style>
 </head>
 <body class="lighten-3">
 
   <!--Main layout-->
-  <main class="mt-5 pt-4">
+<!--   <main class="mt-5 pt-4"> -->
     <div class="container wow fadeIn">
 
       <!-- Heading -->
@@ -168,7 +171,7 @@ $(document).ready(function() {
       <!--Grid row-->
 
     </div>
-  </main>
+<!--   </main> -->
  <!-- SCRIPTS -->
   <!-- JQuery -->
   <script type="text/javascript" src="/resources/kdw/js/jquery-3.4.1.min.js"></script>
@@ -183,5 +186,6 @@ $(document).ready(function() {
     // Animations initialization
     new WOW().init();
   </script>
+  <%@include file="../include/nds/footer.jsp" %> 
 </body>
 </html>

@@ -61,7 +61,7 @@
     
     <header class="site-navbar py-1" role="banner" >
 
-      <div class="container" style="border-bottom: 2px black; border-bottom-style: solid;">
+      <div class="container" id="hr_line" style="border-bottom: 2px black; border-bottom-style: solid;">
         <div class="row align-items-left">
           
           <div class="topAreaWrap">
@@ -92,7 +92,7 @@
 			           		<a href="/kdw/join" class="topAreaIcon02">회원가입</a>
 			        </c:if>
 			        <c:if test="${memberVo != null}">
-							<a href="#" class="topAreaIcon03">마이페이지</a>
+							<a href="/kdw/memberinfo" class="topAreaIcon03">마이페이지</a>
 	                </c:if>
 					</div>
 					</div><!--//topAreaBox--> 

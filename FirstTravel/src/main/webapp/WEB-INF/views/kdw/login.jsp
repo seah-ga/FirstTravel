@@ -224,6 +224,7 @@ $(document).ready(function() {
                       <input type="checkbox" class="form-check-input" id="chk_id" name="chk_id" value="N">
                       <label for="chk_id" class="form-check-label dark-grey-text">로그인 유지</label>
                       <a href="" class="form-check-label dark-grey-text" id="search_id">아이디/비밀번호 찾기</a>
+                      <div><a href="/ljh/main" style="color:#333;">메인으로</a></div>
                       <input type="button" style="display:none;" id="btn_modal" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm" value="모달">
                     </fieldset>
                   </div>

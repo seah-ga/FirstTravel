@@ -46,7 +46,7 @@ public class MemberController {
 			MemberVo memberVo = memberService.memberId(Integer.parseInt(user_cookie));
 			HttpSession session = request.getSession();
 			session.setAttribute("memberVo", memberVo); // 동석 수정 M -> m
-			return "redirect:/kdw/gallery/gallery_list";
+			return "redirect:/ljh/main";
 		}
 		return "/kdw/login";
 	}
@@ -60,7 +60,7 @@ public class MemberController {
 		if (memberVo != null) {
 			session.setAttribute("memberVo", memberVo);
 			System.out.println("멤버 세션에 담김");
-			return "redirect:/kdw/gallery/gallery_list";
+			return "redirect:/ljh/main";
 		}
 		System.out.println("멤버 세션에 담기지 않음");
 		return "redirect:/kdw/join";
@@ -124,7 +124,7 @@ public class MemberController {
 		System.out.println("memberVo2" + memberVo);
 		session.setAttribute("memberVo", memberVo);
 		
-		return "redirect:/kdw/memberinfo";
+		return "redirect:/ljh/main";
 	}
 	
 	// 회원정보 페이지폼

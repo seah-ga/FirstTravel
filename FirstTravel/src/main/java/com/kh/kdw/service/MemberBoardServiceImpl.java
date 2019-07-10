@@ -27,13 +27,15 @@ public class MemberBoardServiceImpl implements IMemberBoardService {
 	@Override
 	public List<TipVo> memberTipWrite(int user_code, int startRow, int endRow) throws Exception {
 		// 팁 게시글 얻기
-		return null;
+		List<TipVo> list = memberBoardDao.memberTipWrite(user_code, startRow, endRow);
+		return list;
 	}
 
 	@Override
 	public List<ReviewVo> memberReviewWrite(int user_code, int startRow, int endRow) throws Exception {
 		// 리뷰 게시글 얻기
-		return null;
+		List<ReviewVo> list = memberBoardDao.memberReviewWrite(user_code, startRow, endRow);
+		return list;
 	}
 
 	@Override

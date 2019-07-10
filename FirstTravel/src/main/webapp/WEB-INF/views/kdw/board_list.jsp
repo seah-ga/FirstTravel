@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@include file="../include/nds/header.jsp" %>      
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Font Awesome -->
@@ -30,6 +28,7 @@ $(document).ready(function() {
 		location.href = "/kdw/login";
 	});
 	
+	// 겔러리 페이지 인동
 	$(".a_title").click(function(e) {
 		e.preventDefault();
 		var g_no = $(this).attr("data-g_no");
@@ -37,6 +36,14 @@ $(document).ready(function() {
 		$("input[name=g_no]").val(g_no);
 		setPage();
 		$("#list_form").attr("action", href).submit();
+	});
+	
+	// 리뷰 페이지 이동
+	$(".readloaction").click(function() {
+		var review_num = $(this).attr("data-num");
+		$("input[name=review_num]").val(review_num);
+		$("#list_form").attr("action", "/nds/reviewread");
+		$("#list_form").submit();
 	});
 	
 	// 페이지 전환
@@ -47,6 +54,8 @@ $(document).ready(function() {
 		$("#list_form").submit();
 	});
 	
+	
+	
 	function setPage() {
 		var page = "${pagingDto.page}";
 		if (page == "") {
@@ -56,6 +65,11 @@ $(document).ready(function() {
 	}
 });
 </script>
+<style>
+.container {
+	padding-bottom: 50px;
+}
+</style>
 </head>
 <body class="lighten-3">
 
@@ -76,9 +90,10 @@ $(document).ready(function() {
           <div class="card">
 
             <!--Card content-->
-            <form class="card-body" method="post" id="list_form">
+            <form class="card-body" id="list_form">
 			<input type="hidden" name="g_no"/>
 			<input type="hidden" name="page" value="${pagingDto.page }">
+			<input type="hidden" name="review_num" value="${param.review_num}">
               <!--Grid row-->
               <ul class="nav nav-tabs" id="myTab" role="tablist">
 				  <li class="nav-item">
@@ -144,6 +159,66 @@ $(document).ready(function() {
 					</nav>
 				  </div>
 				  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+				  <div class="row">
+					 <c:forEach var="reviewVo" items="${reviewList}">
+			      		<div class="col-md-6">
+					        <div class="post">
+					          <div class="post-thumb">
+					            <a href="#">
+					              <img class="img-responsive readloaction" style="width: 300px; height: 200px;" data-num="${reviewVo.review_num}" src="
+					              <c:choose>
+					              <c:when test="${reviewVo.review_image != 'null'}">
+					              /ndsupload/display?fileName=${reviewVo.review_image}
+					              </c:when>
+					              <c:when test="${reviewVo.review_image == 'null'}">
+					              /resources/nds/images/b_nullImage.jpg
+					              </c:when>
+					              </c:choose>
+					              ">
+					            </a>
+					          </div>
+					          <h3 class="post-title"><a href="#" class="readloaction" data-num="${reviewVo.review_num}">[${reviewVo.review_country}:${reviewVo.review_city}]${reviewVo.review_name}</a></h3>
+					          <div class="post-meta">
+					            <ul>
+					              <li>
+					                <i class="tf-ion-ios-calendar"></i> ${reviewVo.review_date}
+					              </li>
+					              <li>
+					                <i class="tf-ion-android-person"></i>작성자:&nbsp;${reviewVo.review_writer}
+					              </li>
+					              <li>
+					                <i class="tf-ion-chatbubbles"></i>조회수:&nbsp;${reviewVo.review_reading}
+					              </li>
+					            </ul>
+					          </div>
+					          <div class="post-content">
+					            <p>${reviewVo.review_content}</p>
+					          </div>
+							</div>
+			        	</div>
+			        </c:forEach>
+			      </div>
+			      <!-- 페이지네이션 -->
+					<nav>
+						<ul class="pagination">
+							<c:if test="${paginationDto.prev == true }">
+							<li class="page-item">
+								<a class="page-link a_pagination" href="#" data-page="${paginationDto.startPage - 1}">Previous</a>
+							</li>
+							</c:if>
+							<c:forEach begin="${paginationDto.startPage }" end="${paginationDto.endPage }" var="i">
+							<li class="page-item <c:if test="${paginationDto.pagingDto.page == i}">active</c:if>">
+								<a class="page-link a_pagination" href="#" data-page="${i }">${i }</a>
+							</li>
+							
+							</c:forEach>
+							<c:if test="${paginationDto.next == true }">
+							<li class="page-item">
+								<a class="page-link a_pagination" data-page="${paginationDto.endPage + 1}" href="#">Next</a>
+							</li>
+							</c:if>
+						</ul>
+					</nav>
 				  </div>
 				  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 				  </div>
@@ -229,5 +304,6 @@ $(document).ready(function() {
     // Animations initialization
     new WOW().init();
   </script>
+<%@include file="../include/nds/footer.jsp" %> 
 </body>
 </html>

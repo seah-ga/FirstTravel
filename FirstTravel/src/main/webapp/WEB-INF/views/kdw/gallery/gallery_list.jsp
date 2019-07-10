@@ -119,17 +119,17 @@ $(document).ready(function() {
 				<div class="col-md-12">
 					<div class="tabbable" id="tabs-847237">
 						<ul class="nav nav-tabs">
-							<li class="nav-item active">
+							<li class="nav-item">
 								<a class="nav-link active a_list" href="#tab1" data-toggle="tab" data-type="list">게시판보기</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link a_list" href="#tab2" data-toggle="tab" data-type="gallery">겔러리보기</a>
+							<li class="nav-item active">
+								<a class="nav-link active a_list" href="#tab2" data-toggle="tab" data-type="gallery">겔러리보기</a>
 							</li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="panel-749780">
+							<div class="tab-pane" id="panel-749780">
 							</div>
-							<div class="tab-pane" id="tab2">
+							<div class="tab-pane active" id="tab2">
 							</div>
 						</div>
 					</div>
@@ -178,7 +178,7 @@ $(document).ready(function() {
 					<button type="button" class="btn btn-success" id="btn_write" style="margin:5px;">글쓰기</button>
 				</div>
 			</div>
-			<div class="row"  style="display:block;" id="boardList">
+			<div class="row"  style="display:none;" id="boardList">
 	        
 			
 				<div class="col-md-12" >
@@ -222,7 +222,7 @@ $(document).ready(function() {
 					</table>
 				</div>
 			</div>
-			<div class="row" id="galleryList" style="display:none table;width:80%;margin:auto;">
+			<div class="row" id="galleryList" style="display:block table;width:80%;margin:auto;">
 			<c:forEach items="${list}" var="gBoardVo" varStatus="status">
 	          <div class="col-md-2 col-lg-3 mb-3 mb-lg-2" style="dispaly:table-cell;text-align:center; margin-bottom: 50px;padding-bottom:20px;">
 	            <a href="/kdw/gallery/gallery_read" class="unit-1 text-center a_title" data-g_no="${gBoardVo.g_no }">
@@ -267,5 +267,6 @@ $(document).ready(function() {
 		</div>
 	</div>
 </div>
+<%@include file="../../include/nds/footer.jsp" %>  
 </body>
 </html>

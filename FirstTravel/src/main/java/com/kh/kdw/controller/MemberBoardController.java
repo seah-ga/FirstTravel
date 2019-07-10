@@ -16,6 +16,7 @@ import com.kh.kdw.domain.PaginationDto;
 import com.kh.kdw.domain.PagingDto;
 import com.kh.kdw.service.IMemberBoardService;
 import com.kh.kdw.service.IMemberService;
+import com.kh.nds.domain.ReviewVo;
 
 @Controller
 @RequestMapping(value="/kdw/*")
@@ -41,6 +42,9 @@ public class MemberBoardController {
 		model.addAttribute("galleryList", galleryList);
 		model.addAttribute("paginationDto", paginationDto);
 		
+		List<ReviewVo> reviewList = memberBoardService.memberReviewWrite(user_code, startRow, endRow);
+		System.out.println("reviewList: " + reviewList);
+		model.addAttribute("reviewList", reviewList);
 		int boardCount = memberService.memberBoardWriteCount(user_code);
 		MemberBoardVo memberBoardVo = new MemberBoardVo();
 		memberBoardVo.setWriteCount(boardCount);
