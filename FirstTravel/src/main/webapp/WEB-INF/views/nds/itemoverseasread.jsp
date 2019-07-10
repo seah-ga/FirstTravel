@@ -290,11 +290,20 @@ table.calendar td{
 // 			console.log("스케쥴가기 클릭");
 			var sch_date = $(this).attr("data-date");
 			var sch_time = "08: 00";
-			var sch_content = "출발 : (${overseasVo.overseas_Country})${overseasVo.overseas_City} 08: 00 김포공항에서 탑승";
+			var air_money = $("#airmoney").text();
+			var adult_num = $("#adultnum").val();
+			var child_num = $("#childnum").val();
+			var sch_content = "출발 : (${overseasVo.overseas_Country})${overseasVo.overseas_City} 08: 00 김포공항에서 탑승 / 가격 :"+ air_money + " / 성인 :"+adult_num +"명 / 유아 : "+ child_num+ "명";
 			location.href = "/nds/overseassch?sch_date=" +sch_date +"&sch_time=" +sch_time +"&sch_content=" + sch_content;
 		});
     	
     	
+		// 돈에 콤마찍기
+		function numberWithCommas(x) {
+		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
+		
     	// 가격 출력 function
     	function moneyresult(air_price_economy,air_price_prestige,hotel_price_adult,hotel_price_child) {
     		
@@ -318,15 +327,21 @@ table.calendar td{
 				var airresult = parseInt(air_price_prestige*resultnum);
 			}
 			
-				$("#hotelmoney").text("호텔 :" + hotelresult);
-				$("#airmoney").text("항공 :" + airresult);
+				var hotelstr = numberWithCommas(hotelresult);
+				var airstr = numberWithCommas(airresult);
+				$("#hotelmoney").text("호텔 :" + hotelstr + "원");
+				
+				$("#airmoney").text("항공 :" + airstr + "원");
 				
 				var hotelmoney = $("#hotelmoney").text().substring(4);
 	    		var airmoney = $("#airmoney").text().substring(4);
 	    		
-	    		var result = parseInt(hotelmoney) + parseInt(airmoney);
+	    		console.log(airmoney);
 	    		
-	    		$("#moneyval").text("합계: " + result + "원");
+	    		var result = parseInt(hotelresult) + parseInt(airresult);
+	    		
+	    		var resultstr = numberWithCommas(result);
+	    		$("#moneyval").text("합계: " + resultstr + "원");
     	}
     	// 호텔 체크 눌렀을때 합계출력
     	$("#hoteltable").on("change",".hotelchk",function(){
