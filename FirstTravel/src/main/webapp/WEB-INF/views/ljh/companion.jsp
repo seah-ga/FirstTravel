@@ -3,7 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@ include file="../ljh/include/header.jsp" %>
+<%@ include file="../include/nds/header.jsp" %>
 <script>
 $(document).ready(function(){
 	// CompanionController.writePost() 에서 RedirectAttrubutes에 넘겨진 값 (메시지관련)
@@ -76,6 +76,10 @@ $(document).ready(function(){
 </script>
 <!--${paginationDto.pagingDto.perPage } -->
 <!-- 사진 -->
+<br>
+<br>
+<br>
+<br>
 <div class="slide-one-item home-slider owl-carousel">
       
       <div class="site-blocks-cover overlay" style="background-image: url(/resources/ljh/images/sweden.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
@@ -99,9 +103,9 @@ $(document).ready(function(){
           <div class="row align-items-center justify-content-center text-center">
 
             <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
-              <h1 class="text-white font-weight-light"></h1>
+              <h1 class="text-white font-weight-light">국내</h1>
               <p class="mb-5">주변의 전통을 둘러보아요</p>
-              <p><a href="/psj/index" class="btn btn-primary py-3 px-5 text-white">지금 당장 예약하세요!<br>Book Now!</a></p>
+              <p><a href="/psj/plan" class="btn btn-primary py-3 px-5 text-white">지금 당장 예약하세요!<br>Book Now!</a></p>
             </div>
           </div>
         </div>
@@ -206,4 +210,4 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-<%@ include file="../ljh/include/footer.jsp" %>
+<%@ include file="../include/nds/footer.jsp" %>

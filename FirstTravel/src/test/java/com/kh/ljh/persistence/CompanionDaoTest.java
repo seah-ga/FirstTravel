@@ -1,5 +1,7 @@
 package com.kh.ljh.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -10,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.kh.kdw.domain.MemberVo;
 import com.kh.ljh.domain.CompanionVo;
 import com.kh.ljh.domain.PagingDto;
+import com.kh.nds.domain.OverseasVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
@@ -64,7 +67,5 @@ public class CompanionDaoTest {
 	public void testDelete() throws Exception{
 		companionDao.delete(521);
 	}
-	
-	
 
 }

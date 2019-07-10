@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ include file="../include/header.jsp" %>								
+<%@ include file="../../include/nds/header.jsp" %>							
 
 <script>
 $(document).ready(function(){
@@ -38,5 +38,5 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../../include/nds/footer.jsp" %>
     

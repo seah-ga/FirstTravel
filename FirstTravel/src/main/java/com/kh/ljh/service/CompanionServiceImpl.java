@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.ljh.domain.CompanionVo;
 import com.kh.ljh.domain.PagingDto;
 import com.kh.ljh.persistence.ICompanionDao;
+import com.kh.nds.domain.OverseasVo;
 @Service
 public class CompanionServiceImpl implements ICompanionService {
 	@Inject
@@ -34,8 +35,8 @@ public class CompanionServiceImpl implements ICompanionService {
 	}
 
 	@Override
-	public CompanionVo read(int numbercode) throws Exception {
-				CompanionVo companionVo =  companionDao.read(numbercode);
+	public CompanionVo read(int companion_numbercode) throws Exception {
+				CompanionVo companionVo =  companionDao.read(companion_numbercode);
 		return companionVo;
 	}
 
@@ -45,9 +46,11 @@ public class CompanionServiceImpl implements ICompanionService {
 	}
 
 	@Override
-	public void delete(int numbercode) throws Exception {
-			companionDao.delete(numbercode);
+	public void delete(int companion_numbercode) throws Exception {
+			companionDao.delete(companion_numbercode);
 		
 	}
+
+
 
 }
