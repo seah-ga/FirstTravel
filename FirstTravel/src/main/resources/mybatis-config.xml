@@ -26,6 +26,8 @@
 		<typeAlias type="com.kh.ljh.domain.CompanionVo" alias="CompanionVo"/>
 		<typeAlias type="com.kh.ljh.domain.PagingDto" alias="PagingDto"/>
 		<typeAlias type="com.kh.ljh.domain.PaginationDto" alias="PaginationDto"/>
+		<typeAlias type="com.kh.ljh.domain.CompanionReplyVo" alias="CompanionReplyVo"/>
+		
 
 	</typeAliases>
 </configuration>  

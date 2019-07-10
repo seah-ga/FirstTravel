@@ -255,17 +255,17 @@ $(document).ready(function() {
 			</div>
 			<!-- 검색 타입-->
 			<div class="col-md-8" style="margin-top: 20px">
-			<select id="searchType" style="width: 70px; height:50px; border-color:#000000; float: left; background-color: #ffffff; margin-right: 30px;">
+			<select id="searchType" style="width: 70px; height:50px; border-color:#000000; float: left; background-color: #ffffff; margin-right: 30px; border-bottom: 2px black; border-style: solid;">
 				<option value="review_writer" selected="selected">작성자</option>
 				<option value="review_name">제목</option>
 				<option value="review_country">국가</option>
 				<option value="review_city">도시</option>
 			</select>
 			<!-- 검색 값 -->
-				<fieldset><input type="search" id="keyword"/><button id="searchbtn"><i class="fa fa-search"></i></button></fieldset>
+				<fieldset><input type="search" id="keyword" style=" border-bottom: 2px black; border-style: solid;"/><button id="searchbtn"><i class="fa fa-search"></i></button></fieldset>
 			<!-- 글쓰기 버튼 -->
 			<c:if test="${memberVo != null}">
-				<a class="btn btn-main mt-10" id="btnregist" style="margin-bottom: 40px; float: right;" onclick="location.href='/nds/reviewregist'">리뷰 작성</a>
+				<a class="btn btn-main mt-10" id="btnregist" style="margin-bottom: 40px; float: right; color: white;" onclick="location.href='/nds/reviewregist'">리뷰 작성</a>
 			</c:if>
 			</div>
   		</div> 	

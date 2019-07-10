@@ -41,5 +41,13 @@
 		delete from tbl_companion
 		where companion_numbercode = #{companion_numbercode}
 	</delete>
+	<!-- 댓글 갯수 갱신 -->
+	<update id="updateReplyCount">
+		update tbl_companion set
+			companion_reply_count = (select count(*)
+						from tbl_companion_reply
+						where companion_numbercode = #{companion_numbercode})
+		where companion_numbercode = #{companion_numbercode}
+	</update>
 	
 </mapper>  

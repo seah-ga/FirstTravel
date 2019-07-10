@@ -6,17 +6,21 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.kdw.domain.MemberVo;
 import com.kh.nds.domain.OverseasHotelVo;
 import com.kh.nds.domain.OverseasVo;
 import com.kh.nds.domain.ReviewVo;
 import com.kh.nds.service.IOverseasService;
 import com.kh.nds.service.IReviewService;
+import com.kh.psj.domain.SchVo;
+import com.kh.psj.service.ISchService;
 
 @Controller
 @RequestMapping("/nds/*")
@@ -27,6 +31,9 @@ public class OverseasController {
 	
 	@Inject
 	IReviewService reviewService;
+	
+	@Inject
+	ISchService schService;
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	// 해외 메인화면
@@ -58,5 +65,16 @@ public class OverseasController {
 		model.addAttribute("overseasVo", overseasVo);
 	}
 	
+	// 데이터 등록후 스케쥴러로 리다이렉트
+	@RequestMapping(value="/overseassch", method=RequestMethod.GET)
+	public String overseasSchedule(SchVo schVo, HttpSession session) throws Exception {
+		MemberVo memberVo = (MemberVo)session.getAttribute("memberVo");
+		int user_code = memberVo.getUser_code();
+		schVo.setUser_code(user_code);
+		System.out.println(schVo);
+		schService.writeSch(schVo);
+		
+		return "redirect:/psj/schedule?enterDate="+schVo.getSch_date();
+	}
 }
 

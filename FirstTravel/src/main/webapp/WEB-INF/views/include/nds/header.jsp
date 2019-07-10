@@ -4,6 +4,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<style>
+</style>
 <!-- header -->
   <head>
     <title>First Travel &mdash; Colorlib Website Template</title>
@@ -59,7 +61,7 @@
     
     <header class="site-navbar py-1" role="banner" >
 
-      <div class="container"  style="border-bottom: 2px black; border-bottom-style: solid;">
+      <div class="container" style="border-bottom: 2px black; border-bottom-style: solid;">
         <div class="row align-items-left">
           
           <div class="topAreaWrap">
@@ -75,22 +77,24 @@
 				
 		           		
 	<!-- 	           			<a href="javascript:void(0);" onclick="goLogin()" class="topAreaLogIn"><span>로그인</span></a> -->
-							<a href="/kdw/login" onclick="viewLoginOpen()" class="topAreaLogIn"><span>로그인</span></a>
 		           	
 		           	
+					<c:if test="${memberVo == null}">
+							<a href="#" onclick="location='/kdw/login'" class="topAreaLogIn" style="background-color: #ffffff;"><span>로그인</span></a>
+					</c:if>
+					<c:if test="${memberVo != null}">	
+							<a href="#" onclick="location='/kdw/logout'" class="topAreaLogOut" style="background-color: #ffffff;"><span>로그아웃</span></a>
+					</c:if>
 					<div class="topAreaIcon">
 					<!-- 아이콘들-->
-					<c:choose>
-						<c:when test="${memberVo == null}">
+					<!-- 로그인이 안되어있을때 -->
+					<c:if test="${memberVo == null}">
 			           		<a href="/kdw/join" class="topAreaIcon02">회원가입</a>
-						</c:when>
-						<c:otherwise>	
-							<a href="#" class="topAreaIcon01">마이페이지</a>
-			          	</c:otherwise>
-			        </c:choose>
-					</div>	
-	             	
-	                     
+			        </c:if>
+			        <c:if test="${memberVo != null}">
+							<a href="#" class="topAreaIcon03">마이페이지</a>
+	                </c:if>
+					</div>
 					</div><!--//topAreaBox--> 
                 </div>
 			
