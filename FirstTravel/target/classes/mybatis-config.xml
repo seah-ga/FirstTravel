@@ -9,7 +9,7 @@
 
 		<typeAlias type="com.kh.kdw.domain.MemberVo" alias="MemberVo"/>
 		<typeAlias type="com.kh.kdw.domain.GBoardVo" alias="GBoardVo"/>
-
+		<typeAlias type="com.kh.kdw.domain.MemberBoardVo" alias="MemberBoardVo"/>
 		<typeAlias type="com.kh.kdw.domain.GReplyVo" alias="GReplyVo"/>
 		
 		<typeAlias type="com.kh.psj.domain.CityVo" alias="CityVo"/>

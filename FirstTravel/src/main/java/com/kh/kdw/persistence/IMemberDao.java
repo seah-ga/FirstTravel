@@ -29,4 +29,7 @@ public interface IMemberDao {
 	
 	// 비밀번호 변경
 	public void passwoardUpdate(int user_code, String user_pw) throws Exception;
+	
+	
+	
 }

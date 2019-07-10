@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.kdw.domain.ChkEmailVo;
 import com.kh.kdw.domain.LoginDto;
+import com.kh.kdw.domain.MemberBoardVo;
 import com.kh.kdw.domain.MemberVo;
 import com.kh.kdw.service.IMemberService;
 import com.kh.kdw.util.TempKey;
@@ -36,7 +38,7 @@ public class MemberController {
 		for (Cookie cookie : cookies) {
 			String cookieName = cookie.getName();
 			String cookieValue = cookie.getValue();
-			if (cookieName.equals("user_cookie")) {
+			if (cookieName.equals("user_code")) {
 				user_cookie = cookieValue;
 			}
 		}
@@ -44,7 +46,7 @@ public class MemberController {
 			MemberVo memberVo = memberService.memberId(Integer.parseInt(user_cookie));
 			HttpSession session = request.getSession();
 			session.setAttribute("memberVo", memberVo); // 동석 수정 M -> m
-			return "redirect:/ljh/main";
+			return "redirect:/kdw/gallery/gallery_list";
 		}
 		return "/kdw/login";
 	}
@@ -127,14 +129,23 @@ public class MemberController {
 	
 	// 회원정보 페이지폼
 	@RequestMapping(value="/memberinfo")
-	public void memberInfo() throws Exception {
+	public void memberInfo(HttpSession session, Model model) throws Exception {
+		MemberVo memberVo = (MemberVo)session.getAttribute("memberVo");
+		int user_code = memberVo.getUser_code();
+		System.out.println("info user_code: " + user_code);
+		int boardCount = memberService.memberBoardWriteCount(user_code);
 		
+		MemberBoardVo memberBoardVo = new MemberBoardVo();
+		memberBoardVo.setWriteCount(boardCount);
+		model.addAttribute("memberBoardVo", memberBoardVo);
+		System.out.println("info boardCount: " + boardCount);
+		System.out.println("membercontroller, memberinfo, memberBoardVo ; " + memberBoardVo);
 	}
 	
 	@RequestMapping(value="/memberinfo-run", method=RequestMethod.POST)
 	public String memberInfoRun(MemberVo memberVo) throws Exception {
 		memberService.memberModify(memberVo);
-		return "redirect:/kdw/listcart";
+		return "redirect:/ljh/main";
 	}
 	
 	// 로그아웃 기능

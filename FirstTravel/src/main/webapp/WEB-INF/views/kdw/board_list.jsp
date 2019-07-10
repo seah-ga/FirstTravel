@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@include file="../include/nds/header.jsp" %>      
 <!DOCTYPE html>
 <html>
@@ -28,6 +29,31 @@ $(document).ready(function() {
 	$("#btn_cancel").click(function() {
 		location.href = "/kdw/login";
 	});
+	
+	$(".a_title").click(function(e) {
+		e.preventDefault();
+		var g_no = $(this).attr("data-g_no");
+		var href = $(this).attr("href");
+		$("input[name=g_no]").val(g_no);
+		setPage();
+		$("#list_form").attr("action", href).submit();
+	});
+	
+	// 페이지 전환
+	$(".a_pagination").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("data-page");
+		$("input[name=page]").val(page);
+		$("#list_form").submit();
+	});
+	
+	function setPage() {
+		var page = "${pagingDto.page}";
+		if (page == "") {
+			page = 1;
+		}
+		$("input[name=page]").val(page);
+	}
 });
 </script>
 </head>
@@ -50,62 +76,82 @@ $(document).ready(function() {
           <div class="card">
 
             <!--Card content-->
-            <form class="card-body" action="/kdw/memberinfo-run" method="post">
-
+            <form class="card-body" method="post" id="list_form">
+			<input type="hidden" name="g_no"/>
+			<input type="hidden" name="page" value="${pagingDto.page }">
               <!--Grid row-->
-              
-              <!-- 유저 아이디 -->
-              <div class="md-form mb-5">
-                <input type="text" id="user_id" class="form-control" value="${memberVo.user_id}" readonly="readonly">
-                <label for="user_id" class="">아이디</label>
-              </div>
-              
-              <!-- 비밀번호 -->
-              <div class="md-form mb-5">
-                <input type="password" id="user_pw" class="form-control" value="${memberVo.user_pw }">
-                <label for="user_pw" class="">비밀번호</label>
-              </div>
-              
-              <!-- 연락처 -->
-              <div class="md-form mb-5">
-                <input type="text" id="user_phone" class="form-control" value="${memberVo.user_phone }">
-                <label for="user_phone" class="">연락처</label>
-              </div>
-
-              <!--email-->
-              <div class="md-form mb-5">
-                <input type="text" id="email" class="form-control" value="${memberVo.user_email}">
-                <label for="email" class="">Email</label>
-              </div>
-
-              <!-- 주소 -->
-              <div class="md-form mb-5">
-                <input type="text" id="address" class="form-control" value="${memberVo.user_address }">
-                <label for="address" class="">주소</label>
-              </div>
-
-              <!--Grid row-->
-
-              <hr>
-
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="chk_ad" value="${memberVo.chk_ad }">
-                <label class="custom-control-label" for="chk_ad">여행정보 / 이벤트 / 쿠폰 수신에 동의합니다.</label>
-              </div>
-              
-			  <div class="row">
-                <!--Grid column-->
-              		<div class="col-md-6 mb-2">
-	              		<hr class="mb-4">
-	              		<button class="btn btn-unique btn-block" type="submit">수정</button>
-					</div>
-              		<div class="col-md-6 mb-2">
-	              		<hr class="mb-4">
-	              		<button class="btn btn-blue-grey btn-block" id="btn_cancel">취소</button>
-					</div>
-				</div>	
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+				  <li class="nav-item">
+				    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+				      aria-selected="true">겔러리게시판</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+				      aria-selected="false">후기게시판</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+				      aria-selected="false">팁게시판</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#list" role="tab" aria-controls="contact"
+				      aria-selected="false">동행자게시판</a>
+				  </li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+				  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+				  <table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">게시글 번호</th>
+				      <th scope="col">제목</th>
+				      <th scope="col">작성일</th>
+				      <th scope="col">조회수</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<c:forEach items="${galleryList }" var="gBoardVo">
+				    <tr>
+				      <th scope="row">${gBoardVo.g_no}</th>
+				      <td><a href="/kdw/gallery/gallery_read" class="a_title" data-g_no="${gBoardVo.g_no }" 
+								data-index=${status.index }>${gBoardVo.g_title }</a></td>
+				      <td>${gBoardVo.g_regdate }</td>
+					  <td>${gBoardVo.g_viewcnt }</td>
+				    </tr>
+				  	</c:forEach>
+				  </tbody>
+				</table>
+					<!-- 페이지네이션 -->
+					<nav>
+						<ul class="pagination">
+							<c:if test="${paginationDto.prev == true }">
+							<li class="page-item">
+								<a class="page-link a_pagination" href="#" data-page="${paginationDto.startPage - 1}">Previous</a>
+							</li>
+							</c:if>
+							<c:forEach begin="${paginationDto.startPage }" end="${paginationDto.endPage }" var="i">
+							<li class="page-item <c:if test="${paginationDto.pagingDto.page == i}">active</c:if>">
+								<a class="page-link a_pagination" href="#" data-page="${i }">${i }</a>
+							</li>
+							
+							</c:forEach>
+							<c:if test="${paginationDto.next == true }">
+							<li class="page-item">
+								<a class="page-link a_pagination" data-page="${paginationDto.endPage + 1}" href="#">Next</a>
+							</li>
+							</c:if>
+						</ul>
+					</nav>
+				  </div>
+				  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+				  </div>
+				  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+				  </div>
+				  <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="contact-tab">
+				  </div>
+				</div>
+			
             </form>
-
           </div>
           <!--/.Card-->
 

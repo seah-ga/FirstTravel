@@ -90,10 +90,15 @@ $(document).ready(function() {
 	});
 });
 </script>
-
-${paginationDto}
-${pagingDto }
-12$ ${memberVo }
+<style>
+.breadcrumb a:before {
+    content: '';
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 10px;
+    vertical-align: middle;
+}
+</style>
 <form id="list_form">
 	<input type="hidden" name="g_no" value="${param.g_no}">
 	<input type="hidden" name="index" value="${param.g_no}">
@@ -114,17 +119,17 @@ ${pagingDto }
 				<div class="col-md-12">
 					<div class="tabbable" id="tabs-847237">
 						<ul class="nav nav-tabs">
-							<li class="nav-item">
-								<a class="nav-link a_list" href="#tab1" data-toggle="tab" data-type="list">게시판보기</a>
-							</li>
 							<li class="nav-item active">
-								<a class="nav-link active a_list" href="#tab2" data-toggle="tab" data-type="gallery">겔러리보기</a>
+								<a class="nav-link active a_list" href="#tab1" data-toggle="tab" data-type="list">게시판보기</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link a_list" href="#tab2" data-toggle="tab" data-type="gallery">겔러리보기</a>
 							</li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane" id="panel-749780">
+							<div class="tab-pane active" id="panel-749780">
 							</div>
-							<div class="tab-pane active" id="tab2">
+							<div class="tab-pane" id="tab2">
 							</div>
 						</div>
 					</div>
@@ -135,10 +140,10 @@ ${pagingDto }
 					<nav>
 						<ol class="breadcrumb" style="background-color:#ffffff;">
 							<li class="breadcrumb-item">
-								<a href="/ljh/main">메인</a>
+								<a href="/ljh/main" style="color:#000;">메인</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="/kdw/memberinfo">커뮤니티</a>
+								<a href="/kdw/memberinfo" style="color:#000;">커뮤니티</a>
 							</li>
 							<li class="breadcrumb-item active">
 								겔러리
@@ -148,13 +153,13 @@ ${pagingDto }
 				</div>
 				<!-- 검색 -->
 				<div class="col-md-6">
-				<select id="searchType">
+				<select id="searchType" style="border-width:0 0 1px 0;border-style:solid;border-color:#000;padding:5px;" >
 					<option value="type">검색항목</option>
 					<option value="title" <c:if test="${pagingDto.searchType == 'title'}">selected</c:if>>제목</option>
 					<option value="writer" <c:if test="${paginationDto.pagingDto.searchType == 'writer'}">selected="selected"</c:if>>작성자</option>
 					<option value="content" <c:if test="${paginationDto.pagingDto.searchType == 'content'}">selected="selected"</c:if>>내용</option>
 				</select>
-				<select id="g_location">
+				<select id="g_location" style="border-width:0 0 1px 0;border-style:solid;border-color:#000;padding:5px;" >
 					<option value="지역선택">지역선택</option>
 					<option value="유럽" <c:if test="${pagingDto.g_location == '유럽'}">selected</c:if>>유럽</option>
 					<option value="중국/대만" <c:if test="${paginationDto.pagingDto.g_location == '중국/대만'}">selected="selected"</c:if>>중국/대만</option>
@@ -163,17 +168,17 @@ ${pagingDto }
 					<option value="미국/캐나다/특수" <c:if test="${paginationDto.pagingDto.g_location == '미국/캐나다/특수'}">selected="selected"</c:if>>미국/캐나다/특수</option>
 					<option value="제주/내륙" <c:if test="${paginationDto.pagingDto.g_location == '제주/내륙'}">selected="selected"</c:if>>제주/내륙</option>
 				</select>
-				<input type="text" id="keyword" value="${pagingDto.keyword }">
-				<input type="button" value="검색" class="btn btn-primary" id="btn_search">
+				<input type="text" id="keyword" style="border-width:0 0 1px 0;border-style:solid;border-color:#000;padding:1.5px;" value="${pagingDto.keyword }">
+				<input type="button" value="검색" class="btn btn-success" id="btn_search" style="color:inherit;">
 				</div>
 				
 				<!-- 글쓰기 버튼 -->
 				<div class="col-md-2">
 					 
-					<button type="button" class="btn btn-success" id="btn_write">글쓰기</button>
+					<button type="button" class="btn btn-success" id="btn_write" style="margin:5px;">글쓰기</button>
 				</div>
 			</div>
-			<div class="row"  style="display:none;" id="boardList">
+			<div class="row"  style="display:block;" id="boardList">
 	        
 			
 				<div class="col-md-12" >
@@ -217,9 +222,9 @@ ${pagingDto }
 					</table>
 				</div>
 			</div>
-			<div class="row" id="galleryList" style="display:block table;width:80%;margin:auto;">
+			<div class="row" id="galleryList" style="display:none table;width:80%;margin:auto;">
 			<c:forEach items="${list}" var="gBoardVo" varStatus="status">
-	          <div class="col-md-2 col-lg-3 mb-3 mb-lg-2" style="dispaly:table-cell;text-align:center; margin-bottom: 50px;">
+	          <div class="col-md-2 col-lg-3 mb-3 mb-lg-2" style="dispaly:table-cell;text-align:center; margin-bottom: 50px;padding-bottom:20px;">
 	            <a href="/kdw/gallery/gallery_read" class="unit-1 text-center a_title" data-g_no="${gBoardVo.g_no }">
 	              <c:choose>
 					<c:when test="${gBoardVo.fileone != null }">
