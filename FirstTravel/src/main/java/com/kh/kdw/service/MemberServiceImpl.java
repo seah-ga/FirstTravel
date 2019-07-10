@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.kdw.domain.ChkEmailVo;
 import com.kh.kdw.domain.MemberVo;
+import com.kh.kdw.persistence.IMemberBoardDao;
 import com.kh.kdw.persistence.IMemberDao;
 import com.kh.kdw.util.MailHandler;
 import com.kh.kdw.util.TempKey;
@@ -17,6 +18,8 @@ public class MemberServiceImpl implements IMemberService {
 	
 	@Inject
 	private IMemberDao memberDao;
+	@Inject
+	private IMemberBoardDao memberBoardDao;
 	
 	@Inject
 	private JavaMailSender mailSender;
@@ -101,6 +104,22 @@ public class MemberServiceImpl implements IMemberService {
 			message = "success";
 		}
 		return message;
+	}
+
+	@Transactional
+	@Override
+	public int memberBoardWriteCount(int user_code) throws Exception {
+		// 작성한 게시판 게시글 수 얻기
+		System.out.println("user_code : " + user_code);
+		int galleryCount = memberBoardDao.memberGalleryWriteCount(user_code);
+		System.out.println("galleryCount : " + galleryCount);
+		int tipCount = memberBoardDao.memberTipWriteCount(user_code);
+		System.out.println("tipCount : " + tipCount);
+		int reviewCount = memberBoardDao.memberReviewWriteCount(user_code);
+		System.out.println("reviewCount : " + reviewCount);
+		int totalCount = galleryCount + tipCount + reviewCount;
+		System.out.println("totalCount : " + totalCount);
+		return totalCount;
 	}
 
 }
