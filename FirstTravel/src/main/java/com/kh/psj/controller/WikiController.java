@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.kdw.domain.MemberVo;
+
 import com.kh.psj.domain.PsjPagingDto;
 import com.kh.psj.domain.SearchDto;
+import com.kh.psj.domain.TipRepVo;
 import com.kh.psj.domain.TipUpDownVo;
 import com.kh.psj.domain.TipVo;
+import com.kh.psj.service.ITipRepService;
 import com.kh.psj.service.ITipService;
 
 @RestController
@@ -162,4 +165,63 @@ public class WikiController {
 		return entity;
 	}
 	
+	@Inject
+	ITipRepService tipRepService;
+	
+	@RequestMapping(value="/reply/{tip_no}", method=RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public ResponseEntity<List<TipRepVo>> getReplyList(@PathVariable("tip_no") int tip_no){
+		ResponseEntity<List<TipRepVo>> entity = null;
+		try {
+			System.out.println("rep.get.tip_no : " + tip_no);
+			List<TipRepVo> list = tipRepService.getRepList(tip_no);
+			System.out.println(list);
+			entity = new ResponseEntity<List<TipRepVo>>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<List<TipRepVo>>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value="/reply/{tip_no}", method=RequestMethod.PUT, produces = "application/json; charset=utf-8" )
+	public ResponseEntity<String> insertReply(@PathVariable("tip_no") int tip_no, @RequestBody TipRepVo tipRepVo){
+		ResponseEntity<String> entity = null;
+		try {
+			System.out.println(tipRepVo);
+			tipRepService.writeRepList(tipRepVo);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value="/reply/{tip_rep_no}", method=RequestMethod.DELETE, produces = "application/json; charset=utf-8" )
+	public ResponseEntity<String> deleteReply(@PathVariable("tip_rep_no") int tip_rep_no){
+		ResponseEntity<String> entity = null;
+		try {
+			TipRepVo tipRepVo = new TipRepVo();
+			tipRepVo.setTip_rep_no(tip_rep_no);
+			tipRepService.deleteRepList(tipRepVo);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value="/reply/{tip_rep_no}", method=RequestMethod.POST, produces = "application/json; charset=utf-8" )
+	public ResponseEntity<String> updateReply(@PathVariable("tip_rep_no") int tip_rep_no,  @RequestBody TipRepVo tipRepVo){
+		ResponseEntity<String> entity = null;
+		try {
+			
+			tipRepVo.setTip_rep_no(tip_rep_no);
+			tipRepService.modifyRepList(tipRepVo);;
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@include file="../include/nds/header.jsp" %>
 <!doctype html>
 <html lang="kr">
 <head>
@@ -37,7 +38,7 @@ input[type="checkbox"]:checked ~ main {
 }
 #sideBar {
   position: fixed;
-  z-index: 9;
+  z-index: 999;
   top: 0;
   left: 0;
   bottom: 0;
@@ -139,12 +140,6 @@ input[type="checkbox"]:checked ~ main {
   line-height: 50px;
   transition: opacity 0.1s ease-in-out;
 }
-main {
-  position: absolute;
-  transition: all 0.15s ease-in-out;
-  top: 0;
-  left: 50px;
-}
 main header {
   position: absolute;
   z-index: -1;
@@ -192,6 +187,33 @@ main section h1 {
 .down{
 	cursor:pointer;
 }
+.replyTable th{
+
+   width: 100px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    background: #eee;
+}
+input[type=button] {
+	border: 1px solid skyblue;
+	background-color: rgba(0,0,0,0);
+	color: skyblue;
+	padding: 5px;
+}
+input[type=text] {
+	border-bottom: 1px solid black;
+}
+main {
+	position: absolute;
+	top: 100px;
+
+	z-index: 300;
+}
 
 
 
@@ -227,7 +249,10 @@ function getPageInfo(country_name,search_val,search_type) {
 			$(rData).each(function(i) {
 				innerHtml += "<tr>";
 					innerHtml += "<td>" + rData[i].tip_no + "</td>";
-					innerHtml += "<td>" + rData[i].tip_content + "</td>";
+					innerHtml += "<td>" + rData[i].tip_content + space 
+							  +   "<span class='glyphicon glyphicon-chevron-down gldown' style='float:right;cursor:pointer'></span>"
+					          + "<span class='glyphicon glyphicon-chevron-up glup' style='display:none;float:right;cursor:pointer'></span>" ;
+					          + "</td>";
 					innerHtml += "<td>" + rData[i].tip_regdate + "</td>";
 					innerHtml += "<td data-writer-code = '"+ rData[i].tip_writer_code 
 								+ "'>" + rData[i].tip_writer_id + "</td>";
@@ -382,16 +407,14 @@ function getPageInfo(country_name,search_val,search_type) {
 				"success" :function(rData){
 					nowPage = 1; // 바로 1페이지로가서 페이지정보리로드.
 					getPageInfo(country_name);
+					$("#txt_tip").val("");
 				}
 			}); //-- ajax
 		}); // -- click
 		
 		
 		/////// 추천 비추천버튼 style ////////////////
-		$("#table_tip_list").on("mouseenter", "span.up", function() {
-			
-			
-		});
+		
 
 		//추천버튼클릭
 		$("#table_tip_list").on("click", "span.up", function() {
@@ -507,7 +530,7 @@ function getPageInfo(country_name,search_val,search_type) {
 				"url" : url,
 				"headers" : {
 					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "post"
+					"X-HTTP-Method-Override" : "delete"
 				},
 				"dataType" : "text",
 				"success" :function(rData){
@@ -527,8 +550,8 @@ function getPageInfo(country_name,search_val,search_type) {
 			var innerUpdateForm = "<input type='text' class='txt_update'" 
 			    innerUpdateForm += "value='" + origin_txt + "'>"
 			
-			$(this).parent().html("<button class='btn-update'>완료</button>" +
-					"<button class='btn-update' data-origin_txt='" +  origin_txt + "'>취소</button>");
+			$(this).parent().html("<button class='btn-update'>완료</button>" + "|" +
+					"<button class='btn-update-cancle' data-origin_txt='" +  origin_txt + "'>취소</button>");
 			td_tip_content.html(innerUpdateForm);
 			td_tip_content.children("input[class=txt_update]").focus();
 			td_tip_content.children("input[class=txt_update]").select(); 
@@ -568,6 +591,11 @@ function getPageInfo(country_name,search_val,search_type) {
 			
 			
 		});
+		$("#table_tip_list").on('click','.btn-update-cancle',function() {
+			var txt_field = $(this).parent().parent().children().eq(1);
+			txt_field.html($(this).attr("data-origin_txt"));
+			$(this).parent().html("<span class='glyphicon glyphicon-pencil update' style='cursor:pointer'/>")
+		});
 		$("#btn-search").click(function() {
 			var country_name = $("#tip_title").text();
 			search_type = $("#sel_search").val();
@@ -576,6 +604,158 @@ function getPageInfo(country_name,search_val,search_type) {
 // 			console.log(search_type + " ::" + search_val);
 		});
 		
+		///댓글펼치기 버튼
+		$("#table_tip_list").on('click','span.gldown', function() {
+// 			console.log($(this).parent().parent());
+			var tip_no = $(this).parent().parent().children().eq(0).text();
+			console.log(tip_no);
+			var thisEl = $(this);
+			var tr = $(this).parent().parent();
+			getRepList(tip_no,tr);
+		
+			thisEl.attr("class","glyphicon glyphicon-chevron-up glup"); // 펼치기 버튼 접기로 변경
+			
+		});
+		
+		// 댓글목록 가져오기
+		function getRepList(tip_no, tr) {
+			var url = "/wiki/reply/" + tip_no;
+			var replyHtml ="<td></td>";  // td 한칸을 비우고싶어서.. 다른 방법 강구해볼것
+			replyHtml += "<td><input type='text' class='txt-reply' placeholder='댓글을 입력해주세요.' size='50'>";
+			replyHtml += "<input type='button' class='btn-primary btn-xs btn-writeReply' value='입력' "
+			replyHtml +=  "data-tip_no='" + tip_no +"'>";
+			replyHtml += "<table class='replyTable'>";
+			$.getJSON(url, function(rData){
+				console.log(rData);
+				$(rData).each(function(i){
+					console.log(rData[i].tip_rep_writer_id + " ㅇㅇ");
+					
+					replyHtml += "<tr>";
+					replyHtml += "<th>"+ rData[i].tip_rep_writer_id +"</th>";
+					replyHtml += "<td>" + rData[i].tip_rep_content + "</td>";
+					if(rData[i].tip_rep_writer_id == "${memberVo.user_id}"){
+						replyHtml += "<td><a class='rep_update' style='cursor:pointer' data-tip_rep_no='"+ rData[i].tip_rep_no +"'>수정</a>|"
+						replyHtml += "<a class='rep_delete' style='cursor:pointer' data-tip_rep_no='"+ rData[i].tip_rep_no +"'>삭제</a></td>" 
+					}	
+					replyHtml += "</tr>";
+				});
+				replyHtml += "</table></td>";
+				tr.after(replyHtml); // 다음 tr에 붙이기
+			});
+		}
+		
+		$("#table_tip_list").on('click', 'span.glup', function() {
+			
+			$(this).parent().parent().next().next().remove(); // 댓글 목록 삭제
+			$(this).attr("class","glyphicon glyphicon-chevron-down gldown");
+		});
+		
+		//댓글작성
+		$("#table_tip_list").on('click', '.btn-writeReply', function() {
+				console.log("ㅇㅇㅇ");
+			var reply_content = $(this).prev().val();
+			var user_code = "${memberVo.user_code}";
+			var user_id = "${memberVo.user_id}";
+			var tip_no = $(this).attr("data-tip_no");
+// 			var tr = $(this).parent().prev().prev();
+			var table = $(this).next().children().eq(0); // table의 0번쨰 tr
+// 			console.log(tr);
+// 			$(this).parent().html("");
+			var data = {
+					"tip_rep_content" : reply_content,
+					"tip_rep_writer_code": user_code,
+					"tip_rep_writer_id" : user_id,
+					"tip_no" : tip_no
+			}
+			
+			var url = "/wiki/reply/" + tip_no;
+			var jsonData = JSON.stringify(data);
+			var tr = $(this).parent().prev().prev();
+			$(this).parent().html("");
+			console.log(tr);
+			var replyHtml = "";
+			$.ajax({
+				"type" : "put",
+				"url" : url,
+				"data" : jsonData,
+				"headers" : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "put"
+				},
+				"dataType" : "text",
+				"success" :function(rData){
+					getRepList(tip_no, tr);
+				}
+			});	
+		});
+		$("#table_tip_list").on('click', '.rep_delete', function(e) {
+			e.preventDefault();
+			var tip_rep_no = $(this).attr("data-tip_rep_no");
+			var url = "/wiki/reply/" + tip_rep_no;
+			var result = confirm('정말 삭제 하시겠습니까?');
+			var tr = $(this).parent().parent();
+			console.log(tr);
+			if(result == true){
+				$.ajax({
+					"type" : "delete",
+					"url" : url,
+					"headers" : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "delete"
+					},
+					"dataType" : "text",
+					"success" :function(rData){
+						tr.remove();
+					}
+				});	
+			}
+			
+			
+		});
+		$("#table_tip_list").on('click', '.rep_update', function(e) {
+			e.preventDefault();
+			var txt_td = $(this).parent().prev();
+			var origin_txt = txt_td.text();
+			var tip_rep_no = $(this).attr("data-tip_rep_no");
+			$(this).parent().html("<input type='button' class='btn-warning btn-xs btn-rep_update' value='확인' data-tip_rep_no='" + tip_rep_no +"'>");
+// 			console.log(txt);
+			txt_td.html("<input type='text' value='" + origin_txt + "' class='txt_rep_update'>");
+			txt_td.children("input[class=txt_rep_update]").focus();
+			txt_td.children("input[class=txt_rep_update]").select();
+			console.log("수정클릭");
+		});
+		$("#table_tip_list").on('click', '.btn-rep_update', function() {
+			var this_td = $(this).parent();
+			var txt_td = $(this).parent().prev();
+			var update_content = txt_td.children("input[type=text]").val();
+			var tip_rep_no = $(this).attr("data-tip_rep_no");
+			var url = "/wiki/reply/" + tip_rep_no;
+			var data = {
+				"tip_rep_content" : update_content
+			}
+			var jsonData = JSON.stringify(data);
+			var replyHtml = "";
+			$.ajax({
+				"type" : "post",
+				"url" : url,
+				"data" : jsonData,
+				"headers" : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "post"
+				},
+				"dataType" : "text",
+				"success" :function(rData){
+					txt_td.html(update_content);
+					replyHtml += "<a class='rep_update' style='cursor:pointer' data-tip_rep_no='"+ tip_rep_no +"'>수정</a>|"
+					replyHtml += "<a class='rep_delete' style='cursor:pointer' data-tip_rep_no='"+ tip_rep_no +"'>삭제</a>"
+					this_El.html(replyHtml);
+				}
+			});	
+			console.log(tip_rep_no);
+		});
+		
+		
+		//팁 작성 텍스트박스 클릭
 		$("#txt_tip").click(function() {
 			var user = "${memberVo}";
 			// 로그인이 되어 있지 않을시 로그인 페이지로.
@@ -585,6 +765,7 @@ function getPageInfo(country_name,search_val,search_type) {
 		});
 	}); // -- doc	
 </script>
+
 </head>
 <body>
 <input type="checkbox" id="menu_state" checked>
@@ -604,18 +785,21 @@ function getPageInfo(country_name,search_val,search_type) {
 </nav>
 <main>
 <div id="div_out">
+
 	<div id="div_title">
-		<h1 id="tip_title">국가를 선택해 주세요.</h1><hr>
+		<h1 id="tip_title">국가를 선택해 주세요.</h1>
 	</div>
 	
 	<div style="display:none" id="div_main">
 	<!-- /ndsupload/displayFile?fileName=이름 -->
 	<div class="col-md-12" id="div_writeForm">
+		
 		<input type="text" size="150" placeholder="팁을 작성해 주세요." id="txt_tip"
 			<c:if test="${memberVo == null}">value="로그인 후 이용해 주세요" readonly="readonly"</c:if>
 		>
 		<input type="button" value="쓰기" id="btn-write">
 	</div>
+
 		<div class="col-md-12" id="div_content">
 			<div class="container-fluid">
 				<div class="row">
@@ -659,7 +843,8 @@ function getPageInfo(country_name,search_val,search_type) {
 									<option value="writer">작성자</option>
 									<option value="content">내용</option>
 								</select>
-								<input type="text" placeholder="검색할 내용을 입력해 주세요." id="txt_search" size="30">
+								<input type="text" placeholder="검색할 내용을 입력해 주세요." id="txt_search" size="30"
+								>
 								<input type="button" value="검색" id="btn-search">
 							</div>
 							
@@ -672,5 +857,6 @@ function getPageInfo(country_name,search_val,search_type) {
 		</div>
 	</div>
 </main>
+
 </body>
 </html>

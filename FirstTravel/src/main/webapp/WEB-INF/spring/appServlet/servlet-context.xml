@@ -76,9 +76,9 @@
 			<mapping path="/nds/reviewregist"/>
 			<mapping path="/psj/schedule"/>
 			<mapping path="/psj/wiki"/>
+			<mapping path="/psj/plan"/>
 			<mapping path="/ljh/companion/write"/>
 			<mapping path="/ljh/companion/update"/>
-			<mapping path="/ljh/companion/write"/>
 			<beans:ref bean="CheckLoginInterceptor"/>
 		</interceptor>
 	</interceptors>

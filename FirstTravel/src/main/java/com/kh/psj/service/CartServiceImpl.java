@@ -31,7 +31,7 @@ public class CartServiceImpl implements ICartService{
 	public void putItemToCart(CartVo cartVo) throws Exception{
 		cartDao.insertCart(cartVo);
 		String sch_date = cartVo.getDeparture_date();
-		String sch_content =  cartVo.getArr_city() + " 출발 ";  
+		String sch_content =  cartVo.getChild_count() + cartVo.getAdult_count() + "명" + cartVo.getDep_city() + " 출발 /" + cartVo.getArr_city() + " 도착";  
 		int user_code = cartVo.getUser_code();
 		
 		SchTitleVo schTitleVo = new SchTitleVo();
@@ -45,3 +45,4 @@ public class CartServiceImpl implements ICartService{
 	}
 
 }
+

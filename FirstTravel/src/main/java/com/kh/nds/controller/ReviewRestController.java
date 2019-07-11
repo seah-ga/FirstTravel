@@ -16,6 +16,7 @@ import com.kh.kdw.domain.MemberVo;
 import com.kh.nds.domain.ReviewReplyVo;
 import com.kh.nds.service.IOverseasService;
 import com.kh.nds.service.IReviewService;
+import com.kh.psj.domain.CityVo;
 import com.kh.psj.service.ICityService;
 
 @RestController
@@ -25,6 +26,8 @@ public class ReviewRestController {
 	@Inject
 	private IReviewService reviewService;
 	
+	@Inject
+	private ICityService cityService;
 	
 	// 리뷰 댓글 작성
 		@RequestMapping(value="/reviewreply-regist", method=RequestMethod.POST)
@@ -60,6 +63,22 @@ public class ReviewRestController {
 			} catch (Exception e) {
 				e.printStackTrace();
 				entity = new ResponseEntity<List<ReviewReplyVo>>(HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}
+		
+		// 한국 도시 출력
+		@RequestMapping(value="/domesticlist", method=RequestMethod.GET)
+		public ResponseEntity<List<CityVo>> domesticList() throws Exception {
+			
+			ResponseEntity<List<CityVo>> entity = null;
+			
+			try {
+				List<CityVo> list = cityService.getAllCities();
+				entity = new ResponseEntity<List<CityVo>>(list, HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				entity = new ResponseEntity<List<CityVo>>(HttpStatus.BAD_REQUEST);
 			}
 			return entity;
 		}
