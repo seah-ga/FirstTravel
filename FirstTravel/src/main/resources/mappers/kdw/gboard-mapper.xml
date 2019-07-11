@@ -22,8 +22,7 @@
 		update tbl_gallery_board set
 			g_title = #{g_title},
 			g_location = #{g_location},
-			g_content = #{g_content},
-			g_file_path = #{g_file_path}
+			g_content = #{g_content}
 		where g_no = #{g_no}	
 	</update>
 	
@@ -103,6 +102,12 @@
 	<insert id="fileAttach">
 		insert into tbl_gallery_file(g_file_path, g_no)
 		values(#{g_file_path}, seq_g_board.currval)
+	</insert>
+	
+	<!-- 첨부파일 위치 저장(수정시) -->
+	<insert id="fileAttachModify">
+		insert into tbl_gallery_file(g_file_path, g_no)
+		values(#{g_file_path}, #{g_no})
 	</insert>
 	
 	<!-- 첨부파일 하나 가져 오기 -->

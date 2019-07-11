@@ -38,10 +38,18 @@ public class GalleryServiceImpl implements IGalleryService {
 		return gBoardVo;
 	}
 
+	@Transactional
 	@Override
 	public void GBoardUpdate(GBoardVo gBoardVo) throws Exception {
 		// 글수정
 		galleryDao.gBoardUpdate(gBoardVo);
+		int g_no = gBoardVo.getG_no();
+		String[] files = gBoardVo.getFiles();
+		System.out.println("update files" + files);
+		for (String file_path : files) {
+			System.out.println("update file_path" + file_path);
+			galleryDao.fileAttachModify(file_path, g_no);
+		}
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class ScheduleController {
 	ICartService cartService;
 	
 	// 스케쥴 입력
-	@RequestMapping(value="/insert", method=RequestMethod.POST)
+	@RequestMapping(value="/date", method=RequestMethod.POST)
 	public ResponseEntity<String> insertSch(@RequestBody SchVo schVo){
 		ResponseEntity<String> entity = null;
 		System.out.println("schVo: " + schVo);
@@ -47,7 +47,7 @@ public class ScheduleController {
 		return entity;
 	}
 	// 스케쥴삭제
-	@RequestMapping(value="/delete", method=RequestMethod.DELETE)
+	@RequestMapping(value="/date", method=RequestMethod.DELETE)
 	public ResponseEntity<String> deleteSch(@RequestBody SchVo schVo){
 		ResponseEntity<String> entity = null;
 		try {
@@ -61,7 +61,7 @@ public class ScheduleController {
 		return entity;
 	}
 	// 스케쥴 수정
-	@RequestMapping(value="/update", method=RequestMethod.PUT)
+	@RequestMapping(value="/date", method=RequestMethod.PUT)
 	public ResponseEntity<String> updateSch(@RequestBody SchVo schVo){
 		ResponseEntity<String> entity = null;
 		System.out.println("수정" +schVo);
@@ -78,7 +78,7 @@ public class ScheduleController {
 	
 	
 	/// 날짜별 메인 스케쥴 입력
-	@RequestMapping(value="/insertTitle", method=RequestMethod.POST)
+	@RequestMapping(value="/title", method=RequestMethod.POST)
 	public ResponseEntity<String> insertSchTitle(@RequestBody SchTitleVo schTitleVo){
 		ResponseEntity<String> entity = null;
 		try {
@@ -91,7 +91,7 @@ public class ScheduleController {
 		}
 		return entity;
 	}
-	@RequestMapping(value="/updateTitle", method=RequestMethod.PUT)
+	@RequestMapping(value="/title", method=RequestMethod.PUT)
 	public ResponseEntity<String> updateSchTitle(@RequestBody SchTitleVo schTitleVo){
 		ResponseEntity<String> entity = null;
 		try {
@@ -104,7 +104,7 @@ public class ScheduleController {
 		}
 		return entity;
 	}
-	@RequestMapping(value="/deleteTitle", method=RequestMethod.DELETE)
+	@RequestMapping(value="/title", method=RequestMethod.DELETE)
 	public ResponseEntity<String> deleteSchTitle(@RequestBody SchTitleVo schTitleVo){
 		ResponseEntity<String> entity = null;
 		try {
@@ -119,7 +119,7 @@ public class ScheduleController {
 	}
 	
 	
-	@RequestMapping(value="/put_into_cart", method=RequestMethod.PUT, produces = "application/json; charset=utf-8")
+	@RequestMapping(value="/cart", method=RequestMethod.PUT, produces = "application/json; charset=utf-8")
 	public void putItemToCart(@RequestBody CartVo cartVo) {
 		try {
 			System.out.println(cartVo);

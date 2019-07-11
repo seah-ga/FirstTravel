@@ -36,10 +36,6 @@ public class OverseasRestController {
 	@Inject
 	private IOverseasService overseasService;
 	
-	@Inject
-	private ICityService cityService;
-	
-	
 	// 항공 API
 	@RequestMapping(value="/overseasapi", produces = "application/json; charset=utf-8")
 	 public String overseasAPI(@RequestParam("airPort") String airPort,
@@ -107,22 +103,6 @@ public class OverseasRestController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<List<OverseasVo>>(HttpStatus.BAD_REQUEST);
-		}
-		return entity;
-	}
-	
-	// 한국 도시 출력
-	@RequestMapping(value="/domesticlist", method=RequestMethod.GET)
-	public ResponseEntity<List<CityVo>> domesticList() throws Exception {
-		
-		ResponseEntity<List<CityVo>> entity = null;
-		
-		try {
-			List<CityVo> list = cityService.getAllCities();
-			entity = new ResponseEntity<List<CityVo>>(list, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<List<CityVo>>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}

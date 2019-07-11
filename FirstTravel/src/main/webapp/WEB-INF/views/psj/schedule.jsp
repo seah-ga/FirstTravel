@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%@ include file="../include/nds/header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,6 +81,7 @@ function drawDays() {
 	for (var i = 0; i < 42; i += 7) {
 		$tdDay.eq(i).css("color", "red");
 	}
+	
 	for (var i = 6; i < 42; i += 7) {
 		$tdDay.eq(i).css("color", "blue");
 	}
@@ -194,6 +200,7 @@ $(document).ready(function() {
 // 		top_date = date;
 		
 // 	});
+	
 
 	
 
@@ -280,9 +287,9 @@ $(document).ready(function() {
 // 		console.log("date :" + date);
 // 		console.log("time :" + time);
 // 		console.log("content :" + content);
-		var url = "/sch/insert";
+		var url = "/sch/date";
 		var data = {
-				"user_code" : "111",
+				"user_code" : "${memberVo.user_code}",
 				"sch_date" : top_date,
 				"sch_time" : time,
 				"sch_content" : content
@@ -318,9 +325,9 @@ $(document).ready(function() {
 		var txt_td = $(this).parent().prev();
 		var time = $(this).parent().attr("data-time");
 		console.log("삭제 " + "date:" + top_date + "time :" + time);
-		var url = "/sch/delete";
+		var url = "/sch/date";
 		var data = {
-			"user_code" : "111",
+			"user_code" : "${memberVo.user_code}",
 			"sch_date" : top_date,
 			"sch_time" : time
 		}
@@ -367,12 +374,12 @@ $(document).ready(function() {
 		var this_tr = $(this).parent().parent();
 		var updateTxt = $(this).parent().prev().children("input[type=text]").val();
 		var time = $(this).parent().attr("data-time");
-		var url = "/sch/update";
+		var url = "/sch/date";
 		var data = {
 			"sch_content" : updateTxt,
 			"sch_date" : top_date,
 			"sch_time" : time,
-			"user_code" : "111"
+			"user_code" : "${memberVo.user_code}"
 		};
 		
 		var jsonData = JSON.stringify(data);
@@ -425,16 +432,16 @@ $(document).ready(function() {
 			if(enterDate_day_toInt ==  cal_day_toInt){
 				var isScheduleExist = $(this).next().text();
 				if(!isScheduleExist){
-					url = "/sch/insertTitle"; /// title Data가 이미 입력되어 있는 날이면 update 아니면 insert
+					url = "/sch/title"; /// title Data가 이미 입력되어 있는 날이면 update 아니면 insert
 					ajaxType = "post";
 				}else{
-					url = "/sch/updateTitle";
+					url = "/sch/title";
 					ajaxType = "put";
 				}	
 			}
 		});
 		var data = {
-				"user_code" : "111",
+				"user_code" : "${memberVo.user_code}",
 				"sch_d_date" : enterDate,
 				"url" : url,
 				"sch_d_content" : sch_d_content
@@ -480,12 +487,12 @@ $(document).ready(function() {
 		}
 // 		console.log(y+m+d);
 		var sch_d_date = y + m + d;
-		var url = "/sch/deleteTitle";
+		var url = "/sch/title";
 		var data = {
 			"sch_d_date" : sch_d_date,
-			"user_code" : "111"
+			"user_code" : "${memberVo.user_code}"
 		};
-		var jsonData = JSON.stringify(data); // 코드 전체 data와 이름이 바뀌었지만 그냥 사용..
+		var jsonData = JSON.stringify(data); // ..
 		
 		var div_schedule = $(this).parent();
 		console.log("div_schedule", div_schedule);
@@ -622,6 +629,10 @@ table.calendar td {
 	</div>
 	</div>
 </div>
+<<<<<<< HEAD
+<%@include file="../include/nds/footer.jsp" %>
+=======
  <%@ include file="../include/nds/footer.jsp"%>
+>>>>>>> branch 'master' of https://github.com/seah-ga/FirstTravel.git
 </body>
 </html>
