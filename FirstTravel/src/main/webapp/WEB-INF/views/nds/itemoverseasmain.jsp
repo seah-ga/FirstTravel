@@ -13,7 +13,7 @@ $(document).ready(function(){
 		var data = {
 				"overseas_Country" : overseas_Country
 		};
-		var url = "/ndsrest/countrychk";
+		var url = "/overseasrest/countrychk";
 		
 		$.ajax({
 			"type" : "post",
