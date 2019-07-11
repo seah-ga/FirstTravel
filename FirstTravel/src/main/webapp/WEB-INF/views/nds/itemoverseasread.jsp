@@ -145,7 +145,7 @@ table.calendar td{
     		var data = {
     				"overseas_Country" : overseas_Country
     		};
-    		var url = "/ndsrest/countrychk";
+    		var url = "/overseasrest/countrychk";
     		
     		$.ajax({
     			"type" : "post",
@@ -185,7 +185,7 @@ table.calendar td{
 			var urlstr = window.location.href;
     		var airPort = urlstr.substr(urlstr.lastIndexOf("=") +1, 3);
     		var datestr = year+month+day;
-    		var overseasapiurl = "/ndsrest/overseasapi?airPort="+airPort+"&datestr="+datestr;
+    		var overseasapiurl = "/overseasrest/overseasapi?airPort="+airPort+"&datestr="+datestr;
     		var schstr = "스케쥴 등록";
     		var schday = "";
     		// 스케쥴러에 들어갈 날짜
@@ -246,7 +246,7 @@ table.calendar td{
     			"hotel_date" : hotel_date,
     			"hotel_city" : hotel_citystr
     		};
-    		var hotelurl = "/ndsrest/selecthotel"; 
+    		var hotelurl = "/overseasrest/selecthotel"; 
 			// 데이터베이스에있는 호텔 ajax 불러오기
     		$.ajax({
     			"type" : "post",

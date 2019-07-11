@@ -30,9 +30,9 @@ public class CompanionController {
 		@RequestMapping(value="/write", method=RequestMethod.POST)
 		public String writePost(CompanionVo vo , RedirectAttributes rttr, HttpSession session) throws Exception {
 			MemberVo memberVo = (MemberVo)session.getAttribute("memberVo");
-			//System.out.println(memberVo);
-			vo.setCompanion_writer(memberVo.getUser_id());
-			//System.out.println("MainController, writePost, vo:" + vo);
+			System.out.println("MainController, writePost, memberVo:" + memberVo);
+			vo.setCompanion_usercode(memberVo.getUser_code());
+			System.out.println("MainController, writePost, vo:" + vo);
 			//last (하고난후 db에 테스트)
 			companionService.insert(vo);
 			rttr.addFlashAttribute("message", "success_insert");
@@ -47,9 +47,9 @@ public class CompanionController {
 		
 		//글 수정 폼양식(보여주는건 model필요)
 		@RequestMapping(value="/update", method=RequestMethod.GET)
-		public void update(@RequestParam("companion_numbercode") int numbercode, Model model) throws Exception{
+		public void update(@RequestParam("companion_numbercode") int companion_numbercode, Model model) throws Exception{
 			//read로 글번호를 읽고 
-				CompanionVo companionVo = companionService.read(numbercode);
+				CompanionVo companionVo = companionService.read(companion_numbercode);
 				System.out.println("CompanionController, updateRun, companionVo:" + companionVo);
 				model.addAttribute("companionVo" , companionVo);
 			
@@ -64,8 +64,8 @@ public class CompanionController {
 		}
 		//글 삭제
 		@RequestMapping(value="/delete", method=RequestMethod.GET)
-		public String delete(@RequestParam("companion_numbercode")int numbercode, RedirectAttributes rttr) throws Exception{
-			companionService.delete(numbercode);
+		public String delete(@RequestParam("companion_numbercode")int companion_numbercode, RedirectAttributes rttr) throws Exception{
+			companionService.delete(companion_numbercode);
 			rttr.addFlashAttribute("message", "success_delete");
 			return "redirect:/ljh/companion";
 		}

@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../../include/nds/header.jsp" %>
+<style>
+.container{
+	padding-bottom:50px;
+}
+</style>
+<script src="/resources/ljh/js/myscript.js"></script>
 
 
 
 
 <script>
+
 
 
 $(document).ready(function(){
@@ -30,7 +37,7 @@ $(document).ready(function(){
 	});
 	//댓글 목록 얻어오기
 	function getCompanionReplyList(){
-		var url = "/companionreply/list/${companionReplyVo.companion_numbercode}";
+		var url = "/companionreply/list/${companionVo.companion_numbercode}";
 		$.getJSON(url , function(receivedData){
 			//console.log(receivedData); 밑에부터는 확인필요
 			var strHtml = "";
@@ -44,7 +51,7 @@ $(document).ready(function(){
 					if(user_id == this.reply_writer){
 							strHtml += "<td>"
 					  + 	"<input type='button' value='수정' class='btn-xs btn-warning'"
-					  +     " data-reply_text='" + this.reply_text + "'"
+					  +     " data-reply_content='" + this.reply_content + "'"
 					  +     " data-reply_writer='" + this.reply_writer + "'"
 					  +		" data-reply_numbercode='" + this.reply_numbercode + "'"
 					  +		" data-index='" + i + "'>" 
@@ -76,7 +83,7 @@ $(document).ready(function(){
 		
 	
 	//댓글쓰기버튼
-	("#btnCompanionReplyFinish").click(function(){
+	$("#btnCompanionReplyFinish").click(function(){
 		var companion_numbercode = "${companionVo.companion_numbercode}";
 		var reply_content = $("#reply_content").val();
 		var reply_writer = $("#reply_writer").val();
@@ -85,10 +92,11 @@ $(document).ready(function(){
 				"reply_content" : reply_content,
 				"reply_writer" : reply_writer
 		};
-		var url = "comapanionreply/insert";
+		var url = "/companionreply/insert";
 // 		$.post(url, JSON.stringify(data), function(receivedData) {
 //  			console.log(receivedData);
 //  		});
+console.log(data);
 		$.ajax({
 			"type" : "post",
 			"url" : url,
@@ -99,24 +107,24 @@ $(document).ready(function(){
 			"dataType" : "text",
 			"data" : JSON.stringify(data),
 			"success" : function(receivedData) {
-				getReplyList(); // 댓글 목록 가져오기
+				getCompanionReplyList(); // 댓글 목록 가져오기
 			}
 		});// $.ajax
 	});//btnCompanionReplyFinish 클릭
 	//댓글 수정 버튼 (tbody 아이디를 가져와서)
-	$("#replyList").on("click",".btn-warning", function(){
-		$("#modal-721283").trigger("click"); //연쇄반응
+	$("#companionReplyList").on("click",".btn-danger", function(){
+		$("#modal-721283").trigger("click"); //연쇄반응 연쇄반응 modal-721283
 		var reply_content = $(this).attr("#data-reply_content");
 		var reply_writer = $(this).attr("#data-reply_writer");
 		var reply_numbercode = $(this).attr("#data-reply_numbercode");
 		var index = $(this).attr("#data-index");
 		$("modal-reply_content").val(reply_content);
-		$("modal-reply_wirter").val(reply_writer);
+		$("modal-reply_writer").val(reply_writer);
 		$("modal-reply_numbercode").val(reply_numbercode);
 		$("modal-comapanion_numbercode").val(companion_numbercode);
 	}); // $("#replyList").on("click")
 	//댓글 삭제 버튼
-	$("#replyList").on("click",".btn-warning", function(){
+	$("#companionReplyList").on("click",".btn-danger", function(){
 		var reply_numbercode = $(this).attr("#data-reply_numbercode");
 		var companion_numbercode = $(this).attr("#data-companion_numbercode");
 		var index = $(this).attr("#data-index");
@@ -134,12 +142,47 @@ $(document).ready(function(){
 					// 1. 댓글 데이터를 새로 불러오기
 //	 				getReplyList();
 					// 2. Traversing(트래버싱)
-					$("#replyList > tr").eq(index).fadeOut("1000");
+					$("#companionReplyList > tr").eq(index).fadeOut("1000");
 				}
 			}
 		});
 	});
 	//모달창 작성완료 버튼
+	$("#btnModalReplyFinish").click(function() {
+		var reply_content = $("#modal_reply_content").val();
+		var reply_writer = $("#modal_reply_writer").val();
+		var reply_numbercode = $("#reply_numbercode").val();
+		var data = {
+				"reply_content" : reply_content,
+				"reply_writer" : reply_writer,
+				"reply_numbercode" : reply_numbercode
+		};
+// 		console.log(data);
+		var url = "/companionreply/update/" + reply_numbercode;
+		$.ajax({
+			"type" : "put",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(data),
+			"success" : function(receivedData) {
+				$("#btnModalReply").next().trigger("click"); // 모달창 사라지기
+// 				getReplyList(); // 1. 새로 불러 들이기
+				// 2. 해당 댓글, 댓글러만 수정
+				var index = $("#modal_index").val();
+				// <tbody> 내의 해당 번째 <tr>
+				var target_tr = $("#companionReplyList > tr").eq(index);
+				// <tr>의 1번째(두번째) <td> - 댓글내용
+				target_tr.find("td").eq(1).text(reply_content);
+				// <tr>의 2번째(세번째) <td> - 댓글러
+				target_tr.find("td").eq(2).text(reply_writer);
+			} // "success"
+		}); // $.ajax
+	}); // $("#btnModalReply").click
+	
 	
 	
 });
@@ -147,11 +190,11 @@ $(document).ready(function(){
 <!-- modal창   -->
 	<div class="row">
 		<div class="col-md-12">
-			<a style="display:none;" id="#modal-721283" href="modal-container-721283" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+			<a style="display:none;" id="modal-721283" href="#modal-container-721283" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
 			 <div class="modal fade" id="modal-container-721283" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			 	<div class="modal-dialog" role="document">
 			 		<div class="modal-content">
-			 			<div class="header">
+			 			<div class="modal-header">
 			 				<h5 class="modal-title" id="myModalLabel">
 			 					글수정
 			 				</h5>
@@ -236,7 +279,7 @@ $(document).ready(function(){
 	<!--  목록 버튼 -->
 		<div class="row">
 		<div class="col-md-12">
-				<c:if test="${memberVo.user_id == boardVo.writer}">
+				<c:if test="${memberVo.user_id == companionVo.companion_writer}">
 				<input type="button" class="btn btn-warning" value="수정"
 				id="btnUpdate"/>
 				<input type="button" class="btn btn-warning" value="삭제"
@@ -296,4 +339,4 @@ $(document).ready(function(){
 	</div>
 </div>
 	
-<%@ include file="../include/footer.jsp" %>		
+<%@ include file="../../include/nds/footer.jsp" %>		

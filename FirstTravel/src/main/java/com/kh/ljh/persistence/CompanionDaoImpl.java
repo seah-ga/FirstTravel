@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ljh.domain.CompanionVo;
 import com.kh.ljh.domain.PagingDto;
+import com.kh.nds.domain.OverseasVo;
 
 @Repository
 public class CompanionDaoImpl implements ICompanionDao {
@@ -38,8 +39,8 @@ public class CompanionDaoImpl implements ICompanionDao {
 	}
 	//글을읽기
 	@Override
-	public CompanionVo read(int numbercode) throws Exception {
-		CompanionVo companionVo = sqlSession.selectOne(NAMESPACE + ".read", numbercode);
+	public CompanionVo read(int companion_numbercode) throws Exception {
+		CompanionVo companionVo = sqlSession.selectOne(NAMESPACE + ".read", companion_numbercode);
 		return companionVo;
 	}
 	//글을 수정
@@ -49,8 +50,8 @@ public class CompanionDaoImpl implements ICompanionDao {
 	}
 
 	@Override
-	public void delete(int numbercode) throws Exception {
-		sqlSession.delete(NAMESPACE + ".delete", numbercode);
+	public void delete(int companion_numbercode) throws Exception {
+		sqlSession.delete(NAMESPACE + ".delete", companion_numbercode);
 		
 	}
 	
@@ -59,6 +60,7 @@ public class CompanionDaoImpl implements ICompanionDao {
 	public void updateReplyCount(int companion_numbercode) throws Exception {
 		sqlSession.update(NAMESPACE + ".update", companion_numbercode);
 	}
+
 	
 
 }
