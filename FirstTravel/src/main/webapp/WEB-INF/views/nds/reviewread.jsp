@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ include file="../include/nds/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +81,7 @@ $(document).ready(function(){
 			"review_reply_content" : review_reply_content,
 			"review_num" : review_num
 		};
-		var replyregisturl = "/ndsrest/reviewreply-regist";
+		var replyregisturl = "/reviewrest/reviewreply-regist";
 		$.ajax({
 			"type" : "post",
 			"url" : replyregisturl,
@@ -111,7 +112,7 @@ $(document).ready(function(){
 	$("#replytable").on("click",".btnreplydelete",function(){
 		var review_reply_num = $(this).attr("data-num");
 		var review_num = "${param.review_num}";
-		var replydeleteurl = "/ndsrest/reviewreply-delete";
+		var replydeleteurl = "/reviewrest/reviewreply-delete";
 		var data = {
 			"review_reply_num" : review_reply_num,
 			"review_num" : review_num
@@ -198,15 +199,15 @@ $(document).ready(function(){
 <section class="about section">
 <div class="container">
 	<c:if test="${memberVo.user_code == reviewVo.user_code}">
-	<a class="btn btn-main" id="btnreivewdelete">삭제</a>
-	<a class="btn btn-main" id="btnreviewupdate">수정</a>
+	<a class="btn btn-main" id="btnreivewdelete" style="color: white;">삭제</a>
+	<a class="btn btn-main" id="btnreviewupdate" style="color: white;">수정</a>
 	</c:if>
 	<h2>댓글작성</h2>
 	<c:if test="${memberVo == null}">
-		<input type="text" id="replytext" style="float:left; background-color: #ffffff; width:20cm;" disabled="disabled" value="로그인 후 작성가능"><a class="btn btn-main" style="height: 45px;" >등록</a>
+		<input type="text" id="replytext" style="float:left; background-color: #ffffff; width:20cm; border: 1px black; border-style: solid;" disabled="disabled" value="로그인 후 작성가능"><a class="btn btn-main" style="height: 45px; color: white;" >등록</a>
 	</c:if>	
 	<c:if test="${memberVo != null}">
-		<input type="text" id="replytext" style="float:left; background-color: #ffffff; width:20cm;"><a class="btn btn-main" id="btnreply" style="height: 45px;">등록</a>
+		<input type="text" id="replytext" style="float:left; background-color: #ffffff; width:20cm; border: 1px black; border-style: solid;"><a class="btn btn-main" id="btnreply" style="height: 45px; color: white;">등록</a>
 	</c:if>	
 	<div class="dashboard-wrapper user-dashboard">
           <div class="table-responsive">
@@ -241,5 +242,6 @@ $(document).ready(function(){
 </div>
 </section>
 <%@ include file="../include/nds/ndsfooter.jsp" %>
+<%@ include file="../include/nds/footer.jsp"%>
 </body>
 </html>

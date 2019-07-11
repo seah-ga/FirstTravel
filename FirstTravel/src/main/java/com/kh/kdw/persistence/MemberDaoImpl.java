@@ -93,4 +93,6 @@ public class MemberDaoImpl implements IMemberDao {
 		sqlSession.update(NAMESPACE + "passwoardUpdate", userInfoMap);
 	}
 
+	
+
 }

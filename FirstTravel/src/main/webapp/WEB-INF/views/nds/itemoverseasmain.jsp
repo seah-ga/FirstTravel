@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../include/nds/header.jsp" %>
 <%@ include file="../include/nds/search.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@ $(document).ready(function(){
 		var data = {
 				"overseas_Country" : overseas_Country
 		};
-		var url = "/ndsrest/countrychk";
+		var url = "/overseasrest/countrychk";
 		
 		$.ajax({
 			"type" : "post",
@@ -45,8 +46,6 @@ $(document).ready(function(){
 			<div class="col-md-12">
 				<div class="content">
 					<h1 class="page-name">해외 메인</h1>
-					<ol class="breadcrumb">
-					</ol>
 				</div>
 			</div>
 		</div>
@@ -122,76 +121,8 @@ $(document).ready(function(){
   </c:forEach>
   <!-- one_third ends here --> 
 </div>
-<section class="category-area section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-top text-center">
-                        <h2>진행중인 이벤트</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-category text-center mb-4">
-                        <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>accounting  Finance</h4>
-                        <h5>250 open job</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-category text-center mb-4">
-                        <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>production  operation</h4>
-                        <h5>250 open jobㄹㄹㄹ</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-category text-center mb-4">
-                        <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>telecommunication</h4>
-                        <h5>250 open job</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-category text-center mb-4">
-                        <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>garments  textile</h4>
-                        <h5>250 open job</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-category text-center mb-4 mb-lg-0">
-                        <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>marketing and sales</h4>
-                        <h5>250 open job</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-category text-center mb-4 mb-lg-0">
-                        <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>engineer  architech</h4>
-                        <h5>250 open job</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-category text-center mb-4 mb-md-0">
-                        <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>design  crative</h4>
-                        <h5>250 open job</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-category text-center">
-                        <img src="/resources/nds/images/portfolio/a.jpg" alt="category">
-                        <h4>customer support</h4>
-                        <h5>250 open job</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 	
 <%@ include file="../include/nds/ndsfooter.jsp" %>
+<%@ include file="../include/nds/footer.jsp"%>
 </body>
 </html>

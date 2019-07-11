@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
+<%@include file="../../include/nds/header.jsp" %>    
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -22,7 +20,7 @@
 		}
 		var mouseover_image = "";
 		// textarea summernote 사용
-		 $('#g_content').summernote({
+		 $("#g_content").summernote({
 			 tabsize : 2,
 			 height : 400,	// set editor height
 			 minHeight : null,
@@ -120,6 +118,11 @@
 			});
 			$("#write_form").submit();
 		});
+		
+		// 글 목록으로 가기
+		$("#btn_gallery_list").click(function() {
+			location.href = "/kdw/gallery/gallery_list"
+		});
 	});
 </script>
 <style>
@@ -200,7 +203,8 @@
 				</div>
 				<div class="col-md-8">
 					 
-					<input type="button" value="작성완료" class="btn btn-primary" id="btn_finish"/>
+					<input type="button" value="작성완료" class="btn btn-primary" id="btn_finish" style="color:inherit;"/>
+					<input type="button" value="목록" class="btn btn-success" id="btn_gallery_list" style="color:inherit;"/>
 				</div>
 				<div class="col-md-2">
 				</div>
@@ -208,5 +212,6 @@
 		</div>
 	</div>
 </div>
+<%@include file="../../include/nds/footer.jsp" %>
 </body>
 </html>

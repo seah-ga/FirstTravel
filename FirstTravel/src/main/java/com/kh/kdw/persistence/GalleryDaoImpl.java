@@ -1,6 +1,8 @@
 package com.kh.kdw.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -68,6 +70,16 @@ public class GalleryDaoImpl implements IGalleryDao {
 	public void fileAttach(String file_path) throws Exception {
 		// 첨부파일 위치 저장
 		sqlSession.insert(NAMESPACE + "fileAttach", file_path);
+		
+	}
+	
+	@Override
+	public void fileAttachModify(String file_path, int g_no) throws Exception {
+		// 첨부파일 위치 저장(수정시)
+		Map<String, Object> fileMap = new HashMap<>();
+		fileMap.put("g_file_path", file_path);
+		fileMap.put("g_no", g_no);
+		sqlSession.insert(NAMESPACE + "fileAttachModify", fileMap);
 		
 	}
 

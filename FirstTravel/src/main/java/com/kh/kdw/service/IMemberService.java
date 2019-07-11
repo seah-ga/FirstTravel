@@ -27,4 +27,7 @@ public interface IMemberService {
 	
 	// 아이디/비번 찾기
 	public String searchId(String user_id, String user_email) throws Exception;
+	
+	// 유저가 작성한 게시글 개수 얻기
+	public int memberBoardWriteCount(int user_code) throws Exception;
 }

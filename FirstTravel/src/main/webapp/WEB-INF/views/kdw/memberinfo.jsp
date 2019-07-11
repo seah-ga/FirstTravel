@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../include/nds/header.jsp" %>      
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Font Awesome -->
@@ -28,14 +25,19 @@ $(document).ready(function() {
 	$("#btn_cancel").click(function() {
 		location.href = "/kdw/login";
 	});
+	
 });
 </script>
+<style>
+.container {
+	padding-bottom: 50px;
+}
+</style>
 </head>
-<body class="grey lighten-3">
+<body class="lighten-3">
 
   <!--Main layout-->
-  <main class="mt-5 pt-4">
-  ${memberVo }
+<!--   <main class="mt-5 pt-4"> -->
     <div class="container wow fadeIn">
 
       <!-- Heading -->
@@ -57,32 +59,38 @@ $(document).ready(function() {
               
               <!-- 유저 아이디 -->
               <div class="md-form mb-5">
-                <input type="text" id="user_id" class="form-control" value="${memberVo.user_id}" readonly="readonly">
+                <input type="text" id="user_id" name="user_id" class="form-control" value="${memberVo.user_id}" readonly="readonly">
                 <label for="user_id" class="">아이디</label>
+              </div>
+              
+              <!-- 유저 이름 -->
+              <div class="md-form mb-5">
+                <input type="text" id="user_name" name="user_name" class="form-control" value="${memberVo.user_name}">
+                <label for="user_name" class="">이름</label>
               </div>
               
               <!-- 비밀번호 -->
               <div class="md-form mb-5">
-                <input type="password" id="user_pw" class="form-control" value="${memberVo.user_pw }">
+                <input type="password" id="user_pw" name="user_pw" class="form-control" value="${memberVo.user_pw }">
                 <label for="user_pw" class="">비밀번호</label>
               </div>
               
               <!-- 연락처 -->
               <div class="md-form mb-5">
-                <input type="text" id="user_phone" class="form-control" value="${memberVo.user_phone }">
+                <input type="text" id="user_phone" name="user_phone" class="form-control" value="${memberVo.user_phone }">
                 <label for="user_phone" class="">연락처</label>
               </div>
 
               <!--email-->
               <div class="md-form mb-5">
-                <input type="text" id="email" class="form-control" value="${memberVo.user_email}">
-                <label for="email" class="">Email</label>
+                <input type="text" id="user_email" name="user_email" class="form-control" value="${memberVo.user_email}">
+                <label for="user_email" class="">Email</label>
               </div>
 
               <!-- 주소 -->
               <div class="md-form mb-5">
-                <input type="text" id="address" class="form-control" value="${memberVo.user_address }">
-                <label for="address" class="">주소</label>
+                <input type="text" id="user_address" name=detail_address class="form-control" value="${memberVo.user_address }">
+                <label for="user_address" class="">주소</label>
               </div>
 
               <!--Grid row-->
@@ -144,9 +152,9 @@ $(document).ready(function() {
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">1:1문의</h6>
+                <h6 class="my-0">내가 쓴글 보기</h6>
               </div>
-              <span class="text-muted">0건</span>
+              <span class="text-muted"><a href="/kdw/board_list">${memberBoardVo.writeCount }건</a></span>
             </li>
           </ul>
           <!-- Cart -->
@@ -169,7 +177,7 @@ $(document).ready(function() {
       <!--Grid row-->
 
     </div>
-  </main>
+<!--   </main> -->
  <!-- SCRIPTS -->
   <!-- JQuery -->
   <script type="text/javascript" src="/resources/kdw/js/jquery-3.4.1.min.js"></script>
@@ -184,5 +192,6 @@ $(document).ready(function() {
     // Animations initialization
     new WOW().init();
   </script>
+  <%@include file="../include/nds/footer.jsp" %> 
 </body>
 </html>

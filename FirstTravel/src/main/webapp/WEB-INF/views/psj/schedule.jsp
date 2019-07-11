@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ include file="../include/nds/header.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -246,10 +251,10 @@ $(document).ready(function() {
 		var btnHtml = ""
 		if(type != 'input'){
 			if(prevHtml.trim() != "" && type != 'input'){  // 내용물이 있고 인풋박스가 없을때
-				btnHtml = "<input type='button' value='수정' class='btn-warning btn-xs btn-update'>"
-						+ "<input type='button' value='삭제' class='btn-danger btn-xs btn-delete'>";
+				btnHtml = "<input type='button' value='수정' class='btn-warning btn-xs btn-update' style='background: #eea236; color: white;'>"
+						+ "<input type='button' value='삭제' class='btn-danger btn-xs btn-delete' style='background: #ff0000; color: white;'>";
 			}else{
-				btnHtml = "<input type='button' value='입력' class='btn-success btn-xs btn-input'>"		
+				btnHtml = "<input type='button' value='입력' class='btn-success btn-xs btn-input' style='background: #009900; color: white;'>";	
 			}
 			$(this).html(btnHtml);
 		}	
@@ -350,7 +355,7 @@ $(document).ready(function() {
 	$("#tSch").on("click", ".btn-update", function(){
 		var originTxt = $(this).parent().prev().text();
 // 		console.log(originTxt);
-		inputHtml = "<input type='text' class='inp-sch' size='80%'" 
+		inputHtml = "<input type='text' class='inp-sch' size='50%'" 
 					+		"value='" +  originTxt +"'>";
 		$(this).parent().prev().html(inputHtml);
 		$(this).parent().prev().children(".inp-sch").focus();
@@ -405,7 +410,7 @@ $(document).ready(function() {
 	/// 입력 버튼클릭 --> 텍스트인풋박스 출력/ 버튼메시지 확인 으로 변경
 	$("#tSch").on("click", ".btn-input", function() { 
 		console.log("인풋버튼클릭됨");
-		inputHtml = "<input type='text' class='inp-sch' size='80%'>";
+		inputHtml = "<input type='text' class='inp-sch' size='50%'>";
 		$(this).val("확인");
 		$(this).attr("class","btn-success btn-xs btn-confirm");
 		$(this).parent().prev().html(inputHtml);
@@ -564,13 +569,14 @@ table.calendar td {
 </head>
 <body>
 <div class="container-fluid">
+	<div class="container">
 	<div class="row">
-		<label for="txt_enterDate">날짜: </label>
-		<input type="text" readonly="readonly" id="txt_enterDate" value="${enterDate}"> 
-		<label for="txt_sch_title">대표 스케쥴 입력: </label>
-		<input type="text" id="txt_sch_title">
-		<input type="button" id="btn_schTitle" value="확인">
 		<div class="col-md-6">
+		<label for="txt_enterDate">날짜: </label>
+		<input type="text" readonly="readonly" id="txt_enterDate" value="${enterDate}" style="border-bottom: 1px black; border-bottom-style: solid;"> 
+		<label for="txt_sch_title">대표 스케쥴 입력: </label>
+		<input type="text" id="txt_sch_title"  style="border-bottom: 1px black; border-bottom-style: solid;">
+		<input type="button" id="btn_schTitle" value="확인" style="border: 1px black; border-style:solid; padding: 2px;">
 			<table class="table">
 					<thead>
 						<tr>
@@ -600,7 +606,7 @@ table.calendar td {
 										</c:forEach>
 										</td>
 									
-									<td class='tdBtn' data-time="${time}"></td>
+									<td class='tdBtn' data-time="${time}" style="width: 40px;"></td>
 							</tr>
 					</c:forEach>
 						
@@ -615,12 +621,18 @@ table.calendar td {
 						<span id="nextMonth" class="cal_tit">&gt;</span></a>
 				</div>
 			<div id="cal_tab" class="cal"></div>
+			<p>** 스케쥴이 있는 날은 파랑 배경색 유지</p>
+		<p>** 주요 스케쥴을 달력에 출력하고 싶다면 상단에서 입력해 주세요.</p>
 		</div>
 		
-		<p>** 스케쥴이 있는 날은 파랑 배경색 유지</p>
-		<p>** 주요 스케쥴을 달력에 출력하고 싶다면 상단에서 입력해 주세요.</p>
+		
+	</div>
 	</div>
 </div>
+<<<<<<< HEAD
 <%@include file="../include/nds/footer.jsp" %>
+=======
+ <%@ include file="../include/nds/footer.jsp"%>
+>>>>>>> branch 'master' of https://github.com/seah-ga/FirstTravel.git
 </body>
 </html>

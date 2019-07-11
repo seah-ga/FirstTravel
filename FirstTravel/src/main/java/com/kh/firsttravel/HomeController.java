@@ -34,7 +34,7 @@ public class HomeController {
 //		
 //		model.addAttribute("serverTime", formattedDate );
 //		
-		return "redirect:/kdw/login";
+		return "redirect:/ljh/main";
 	}
 	
 }

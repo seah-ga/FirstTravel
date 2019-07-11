@@ -60,11 +60,26 @@
 	
 	<!-- 인터셉터 -->
 	<beans:bean id="LoginInterceptor" class="com.kh.kdw.intercepter.LoginInterceptor"/>
+	<beans:bean id="CheckLoginInterceptor" class="com.kh.nds.intercepter.CheckLoginInterceptor"/>
 	<!-- **, * 패턴 사용가능 --><!-- mapping path가 할 것을 가로 채서 먼저 할일을 정한다. -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/kdw/login-run"/>
 			<beans:ref bean="LoginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/kdw/memberinfo"/>
+			<mapping path="/kdw/gallery/gallery_write"/>
+			<mapping path="/kdw/gallery/gallery_modify"/>
+			<mapping path="/nds/reviewupdate"/>
+			<mapping path="/nds/reviewregist"/>
+			<mapping path="/psj/schedule"/>
+			<mapping path="/psj/wiki"/>
+			<mapping path="/psj/plan"/>
+			<mapping path="/ljh/companion/write"/>
+			<mapping path="/ljh/companion/update"/>
+			<beans:ref bean="CheckLoginInterceptor"/>
 		</interceptor>
 	</interceptors>
 </beans:beans>

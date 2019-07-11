@@ -86,6 +86,20 @@ public class GalleryController {
 		model.addAttribute("gBoardVo", gBoardVo);
 	}
 	
+	// 겔러리 수정 진행
+	@RequestMapping(value="gallery_modify_run")
+	public String galleryModifyRun(GBoardVo gBoardVo, HttpSession session) throws Exception {
+		MemberVo memberVo = (MemberVo)session.getAttribute("memberVo");
+		if(memberVo == null) {
+			return "redirect:/kdw/login";
+		}
+		int user_code = memberVo.getUser_code();
+		gBoardVo.setUser_code(user_code);
+		System.out.println("gallery_modify_run, gBoardVo : " + gBoardVo);
+		galleryService.GBoardUpdate(gBoardVo);
+		return "redirect:/kdw/gallery/gallery_list";
+	}
+	
 	// 겔러리 삭제
 	@RequestMapping(value="/gallery_delete/{g_no}", method=RequestMethod.DELETE)
 	@ResponseBody

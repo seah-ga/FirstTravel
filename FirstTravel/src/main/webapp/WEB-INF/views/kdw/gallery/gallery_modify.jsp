@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-<!DOCTYPE html>
-<html>
-<head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@include file="../../include/nds/header.jsp" %>  
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -17,7 +15,7 @@
 	$(document).ready(function() {
 		var mouseover_image = "";
 		// textarea summernote 사용
-		 $('#g_content').summernote({
+		 $("#g_content").summernote({
 			 tabsize : 2,
 			 height : 400,	// set editor height
 			 minHeight : null,
@@ -111,9 +109,9 @@
 			uploadDiv.each(function(index) {
 				var fileName = $(this).attr("data-filename");
 				var hiddenInput = "<input type='hidden' name='files[" + index + "]' value='" + fileName + "'/>";
-				$("#write_form").append(hiddenInput);
+				$("#modify_form").append(hiddenInput);
 			});
-			$("#write_form").submit();
+			$("#modify_form").submit();
 		});
 	});
 </script>
@@ -150,6 +148,7 @@
 				</div>
 				<div class="col-md-8">
 					<form role="form" action="/kdw/gallery/gallery_modify_run" id="modify_form" method="post">
+					<input type="hidden" name="g_no" value="${gBoardVo.g_no}"/>
 						<div class="form-group">
 							 
 							<label for="g_writer">이름</label>
@@ -203,5 +202,6 @@
 		</div>
 	</div>
 </div>
+<%@include file="../../include/nds/footer.jsp" %>
 </body>
 </html>

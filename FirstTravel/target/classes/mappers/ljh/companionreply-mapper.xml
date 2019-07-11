@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="companionreply">
+	<!-- 댓글 쓰기 -->
+	<insert id="insert">
+		insert into tbl_companion_reply(reply_numbercode, companion_numbercode, reply_writer, reply_content)
+		values(seq_reply_numbercode.nextval, #{companion_numbercode}, #{reply_writer}, #{reply_content})
+	</insert>
+	<!-- 댓글목록 -->
+	<select id="list" resultType="CompanionReplyVo">
+		select * from tbl_companion_reply
+		where companion_numbercode = #{companion_numbercode}
+		order by reply_numbercode desc
+	</select>
+	<!-- 댓글의 수정 -->
+	<update id="update">
+		update tbl_companion_reply set
+			reply_content = #{reply_cotent},
+			reply_writer = #{reply_writer},
+			reply_date = sysdate
+			where reply_numbercode = #{reply_numbercode}
+    </update>
+    <!-- 댓글의 삭제 -->
+    <delete id="delete">
+    	delete from tbl_companion_reply
+    	where reply_numbercode = #{reply_numbercode}
+    </delete>
+</mapper>  

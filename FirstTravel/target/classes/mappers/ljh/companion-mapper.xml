@@ -6,8 +6,8 @@
 <mapper namespace="companion">
 	<!-- 글쓰기 -->
 	<insert id="insert">
-		insert into tbl_companion(companion_numbercode, companion_title, companion_writer, companion_content)
-		values (seq_companion.nextval, #{companion_title}, #{companion_writer}, #{companion_content})
+		insert into tbl_companion(companion_numbercode, companion_title, companion_writer, companion_content, companion_usercode)
+		values (seq_companion.nextval, #{companion_title}, #{companion_writer}, #{companion_content}, #{companion_usercode})
 	</insert>
 	<!-- 글목록 -->
 	<select id="list" resultType="CompanionVo">
@@ -41,5 +41,14 @@
 		delete from tbl_companion
 		where companion_numbercode = #{companion_numbercode}
 	</delete>
+	<!-- 댓글 갯수 갱신 -->
+	<update id="updateReplyCount">
+		update tbl_companion set
+			companion_reply_count = (select count(*)
+						from tbl_companion_reply
+						where companion_numbercode = #{companion_numbercode})
+		where companion_numbercode = #{companion_numbercode}
+	</update>
+
 	
 </mapper>  

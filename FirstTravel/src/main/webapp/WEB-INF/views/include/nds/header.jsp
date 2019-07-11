@@ -65,7 +65,7 @@ site-navbar py-1{
     
     <header class="site-navbar py-1" role="banner" style="z-index: 300;" >
 
-      <div class="container"  style="border-bottom: 2px black; border-bottom-style: solid;">
+      <div class="container" id="hr_line" style="border-bottom: 2px black; border-bottom-style: solid;">
         <div class="row align-items-left">
           
           <div class="topAreaWrap">
@@ -84,10 +84,10 @@ site-navbar py-1{
 		           	
 		           	
 					<c:if test="${memberVo == null}">
-							<a href="#" onclick="location='/kdw/login'" class="topAreaLogIn"><span>로그인</span></a>
+							<a href="#" onclick="location='/kdw/login'" class="topAreaLogIn" style="background-color: #ffffff;"><span>로그인</span></a>
 					</c:if>
 					<c:if test="${memberVo != null}">	
-							<a href="#" onclick="location='/kdw/logout'" class="topAreaLogOut"><span>로그아웃</span></a>
+							<a href="#" onclick="location='/kdw/logout'" class="topAreaLogOut" style="background-color: #ffffff;"><span>로그아웃</span></a>
 					</c:if>
 					<div class="topAreaIcon">
 					<!-- 아이콘들-->
@@ -96,7 +96,7 @@ site-navbar py-1{
 			           		<a href="/kdw/join" class="topAreaIcon02">회원가입</a>
 			        </c:if>
 			        <c:if test="${memberVo != null}">
-							<a href="#" class="topAreaIcon03">마이페이지</a>
+							<a href="/kdw/memberinfo" class="topAreaIcon03">마이페이지</a>
 	                </c:if>
 					</div>
 					</div><!--//topAreaBox--> 

@@ -9,6 +9,9 @@
 
 		<typeAlias type="com.kh.kdw.domain.MemberVo" alias="MemberVo"/>
 		<typeAlias type="com.kh.kdw.domain.GBoardVo" alias="GBoardVo"/>
+
+		<typeAlias type="com.kh.kdw.domain.MemberBoardVo" alias="MemberBoardVo"/>
+
 		<typeAlias type="com.kh.kdw.domain.GReplyVo" alias="GReplyVo"/>
 		
 		<typeAlias type="com.kh.psj.domain.CityVo" alias="CityVo"/>
@@ -26,6 +29,8 @@
 		<typeAlias type="com.kh.ljh.domain.CompanionVo" alias="CompanionVo"/>
 		<typeAlias type="com.kh.ljh.domain.PagingDto" alias="PagingDto"/>
 		<typeAlias type="com.kh.ljh.domain.PaginationDto" alias="PaginationDto"/>
+		<typeAlias type="com.kh.ljh.domain.CompanionReplyVo" alias="CompanionReplyVo"/>
+		
 
 	</typeAliases>
 </configuration>  
