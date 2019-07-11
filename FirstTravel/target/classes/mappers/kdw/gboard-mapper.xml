@@ -110,6 +110,12 @@
 		values(#{g_file_path}, #{g_no})
 	</insert>
 	
+	<!-- 첨부파일 삭제 -->
+	<delete id="fileDelete">
+		delete from tbl_gallery_file
+		where g_no = #{g_no}
+	</delete>
+	
 	<!-- 첨부파일 하나 가져 오기 -->
 	<select id="getFile" resultType="string">
 		select g_file_path 

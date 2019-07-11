@@ -45,6 +45,7 @@ public interface IGalleryDao {
 	// 댓글 개수 업데이트
 	public void replycountUpdate(int g_no) throws Exception;
 	
-	// 첨부파일 삭제(파일명으로)
+	// 첨부파일테이블에서 삭제(글번호로)
+	public void fileDelete(int g_no) throws Exception;
 	// 첨부파일테이블에서 삭제(글번호로)
 }
