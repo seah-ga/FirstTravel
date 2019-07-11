@@ -108,7 +108,7 @@ $(document).ready(function(){
 	// 국가에 따른 도시 변경
 	$("#review_country").change(function(){
 		var review_country = $("#review_country").val();
-		var domesticurl = "/overseasrest/domesticlist";
+		var domesticurl = "/reviewrest/domesticlist";
 		var countrychkurl = "/overseasrest/countrychk";
 		var str = "";
 		

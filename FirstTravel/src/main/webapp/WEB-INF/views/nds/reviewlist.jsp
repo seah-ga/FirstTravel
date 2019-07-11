@@ -221,9 +221,6 @@ $(document).ready(function() {
 		              </li>
 		            </ul>
 		          </div>
-		          <div class="post-content">
-		            <p>${reviewVo.review_content}</p>
-		          </div>
 				</div>
         	</div>
         </c:forEach>
