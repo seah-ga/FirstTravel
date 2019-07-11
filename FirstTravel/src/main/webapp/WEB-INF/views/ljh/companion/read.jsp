@@ -3,13 +3,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../../include/nds/header.jsp" %>
-
+<style>
+.container{
+	padding-bottom:50px;
+}
+</style>
 <script src="/resources/ljh/js/myscript.js"></script>
 
 
 
 
 <script>
+
 
 
 $(document).ready(function(){

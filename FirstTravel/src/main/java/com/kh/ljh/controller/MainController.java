@@ -48,7 +48,7 @@ public class MainController {
 		
 		model.addAttribute("countrylist", countrylist);
 		model.addAttribute("overseas", overseas);
-		model.addAttribute("reviewbestlist", reviewbestlist);
+		model.addAttribute("reviewbestlist", reviewbestlist); 
 }
 	@RequestMapping(value="/hotel")
 	public void hotel() {
@@ -91,13 +91,17 @@ public class MainController {
 //			overseasVo.setImage6(cityImage.getImage6());
 			
 			
-			model.addAttribute("countrylist", countrylist);
-			model.addAttribute("overseaslist", overseaslist);
+//			model.addAttribute("countrylist", countrylist);
+//			model.addAttribute("overseaslist", overseaslist);
 //			model.addAttribute("overseasVo", overseasVo);
 			
-			return "redirect:/nds/overseasread";
+			return "redirect:/nds/itemoverseasread?overseas_Country=${overseas_Country}&overseas_City=${overseas_City}&airport=${airport}";
 			//리다이렉트 nds 오버시즈리드 ? 에어포트정보 = 값 
 		}
+		@RequestMapping(value="/notification", method=RequestMethod.GET)
+		public String notification(HttpSession session) throws Exception{
+			return "redirect:/ljh/companion";
+	}		
 	
 	
 	
