@@ -20,5 +20,4 @@ public interface IOverseasDao {
 	
 	// 에어포트에 맞는 이미지 불러오기 (도시이미지)
 	public OverseasVo cityImage(String airPort) throws Exception;
-	
 }

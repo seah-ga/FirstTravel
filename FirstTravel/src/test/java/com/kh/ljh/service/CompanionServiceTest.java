@@ -1,5 +1,7 @@
 package com.kh.ljh.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -10,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.kh.kdw.domain.MemberVo;
 import com.kh.ljh.domain.CompanionVo;
 import com.kh.ljh.domain.PagingDto;
+import com.kh.nds.domain.OverseasVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
@@ -57,10 +60,7 @@ public class CompanionServiceTest {
 		companionVo.setCompanion_numbercode(1);
 		companionService.update(companionVo);
 	}
-	@Test
-	public void testDelete() throws Exception{
-		companionService.delete(541);
-	}
+	
 	
 	
 	

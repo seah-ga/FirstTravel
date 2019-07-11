@@ -9,6 +9,7 @@ public class CompanionVo {
 	private String companion_content; //글의 내용
 	private Timestamp companion_date; //글의 올린시간
 	private int companion_reading; //글의 조회수
+	private int companion_usercode; //글의 유저코드
 	private int companion_reply_count; //댓글의 조회수
 	public int getCompanion_numbercode() {
 		return companion_numbercode;
@@ -46,6 +47,12 @@ public class CompanionVo {
 	public void setCompanion_reading(int companion_reading) {
 		this.companion_reading = companion_reading;
 	}
+	public int getCompanion_usercode() {
+		return companion_usercode;
+	}
+	public void setCompanion_usercode(int companion_usercode) {
+		this.companion_usercode = companion_usercode;
+	}
 	public int getCompanion_reply_count() {
 		return companion_reply_count;
 	}
@@ -57,7 +64,13 @@ public class CompanionVo {
 		return "CompanionVo [companion_numbercode=" + companion_numbercode + ", companion_title=" + companion_title
 				+ ", companion_writer=" + companion_writer + ", companion_content=" + companion_content
 				+ ", companion_date=" + companion_date + ", companion_reading=" + companion_reading
-				+ ", companion_reply_count=" + companion_reply_count + "]";
+				+ ", companion_usercode=" + companion_usercode + ", companion_reply_count=" + companion_reply_count
+				+ "]";
 	}
+	
+	
+	
+	
+	
 
 }
