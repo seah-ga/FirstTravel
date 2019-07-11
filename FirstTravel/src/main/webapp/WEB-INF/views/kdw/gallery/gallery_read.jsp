@@ -80,9 +80,9 @@ $(document).ready(function() {
 						+ "<li><p>" + this.r_text + "</p>";
 				if(user_code == r_code) {
 				strHtml	+= "<input type='button' class='btn btn-xs btn-warning btn_modify' value='수정' data-g_no='" + this.g_no
-						+ "' data-r_no='" + this.r_no + "' data-r_text='" + this.r_text + "' data-index='" + i + "'/>"
+						+ "' data-r_no='" + this.r_no + "' data-r_text='" + this.r_text + "' data-index='" + i + "' style='color:inherit;'/>"
 						+ "<input type='button' class='btn btn-xs btn-danger btn_delete' value='삭제' data-g_no='" + this.g_no
-						+ "' data-r_no='" + this.r_no + "' data-index='" + i + "'/>"
+						+ "' data-r_no='" + this.r_no + "' data-index='" + i + "'  style='color:inherit;'/>"
 						+ "</li>";
 				} else {
 				strHtml += "</li>";
@@ -240,7 +240,7 @@ p {
         <h4 class="modal-title">답글 수정하기</h4>
       </div>
       <div class="modal-body">
-        <input type="text" id="modal_text" data-r_no="">
+        <input type="text" id="modal_text" data-r_no="" style="width:300px">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="btn_modal_modify" data-dismiss="modal">수정</button>

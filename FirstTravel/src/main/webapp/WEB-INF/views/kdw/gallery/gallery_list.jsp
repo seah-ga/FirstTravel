@@ -204,7 +204,7 @@ $(document).ready(function() {
 								<td>
 									<c:choose>
 										<c:when test="${gBoardVo.fileone != null }">
-											<img src="/kdw/upload/displayFile?fileName=${gBoardVo.fileone }" style="width:100px;">
+											<img src="/kdw/upload/displayFile?fileName=${gBoardVo.fileone }" style="width:100px;height:80px;">
 										</c:when>
 										<c:otherwise>
 											<img src="/resources/kdw/img/baseImage.jpg" style="width:100px;">
