@@ -74,6 +74,9 @@ public class MemberVo {
 
 
 	public void setUser_address(String search_address, String detail_address) {
+		if (search_address == null) {
+			this.user_address = detail_address;
+		}
 		this.user_address = search_address + " " + detail_address;
 	}
 

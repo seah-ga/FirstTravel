@@ -143,7 +143,7 @@ $(document).ready(function() {
 								<a href="/ljh/main" style="color:#000;">메인</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="/kdw/memberinfo" style="color:#000;">커뮤니티</a>
+								<a href="#" style="color:#000;">커뮤니티</a>
 							</li>
 							<li class="breadcrumb-item active">
 								겔러리
@@ -199,7 +199,7 @@ $(document).ready(function() {
 						<tbody>
 						<c:forEach items="${list}" var="gBoardVo" varStatus="status">
 							<tr>
-								<td>${status.index} - ${gBoardVo.g_no }</td>
+								<td>${gBoardVo.g_no }</td>
 								<td>${gBoardVo.g_location }</td>
 								<td>
 									<c:choose>
