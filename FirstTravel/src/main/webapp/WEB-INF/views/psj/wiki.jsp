@@ -428,7 +428,7 @@ function getPageInfo(country_name,search_val,search_type) {
 				console.log(thisEl.css("color"));
 				if(thisEl.css("color") != "rgb(51, 51, 51)"){
 					console.log("ㅇㅇㅇㅇ");
-					url = "/wiki/tip/" + sort + "/" + tipNo + "/minus";
+					url = "/updown/tip/" + sort + "/" + tipNo + "/minus";
 					$.ajax({
 						"type" : "post",
 						"url" : url,
@@ -444,7 +444,7 @@ function getPageInfo(country_name,search_val,search_type) {
 						}
 					});	
 				}else{
-					url = "/wiki/tip/" + sort + "/" + tipNo + "/plus";
+					url = "/updown/tip/" + sort + "/" + tipNo + "/plus";
 // 					console.log(url);
 					$.ajax({
 						"type" : "post",
@@ -479,7 +479,7 @@ function getPageInfo(country_name,search_val,search_type) {
 				console.log(thisEl.css("color"));
 				if(thisEl.css("color") != "rgb(51, 51, 51)"){
 					console.log("ㅇㅇㅇㅇ");
-					url = "/wiki/tip/" + sort + "/" + tipNo + "/minus";
+					url = "/updown/tip/" + sort + "/" + tipNo + "/minus";
 					$.ajax({
 						"type" : "post",
 						"url" : url,
@@ -495,7 +495,7 @@ function getPageInfo(country_name,search_val,search_type) {
 						}
 					});	
 				}else{
-					url = "/wiki/tip/" + sort + "/" + tipNo + "/plus";
+					url = "/updown/tip/" + sort + "/" + tipNo + "/plus";
 // 					console.log(url);
 					$.ajax({
 						"type" : "post",
@@ -601,6 +601,8 @@ function getPageInfo(country_name,search_val,search_type) {
 			search_type = $("#sel_search").val();
 			search_val = $("#txt_search").val();
 			getPageInfo(country_name,search_val,search_type);
+			search_type = "";
+			search_val = "";
 // 			console.log(search_type + " ::" + search_val);
 		});
 		
