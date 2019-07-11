@@ -112,4 +112,11 @@ public class GalleryDaoImpl implements IGalleryDao {
 		
 	}
 
+	@Override
+	public void fileDelete(int g_no) throws Exception {
+		//첨부파일테이블에서 삭제
+		sqlSession.update(NAMESPACE + "fileDelete", g_no);
+		
+	}
+
 }

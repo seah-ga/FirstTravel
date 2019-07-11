@@ -194,7 +194,7 @@
 				</div>
 				<div class="col-md-8">
 					 
-					<input type="button" value="작성완료" class="btn btn-primary" id="btn_finish"/>
+					<input type="button" value="작성완료" class="btn btn-primary" id="btn_finish" style="color:inherit;border: 2px solid #000;"/>
 				</div>
 				<div class="col-md-2">
 				</div>

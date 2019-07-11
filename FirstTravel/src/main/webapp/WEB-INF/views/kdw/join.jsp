@@ -63,6 +63,7 @@
   </style>
 <script>
 $(document).ready(function() {
+	var message = "";
 	isNull = function(object) { try { if (typeof object == "boolean"){ return false; } else { return (object == null || typeof object == "undefined" || object === "" || object == "undefined"); } } catch (e) { alert("isNull: " + object +"::"+ e.message); WebSquare.exception.printStackTrace(e); } }; 
 	// 아이디 중복 체크
 	$("#btn_chkid").click(function() {
@@ -101,8 +102,10 @@ $(document).ready(function() {
 				if(received == 0) {
 					$("#chk_id_text").text("사용가능한 아이디입니다.");
 					$("#user_id").focus();
+					message = "useable_id";
 				} else if (received > 0) {
 					$("#chk_id_text").text("사용중인 아이디입니다.");
+					message = "use_id";
 					$("#user_id").focus();
 				}
 			}	
@@ -188,10 +191,20 @@ $(document).ready(function() {
 	// 회원가입 버튼
 	$("#btn_join").click(function() {
 		console.log("회원가입 버튼 클릭");
+		console.log("message" + message);
 		var user_key = $("#user_key").val();
 		var authkey = $("#authkey").val();
 		console.log("user_key" + user_key);
 		console.log("authkey" + authkey);
+		var user_id = $("#user_id").val();
+		if (user_id.length == 0) {
+			alert("아이디를 입력해 주세요.");
+			$("#user_id").focus();
+			return;
+		} else if(message == "use_id") {
+			alert("아이디가 중복입니다.");
+			return;
+		}
 		if (user_key != authkey) {
 			alert("이메일 인증번호가 틀립니다.");
 			return;
@@ -205,6 +218,11 @@ $(document).ready(function() {
 			return;
 		} else if ($("#user_pw").val().length < 8) {
 			alert("비밀번호의 길이가 짧습니다.");
+			return;
+		}
+		var address = $("#search_address").val();
+		if (address == null || address == "") {
+			alert("주소를 입력해주세요.");
 			return;
 		}
 		$("#joinForm").submit();

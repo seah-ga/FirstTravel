@@ -133,6 +133,9 @@
 		background-color : #ffffff;
 		margin : auto;
 	}
+input.btn-primary {
+    border: 2px solid #000;
+    }	
 </style>
 </head>
 <body>
@@ -163,7 +166,7 @@
 							<label for="g_writer">이름</label>
 							<input type="text" class="form-control" id="g_writer" name="g_writer" value="${memberVo.user_name }" readonly="readonly"/>
 							<label for="gBoard_location">여행지역</label><br>
-							<select id="g_location" name="g_location">
+							<select id="g_location" name="g_location" style="border-width:0 0 1px 0;border-style:solid;border-color:#000;padding:5px;">
 								<option value="location">지역선택</option>
 								<option value="유럽">유럽</option>
 								<option value="중국/대만">중국/대만</option>
@@ -203,8 +206,8 @@
 				</div>
 				<div class="col-md-8">
 					 
-					<input type="button" value="작성완료" class="btn btn-primary" id="btn_finish" style="color:inherit;"/>
-					<input type="button" value="목록" class="btn btn-success" id="btn_gallery_list" style="color:inherit;"/>
+					<input type="button" value="작성완료" class="btn btn-primary" id="btn_finish" style="color:inherit;border: 2px solid #000;"/>
+					<input type="button" value="목록" class="btn btn-success" id="btn_gallery_list" style="color:inherit;border: 2px solid #000;"/>
 				</div>
 				<div class="col-md-2">
 				</div>
