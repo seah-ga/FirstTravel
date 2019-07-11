@@ -57,9 +57,13 @@
   </head>
   <body>
    
-
+<style>
+site-navbar py-1{
+	z-index: 300;
+}
+</style>
     
-    <header class="site-navbar py-1" role="banner" >
+    <header class="site-navbar py-1" role="banner" style="z-index: 300;" >
 
       <div class="container"  style="border-bottom: 2px black; border-bottom-style: solid;">
         <div class="row align-items-left">

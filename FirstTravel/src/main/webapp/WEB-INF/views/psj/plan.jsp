@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="../include/nds/header.jsp" %>	
+	
+	
 <html lang="en">
 <head>
 <!-- Required Meta Tags -->
@@ -493,7 +496,9 @@
 		$("#moveNextMonth").on("click", function() {
 			moveNextMonth();
 		});
-		
+
+
+	//////////////////////////////////////////////////////////////////////	
 		// 달력 클릭시 해당 날짜 정보출력을 위해 박스에 저장.
 		$(".tDay").click(function() {
 			var strDay = $(this).children().eq(0).text();
@@ -544,6 +549,7 @@
 		
 		
 		$("#btn_cart").click(function() {
+		
 			var url = "/sch/cart";
 			var depCity = $("#sel_dep option:checked").text();
 			var arrCity = $("#sel_arr option:checked").text();
@@ -551,7 +557,7 @@
 // 			console.log($("#sel_dep option:checked").text());
 // 			console.log($("#sel_arr option:checked").text());
 			var data = {
-				"user_code" : "111",
+				"user_code" : "${memberVo.user_code}",
 				"dep_city" : depCity,
 				"arr_city" : arrCity,
 				"departure_date" : departure_date,
@@ -586,6 +592,34 @@
 
 
 <style type="text/css">
+input.btn-sch{
+	border: 1px solid blue;
+	background-color: rgba(0,0,0,0);
+	color: blue;
+	padding: 5px;
+}
+input.btn-pay{
+	border: 1px solid blue;
+	background-color: rgba(0,0,0,0);
+	color: blue;
+	padding: 5px;
+}
+input.btn-cart{
+	border: 1px solid #FF8000;
+	background-color: rgba(0,0,0,0);
+	color: #FF8000;
+	padding: 5px;
+}
+input.btn-search {
+	border: 1px solid red;
+	background-color: rgba(255,255,255,255);
+	color: red;
+	padding: 5px;
+}
+input[type=text] {
+	border-bottom: 1px solid black;
+}
+
 .div_chargeOutPut {
 	font-size: 200%;
 	font-family: "Times New Roman", Times, sans-serif;
@@ -641,111 +675,6 @@ table.calendar td {
 </head>
 <body>
 
-	<!-- Preloader Starts -->
-	<div class="preloader">
-		<div class="spinner"></div>
-	</div>
-	<!-- Preloader End -->
-
-	<!-- Header Area Starts -->
-	<header class="header-area main-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2">
-					<div class="logo-area">
-						<a href="index.html"><img src="assets/images/logo.png"
-							alt="logo"></a>
-					</div>
-
-				</div>
-				<div class="col-lg-10">
-					<div class="custom-navbar">
-						<span></span> <span></span> <span></span>
-					</div>
-					<div class="main-menu">
-						<ul>
-							<li class="active"><a href="index.html">home</a></li>
-							<li><a href="about.html">about us</a></li>
-							<li><a href="job-category.html">category</a></li>
-							<li><a href="#">blog</a>
-								<ul class="sub-menu">
-									<li><a href="blog-home.html">Blog Home</a></li>
-									<li><a href="blog-details.html">Blog Details</a></li>
-								</ul></li>
-							<li><a href="contact-us.html">contact</a></li>
-							<li><a href="#">pages</a>
-								<ul class="sub-menu">
-									<li><a href="job-search.html">Job Search</a></li>
-									<li><a href="job-single.html">Job Single</a></li>
-									<li><a href="pricing-plan.html">Pricing Plan</a></li>
-									<li><a href="elements.html">Elements</a></li>
-								</ul></li>
-							<li class="menu-btn"><a href="#" class="login">log in</a> <a
-								href="#" class="template-btn">sign up</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- Header Area End -->
-
-	<!-- Banner Area Starts -->
-	<section class="banner-area">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-6 px-0">
-					<div class="banner-bg"></div>
-				</div>
-				<div class="col-lg-6 align-self-center">
-					<div class="banner-text">
-						<h1>
-							find your dream <span>job</span> with comport
-						</h1>
-						<p class="py-3">Wherein herb beginning. Moved after gathering.
-							Sea hi crate fowl man replenish place divided likeness herb one
-							two lnetn Winged moving saw, may over.</p>
-						<a href="#" class="secondary-btn">explore now<span
-							class="flaticon-next"></span></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Banner Area End -->
-
-	<!-- Search Area Starts -->
-	<div class="search-area">
-		<div class="search-bg">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<form action="#" class="d-md-flex justify-content-between">
-							<select>
-								<option value="1">All Category</option>
-								<option value="2">Part Time</option>
-								<option value="3">Full Time</option>
-								<option value="4">Remote</option>
-								<option value="5">Office Job</option>
-							</select> <select>
-								<option value="1">Select Location</option>
-								<option value="2">Dhaka</option>
-								<option value="3">Rajshahi</option>
-								<option value="4">Barishal</option>
-								<option value="5">Noakhali</option>
-							</select> <input type="text" placeholder="Search Keyword"
-								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Search Keyword'" required>
-							<button type="submit" class="template-btn">find job</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Search Area End -->
-
-	<!-- Feature Area Starts -->
 	<section class="feature-area section-padding2">
 		
 		<div class="container">
@@ -798,10 +727,10 @@ table.calendar td {
 																  
 					</div>
 					<div class="col-md-6">
-						<input type="button" value="장바구니" class="btn-warning  btn-block" id="btn_cart">
+						<input type="button" value="장바구니" class="btn-warning  btn-block btn-cart" id="btn_cart">
 					</div>
 					<div class="col-md-6">
-						<input type="button" value="결제하기" class="btn-primary  btn-block"
+						<input type="button" value="결제하기" class="btn-primary  btn-block btn-pay"
 							id="btn-test">
 					</div>
 				</div>
@@ -847,7 +776,8 @@ table.calendar td {
 					
 					</div>
 					<div class="col-md-4">
-					<input type="button" class="btn-outline-danger btn-lg" id="btn_searchAir" value="검색">
+					<input type="button" class="btn-outline-danger btn-lg btn-search" id="btn_searchAir" value="검색"
+					style="background-color: red; color: white;">
 					&nbsp;
 					<label for="txt_date">출발 날짜 :</label>
 					<input type="text" id="txt_date">
@@ -889,7 +819,7 @@ table.calendar td {
 			</select>
 		</div>
 		<div class="col-md-8">
-			<input type="button" class="btn-outline-danger btn-lg" id="btn_searchHotel" value="검색">
+			<input type="button" class="btn-outline-danger btn-lg btn-search" id="btn_searchHotel" value="검색">
 		</div>
 	 </div>
 	 <div>
@@ -920,373 +850,10 @@ table.calendar td {
 	<!--  tab2 호텔정보 긑 -->
 	<!-- Category Area End -->
 
-	<!-- Jobs Area Starts -->
-	<section class="jobs-area section-padding3">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="jobs-title">
-						<h2>Browse recent jobs</h2>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="jobs-tab tab-item">
-						<ul class="nav nav-tabs" id="myTab" role="tablist">
-							<li class="nav-item"><a class="nav-link active"
-								id="home-tab" data-toggle="tab" href="#recent" role="tab"
-								aria-controls="home" aria-selected="true">recent</a></li>
-							<li class="nav-item"><a class="nav-link" id="profile-tab"
-								data-toggle="tab" href="#full-time" role="tab"
-								aria-controls="profile" aria-selected="false">full time</a></li>
-							<li class="nav-item"><a class="nav-link" id="contact-tab"
-								data-toggle="tab" href="#part-time" role="tab"
-								aria-controls="part-time" aria-selected="false">part time</a></li>
-							<li class="nav-item"><a class="nav-link" id="contact-tab2"
-								data-toggle="tab" href="#intern" role="tab"
-								aria-controls="intern" aria-selected="false">intern</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="tab-content" id="myTabContent">
-						<div class="tab-pane fade show active" id="recent" role="tabpanel"
-							aria-labelledby="home-tab">
-							<div class="single-job mb-4 d-lg-flex justify-content-between">
-								<div class="job-text">
-									<h4>Assistant Executive - Production/ Quality Control</h4>
-									<ul class="mt-4">
-										<li class="mb-3"><h5>
-												<i class="fa fa-map-marker"></i> new yourk, USA
-											</h5></li>
-										<li class="mb-3"><h5>
-												<i class="fa fa-pie-chart"></i> Applied Chemistry & Chemical
-												Engineering / Chemistry
-											</h5></li>
-										<li><h5>
-												<i class="fa fa-clock-o"></i> Deadline Deadline: Dec 11,
-												2018
-											</h5></li>
-									</ul>
-								</div>
-								<div class="job-img align-self-center">
-									<img src="assets/images/job1.png" alt="job">
-								</div>
-								<div class="job-btn align-self-center">
-									<a href="#" class="third-btn job-btn1">full time</a> <a
-										href="#" class="third-btn">apply</a>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="full-time" role="tabpanel"
-							aria-labelledby="profile-tab">
-							<div class="single-job mb-4 d-lg-flex justify-content-between">
-								<div class="job-text">
-									<h4>Asst. Manager, Production (Woven Dyeing)</h4>
-									<ul class="mt-4">
-										<li class="mb-3"><h5>
-												<i class="fa fa-map-marker"></i> new yourk, USA
-											</h5></li>
-										<li class="mb-3"><h5>
-												<i class="fa fa-pie-chart"></i> Applied Chemistry & Chemical
-												Engineering / Chemistry
-											</h5></li>
-										<li><h5>
-												<i class="fa fa-clock-o"></i> Deadline Deadline: Dec 11,
-												2018
-											</h5></li>
-									</ul>
-								</div>
-								<div class="job-img align-self-center">
-									<img src="assets/images/job2.png" alt="job">
-								</div>
-								<div class="job-btn align-self-center">
-									<a href="#" class="third-btn job-btn2">full time</a> <a
-										href="#" class="third-btn">apply</a>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="part-time" role="tabpanel"
-							aria-labelledby="contact-tab">
-							<div class="single-job mb-4 d-lg-flex justify-content-between">
-								<div class="job-text">
-									<h4>Deputy Manager/ Assistant Manager - Footwear</h4>
-									<ul class="mt-4">
-										<li class="mb-3"><h5>
-												<i class="fa fa-map-marker"></i> new yourk, USA
-											</h5></li>
-										<li class="mb-3"><h5>
-												<i class="fa fa-pie-chart"></i> Applied Chemistry & Chemical
-												Engineering / Chemistry
-											</h5></li>
-										<li><h5>
-												<i class="fa fa-clock-o"></i> Deadline Deadline: Dec 11,
-												2018
-											</h5></li>
-									</ul>
-								</div>
-								<div class="job-img align-self-center">
-									<img src="assets/images/job3.png" alt="job">
-								</div>
-								<div class="job-btn align-self-center">
-									<a href="#" class="third-btn job-btn3">full time</a> <a
-										href="#" class="third-btn">apply</a>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="intern" role="tabpanel"
-							aria-labelledby="contact-tab2s">
-							<div class="single-job mb-4 d-lg-flex justify-content-between">
-								<div class="job-text">
-									<h4>R&D Manager (Technical Lab Department)</h4>
-									<ul class="mt-4">
-										<li class="mb-3"><h5>
-												<i class="fa fa-map-marker"></i> new yourk, USA
-											</h5></li>
-										<li class="mb-3"><h5>
-												<i class="fa fa-pie-chart"></i> Applied Chemistry & Chemical
-												Engineering / Chemistry
-											</h5></li>
-										<li><h5>
-												<i class="fa fa-clock-o"></i> Deadline Deadline: Dec 11,
-												2018
-											</h5></li>
-									</ul>
-								</div>
-								<div class="job-img align-self-center">
-									<img src="assets/images/job4.png" alt="job">
-								</div>
-								<div class="job-btn align-self-center">
-									<a href="#" class="third-btn job-btn4">full time</a> <a
-										href="#" class="third-btn">apply</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- <div class="single-job d-lg-flex justify-content-between">
-                        <div class="job-text">
-                            <h4>Manager/ Asst. Manager (Quality Assurance)</h4>
-                            <ul class="mt-4">
-                                <li class="mb-3"><h5><i class="fa fa-map-marker"></i> new yourk, USA</h5></li>
-                                <li class="mb-3"><h5><i class="fa fa-pie-chart"></i> Applied Chemistry & Chemical Engineering / Chemistry</h5></li>
-                                <li><h5><i class="fa fa-clock-o"></i> Deadline Deadline: Dec 11, 2018</h5></li>
-                            </ul>
-                        </div>
-                        <div class="job-img align-self-center">
-                            <img src="assets/images/job5.png" alt="job">
-                        </div>
-                        <div class="job-btn align-self-center">
-                            <a href="#" class="third-btn job-btn2">full time</a>
-                            <a href="#" class="third-btn">apply</a>
-                        </div>
-                    </div> -->
-				</div>
-			</div>
-			<div class="more-job-btn mt-5 text-center">
-				<a href="#" class="template-btn">more job post</a>
-			</div>
-		</div>
-	</section>
-	<!-- Jobs Area End -->
-
-	<!-- Newsletter Area Starts -->
-	<section class="newsletter-area section-padding">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-top text-center">
-						<h2>Get job information daily</h2>
-						<p>Subscribe to our newsletter and get a coupon code!</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<form action="#">
-						<input type="email" placeholder="Your email here"
-							onfocus="this.placeholder = ''"
-							onblur="this.placeholder = 'Your email here'" required>
-						<button type="submit" class="template-btn">subscribe now</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Newsletter Area End -->
-
-	<!-- Employee Area Starts -->
-	<section class="employee-area section-padding">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-top text-center">
-						<h2>Happy employee</h2>
-						<p>Open lesser winged midst wherein may morning</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="employee-slider owl-carousel">
-						<div class="single-slide d-sm-flex">
-							<div class="slide-img employee1">
-								<div class="hover-state">
-									<div class="hover-text text-center">
-										<h3>david aron</h3>
-										<h5>Facebook</h5>
-									</div>
-								</div>
-							</div>
-							<div class="slide-text align-self-center">
-								<i class="fa fa-quote-left"></i>
-								<p>Appear, called day. Sixth two after eve moved called
-									winged very heaven two lights let all third gathered.</p>
-							</div>
-						</div>
-						<div class="single-slide d-sm-flex">
-							<div class="slide-img employee2">
-								<div class="hover-state">
-									<div class="hover-text text-center">
-										<h3>david aron</h3>
-										<h5>Twitter</h5>
-									</div>
-								</div>
-							</div>
-							<div class="slide-text align-self-center">
-								<i class="fa fa-quote-left"></i>
-								<p>Appear, called day. Sixth two after eve moved called
-									winged very heaven two lights let all third gathered.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Employee Area End -->
+	
+	
 	
 
-	<!-- News Area Starts -->
-	<section id="blog" class="news-area section-padding3">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-top text-center">
-						<h2>Company latest news</h2>
-		
-						<p>Open lesser winged midst wherein may morning</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="single-news mb-5 mb-lg-0">
-						<div class="news-img news-img1"></div>
-						<div class="news-tag">
-							<ul class="my-4">
-								<li><h5>
-										<i class="fa fa-calendar-o"></i> 20th sep, 2018
-									</h5></li>
-								<li class="separator mx-2"><span></span></li>
-								<li><h5>
-										<i class="fa fa-folder-open-o"></i> company
-									</h5></li>
-							</ul>
-						</div>
-						<div class="news-title">
-							<h4>
-								<a href="#">Lime recalls electric scooters over battery
-									fire.</a>
-							</h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-news mb-5 mb-lg-0">
-						<div class="news-img news-img2"></div>
-						<div class="news-tag">
-							<ul class="my-4">
-								<li><h5>
-										<i class="fa fa-calendar-o"></i> 18th sep, 2018
-									</h5></li>
-								<li class="separator mx-2"><span></span></li>
-								<li><h5>
-										<i class="fa fa-folder-open-o"></i> company
-									</h5></li>
-							</ul>
-						</div>
-						<div class="news-title">
-							<h4>
-								<a href="#">Apple resorts to promo deals trade to boost</a>
-							</h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-news">
-						<div class="news-img news-img3"></div>
-						<div class="news-tag">
-							<ul class="my-4">
-								<li><h5>
-										<i class="fa fa-calendar-o"></i> 25th sep, 2018
-									</h5></li>
-								<li class="separator mx-2"><span></span></li>
-								<li><h5>
-										<i class="fa fa-folder-open-o"></i> company
-									</h5></li>
-							</ul>
-						</div>
-						<div class="news-title">
-							<h4>
-								<a href="#">Lime recalls electric scooters over battery
-									fire.</a>
-							</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- News Area End -->
-
-	<!-- Download Area Starts -->
-	<section class="download-area section-padding">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="download-text">
-						<h2>Download the app your mobile today</h2>
-						<p class="py-3">Light earth also land can't. May you midst
-							shall lights blessed in lights Have gathered image morning
-							blessed grass him. Appear female rule all seas she'd winged</p>
-						<div
-							class="download-button d-sm-flex flex-row justify-content-start">
-							<div class="download-btn mb-3 mb-sm-0 flex-row d-flex">
-								<i class="fa fa-apple" aria-hidden="true"></i> <a href="#">
-									<p>
-										<span>Available</span> <br> on App Store
-									</p>
-								</a>
-							</div>
-							<div class="download-btn dark flex-row d-flex">
-								<i class="fa fa-android" aria-hidden="true"></i> <a href="#">
-									<p>
-										<span>Available</span> <br> on Play Store
-									</p>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 pr-0">
-					<div class="download-img"></div>
-				</div>
-			</div>
-		</div>
-	</section>
 	<!--  호텔 상세정보 모달창 -->
 		<div class="container-fluid">
 			<div class="row">
@@ -1350,94 +917,12 @@ table.calendar td {
 			
 		</div>
 	</div>
-</div>
+
 		<!--  호텔 상세정보 모달창 끝 -->
 
 			
 	<!-- Download Area End -->
 
-	<!-- Footer Area Starts -->
-	<footer class="footer-area section-padding">
-		<div class="footer-widget">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-2 col-lg-3">
-						<div class="single-widget-home mb-5 mb-lg-0">
-							<h3 class="mb-4">top products</h3>
-							<ul>
-								<li class="mb-2"><a href="#">managed website</a></li>
-								<li class="mb-2"><a href="#">managed reputation</a></li>
-								<li class="mb-2"><a href="#">power tools</a></li>
-								<li><a href="#">marketing service</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xl-5 offset-xl-1 col-lg-6">
-						<div class="single-widget-home mb-5 mb-lg-0">
-							<h3 class="mb-4">newsletter</h3>
-							<p class="mb-4">You can trust us. we only send promo offers,
-								not a single.</p>
-							<form action="#">
-								<input type="email" placeholder="Your email here"
-									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = 'Your email here'" required>
-								<button type="submit" class="template-btn">subscribe
-									now</button>
-							</form>
-						</div>
-					</div>
-					<div class="col-xl-3 offset-xl-1 col-lg-3">
-						<div class="single-widge-home">
-							<h3 class="mb-4">instagram feed</h3>
-							<div class="feed">
-								<img src="assets/images/feed1.jpg" alt="feed"> <img
-									src="assets/images/feed2.jpg" alt="feed"> <img
-									src="assets/images/feed3.jpg" alt="feed"> <img
-									src="assets/images/feed4.jpg" alt="feed"> <img
-									src="assets/images/feed5.jpg" alt="feed"> <img
-									src="assets/images/feed6.jpg" alt="feed"> <img
-									src="assets/images/feed7.jpg" alt="feed"> <img
-									src="assets/images/feed8.jpg" alt="feed">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="footer-copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-md-6">
-						<span>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>
-								document.write(new Date().getFullYear());
-							</script>
-							All rights reserved | This template is made with <i
-							class="fa fa-heart-o" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</span>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="social-icons">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fa fa-behance"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	
-		
-		
-	</footer>
-	<!-- Footer Area End -->
-	
 
 	
 	<!-- Javascript -->
@@ -1448,5 +933,6 @@ table.calendar td {
 	<script src="/resources/psj/assets/js/vendor/jquery.nice-select.min.js"></script>
 	<script src="/resources/psj/assets/js/vendor/ion.rangeSlider.js"></script>
 	<script src="/resources/psj/assets/js/main.js"></script>
+	<%@include file="../include/nds/footer.jsp" %>	
 </body>
 </html>

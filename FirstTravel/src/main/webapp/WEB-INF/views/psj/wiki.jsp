@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@include file="../include/nds/header.jsp" %>
 <!doctype html>
 <html lang="kr">
 <head>
@@ -37,7 +38,7 @@ input[type="checkbox"]:checked ~ main {
 }
 #sideBar {
   position: fixed;
-  z-index: 9;
+  z-index: 999;
   top: 0;
   left: 0;
   bottom: 0;
@@ -139,12 +140,6 @@ input[type="checkbox"]:checked ~ main {
   line-height: 50px;
   transition: opacity 0.1s ease-in-out;
 }
-main {
-  position: absolute;
-  transition: all 0.15s ease-in-out;
-  top: 0;
-  left: 50px;
-}
 main header {
   position: absolute;
   z-index: -1;
@@ -204,6 +199,22 @@ main section h1 {
     border-left: 1px solid #fff;
     background: #eee;
 }
+input[type=button] {
+	border: 1px solid skyblue;
+	background-color: rgba(0,0,0,0);
+	color: skyblue;
+	padding: 5px;
+}
+input[type=text] {
+	border-bottom: 1px solid black;
+}
+main {
+	position: absolute;
+	top: 100px;
+
+	z-index: 300;
+}
+
 
 
 
@@ -396,16 +407,14 @@ function getPageInfo(country_name,search_val,search_type) {
 				"success" :function(rData){
 					nowPage = 1; // 바로 1페이지로가서 페이지정보리로드.
 					getPageInfo(country_name);
+					$("#txt_tip").val("");
 				}
 			}); //-- ajax
 		}); // -- click
 		
 		
 		/////// 추천 비추천버튼 style ////////////////
-		$("#table_tip_list").on("mouseenter", "span.up", function() {
-			
-			
-		});
+		
 
 		//추천버튼클릭
 		$("#table_tip_list").on("click", "span.up", function() {
@@ -541,8 +550,8 @@ function getPageInfo(country_name,search_val,search_type) {
 			var innerUpdateForm = "<input type='text' class='txt_update'" 
 			    innerUpdateForm += "value='" + origin_txt + "'>"
 			
-			$(this).parent().html("<button class='btn-update'>완료</button>" +
-					"<button class='btn-update' data-origin_txt='" +  origin_txt + "'>취소</button>");
+			$(this).parent().html("<button class='btn-update'>완료</button>" + "|" +
+					"<button class='btn-update-cancle' data-origin_txt='" +  origin_txt + "'>취소</button>");
 			td_tip_content.html(innerUpdateForm);
 			td_tip_content.children("input[class=txt_update]").focus();
 			td_tip_content.children("input[class=txt_update]").select(); 
@@ -581,6 +590,11 @@ function getPageInfo(country_name,search_val,search_type) {
 			});	
 			
 			
+		});
+		$("#table_tip_list").on('click','.btn-update-cancle',function() {
+			var txt_field = $(this).parent().parent().children().eq(1);
+			txt_field.html($(this).attr("data-origin_txt"));
+			$(this).parent().html("<span class='glyphicon glyphicon-pencil update' style='cursor:pointer'/>")
 		});
 		$("#btn-search").click(function() {
 			var country_name = $("#tip_title").text();
@@ -631,6 +645,7 @@ function getPageInfo(country_name,search_val,search_type) {
 		}
 		
 		$("#table_tip_list").on('click', 'span.glup', function() {
+			
 			$(this).parent().parent().next().next().remove(); // 댓글 목록 삭제
 			$(this).attr("class","glyphicon glyphicon-chevron-down gldown");
 		});
@@ -750,6 +765,7 @@ function getPageInfo(country_name,search_val,search_type) {
 		});
 	}); // -- doc	
 </script>
+
 </head>
 <body>
 <input type="checkbox" id="menu_state" checked>
@@ -769,18 +785,21 @@ function getPageInfo(country_name,search_val,search_type) {
 </nav>
 <main>
 <div id="div_out">
+
 	<div id="div_title">
-		<h1 id="tip_title">국가를 선택해 주세요.</h1><hr>
+		<h1 id="tip_title">국가를 선택해 주세요.</h1>
 	</div>
 	
 	<div style="display:none" id="div_main">
 	<!-- /ndsupload/displayFile?fileName=이름 -->
 	<div class="col-md-12" id="div_writeForm">
+		
 		<input type="text" size="150" placeholder="팁을 작성해 주세요." id="txt_tip"
 			<c:if test="${memberVo == null}">value="로그인 후 이용해 주세요" readonly="readonly"</c:if>
 		>
 		<input type="button" value="쓰기" id="btn-write">
 	</div>
+
 		<div class="col-md-12" id="div_content">
 			<div class="container-fluid">
 				<div class="row">
@@ -824,7 +843,8 @@ function getPageInfo(country_name,search_val,search_type) {
 									<option value="writer">작성자</option>
 									<option value="content">내용</option>
 								</select>
-								<input type="text" placeholder="검색할 내용을 입력해 주세요." id="txt_search" size="30">
+								<input type="text" placeholder="검색할 내용을 입력해 주세요." id="txt_search" size="30"
+								>
 								<input type="button" value="검색" id="btn-search">
 							</div>
 							
@@ -837,5 +857,6 @@ function getPageInfo(country_name,search_val,search_type) {
 		</div>
 	</div>
 </main>
+
 </body>
 </html>
