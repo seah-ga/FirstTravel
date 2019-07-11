@@ -48,13 +48,19 @@
       </div>  
 
     </div>
-
-
+	<br>
+	<br>
+	<br>
+	 <div class="col-md-12 text-center">
+            <h2 class="font-weight-light text-black">BEST 인기여행지</h2>
+            <p class="color-black-opacity-5">Choose Your Next Destination</p>
+          </div>
     <div class="site-section">
       
       <div class="container overlap-section">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+          
             <a href="/nds/itemoverseasread?overseas_Country=${overseas[10].overseas_Country}&overseas_City=${overseas[10].overseas_City}&airPort=${overseas[10].airPort}" class="unit-1 text-center">
               <img src="/ndsupload/displayFile?fileName=${overseas[10].image1}" alt="Image" class="img-fluid">
               <div class="unit-1-text">
@@ -214,7 +220,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6 mb-5">
-                  <img src="/ndsupload/displayFile?fileName=${overseas[15].image6}" alt="Image" class="img-md-fluid">
+                  <img src="/ndsupload/display?fileName=2019/7/11/b_65fc8469-05fb-4532-ab8c-052feb85b089_베르ㅜ루헐흐ㅜ하ㅜㅎㄹㅇ.jpg" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
                   <p class="text-black lead">&ldquo;<a href=/nds/reviewread?review_num=750&page=1&perPage=6&searchType=&keyword=">프랑스 마르세유에서  열차를타고 20시간을 달려 도착한 베를린의 아름다움&rdquo;</a></p>
@@ -228,7 +234,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6 mb-5">
-                  <img src="/ndsupload/displayFile?fileName=${overseas[13].image5}" alt="Image" class="img-md-fluid">
+                  <img src="/ndsupload/display?fileName=2019/7/11/b_470f014a-7fd6-4e5f-b5ac-71bd5121e0a9_슬로바키아.jpg" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
                   <p class="text-black lead">&ldquo;<a href=/nds/reviewread?review_num=751&page=1&perPage=6&searchType=&keyword=">제 고향에서는 이런 화창한날씨를 보기힘들었는데 여기는 일상이더군요&rdquo;</a></p>
@@ -242,7 +248,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6 mb-5">
-                  <img src="/ndsupload/displayFile?fileName=${overseas[12].image1}" alt="Image" class="img-md-fluid">
+                  <img src="/ndsupload/display?fileName=2019/7/11/b_a59e7c20-bf9c-4c37-82e1-fe26998d39c6_장미축제잉.jpg" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
                   <p class="text-black lead">&ldquo;<a href=/nds/reviewread?review_num=743&page=1&perPage=6&searchType=&keyword=">처음에는 망설였습니다 하지만... &rdquo;</a></p>
@@ -257,55 +263,6 @@
         </div>
       </div>
     </div>
-    <!-- 여행후기글 -->
-     <div class="site-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-4 text-center">
-            <h2 class="font-weight-light text-black">BEST 여행후기글</h2>
-             <p>travel stories people wrote<p>
-          </div>
-        </div>
-             <div class="container latest">
-      <c:forEach items="${reviewbestlist}" begin="0" end="2" var="reviewVo">
-  <div class="col-md-4">
-    <figure class="shadow">
-    				  <a href="/nds/reviewread?review_num=${reviewVo.review_num}" class="thumb"><img src="
-	    				  <c:choose>
-		          		    <c:when test="${reviewVo.review_image != 'null'}">
-		           			   /ndsupload/display?fileName=${reviewVo.review_image}
- 		           		   </c:when>
-		             		 <c:when test="${reviewVo.review_image == 'null'}">
- 		            		  /resources/nds/images/b_nullImage.jpg
-		             	    </c:when>
-		             		 </c:choose>" alt="alt" /></a>
-    		  <figcaption>
-       <a href="/nds/reviewread?review_num=${reviewVo.review_num}">
-        <h3 class="heading">${reviewVo.review_name}</h3>
-        </a>
-        <p class="bioquote">${reviewVo.review_content}</p>
-      </figcaption>
-    </figure>
-  </div>
-  </c:forEach>
-  <!-- one_third ends here --> 
-</div>
-      </div>
-    </div>
-      <!-- /여행후기글 -->
-      
-    <div class="site-section border-top">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-md-12">
-            <!-- <h2 class="mb-5 text-black">공지사항&이벤트</h2> -->
-            <p class="mb-0"><a href="booking.html" class="btn btn-primary py-3 px-5 text-white">동행자찾기 & 이벤트</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-   
-  
   
     </div>
   </body>

@@ -103,7 +103,7 @@ $(document).ready(function(){
 		
 		
 		<!-- 글의 목록 보이기 -->								
-<h1>동행자 구하기 & 이벤트</h1>
+<h1>동행자 구하기</h1>
 <br>
 <br>
 <div class="container-fluid">
