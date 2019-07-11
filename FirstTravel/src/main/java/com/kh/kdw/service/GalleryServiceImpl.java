@@ -52,8 +52,11 @@ public class GalleryServiceImpl implements IGalleryService {
 		}
 	}
 
+	@Transactional
 	@Override
 	public void GBoardDelete(int g_no) throws Exception {
+		// 파일 테이블에서 삭제
+		galleryDao.fileDelete(g_no);
 		// 글삭제
 		galleryDao.gBoardDelete(g_no);
 	}

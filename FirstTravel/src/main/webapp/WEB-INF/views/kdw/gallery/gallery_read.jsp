@@ -43,7 +43,6 @@ $(document).ready(function() {
 	
 	// 삭제 버튼 클릭시
 	$("#btn_delete").click(function() {
-		location.href = "/kdw/gallery/gallery_delete?g_no=${gBoardVo.g_no}";
 		var g_no = "${gBoardVo.g_no}";
 		var url = "/kdw/gallery/gallery_delete/" + g_no;
 		$.ajax({
@@ -51,7 +50,7 @@ $(document).ready(function() {
 			"url" : url,
 			"headers" : {
 				"content-type" : "application/json",
-				"X-HTTP-Method-Override" : "post"
+				"X-HTTP-Method-Override" : "delete"
 			},
 			"success" : function(rData) {
 				console.log(rData);
@@ -314,11 +313,11 @@ p {
 								<p>댓글</p>
 								<div class="col-md-12">
 									<div class="div_text" style="width:80%;float:left;" >
-										<textarea rows="5" name="r_text" id="r_text" style="resize:none;width:100%;text-align:left;"></textarea>
+										<textarea rows="5" name="r_text" id="r_text" style="resize:none;width:100%;text-align:left;border: 1px solid #444;"></textarea>
 									</div>
 									<div class="div_text" style="width:20%;height:100%;float:left;text-align:center;">
 										<input type="button" value="등록" id="btn_reply" class="btn btn-lg btn-primary"
-											style="width:100%;height: 104px;"/>
+											style="width:100%;height: 104px;color:inherit;border: 2px solid #000;"/>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -360,10 +359,10 @@ p {
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
-					<input type="button" value="목록" class="btn btn-primary" id="btn_list"/>
+					<input type="button" value="목록" class="btn btn-primary" id="btn_list" style="color:inherit;border: 2px solid #000;"/>
 					<c:if test="${gBoardVo.user_code == memberVo.user_code }">
-						<input type="button" value="수정" class="btn btn-success" id="btn_update"/>
-						<input type="button" value="삭제" class="btn btn-danger" id="btn_delete"/>
+						<input type="button" value="수정" class="btn btn-success" id="btn_update" style="color:inherit;border: 2px solid #000;"/>
+						<input type="button" value="삭제" class="btn btn-danger" id="btn_delete" style="color:inherit;border: 2px solid #000;"/>
 					</c:if>
 				</div>
 				<div class="col-md-2">

@@ -67,8 +67,7 @@ public class MemberServiceImpl implements IMemberService {
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("이메일 인증");
 		StringBuffer sb = new StringBuffer();
-		sb.append("<h1>메일인증</h1>").append("<a href = 'http://localhost/kdw/join?key=")
-		  .append(chkEmailVo.getAuthkey()).append("' target='_blenk'>이메일 인증 확인</a>");
+		sb.append("메일인증 번호 : [").append(chkEmailVo.getAuthkey()).append("]");
 		sendMail.setText(sb.toString());
 		sendMail.setForm("FirstTravel@naver.com", "(주)First Travel");
 		sendMail.setTo(chkEmailVo.getUser_email());
@@ -97,7 +96,7 @@ public class MemberServiceImpl implements IMemberService {
 			System.out.println("수정된 비밀번호 : " + memberVo);
 			MailHandler sendMail = new MailHandler(mailSender);
 			sendMail.setSubject("비밀번호 변경");
-			sendMail.setText(new StringBuffer().append("<h1>비밀번호 변경</h1><br>").append("[" + key + "] 로 변경되었습니다.").toString());
+			sendMail.setText(new StringBuffer().append("비밀번호 변경 : ").append("[" + key + "] 로 변경되었습니다.").toString());
 			sendMail.setForm("FirstTravel@naver.com", "(주)First Travel");
 			sendMail.setTo(user_email);
 			sendMail.send();
