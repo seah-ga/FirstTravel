@@ -90,51 +90,7 @@ public class WikiController {
 		return entity;
 	}
 	//팁 추천, 비추천
-	@RequestMapping(value="/tip/{sort}/{tip_no}/{method}", method=RequestMethod.POST, produces = "application/json; charset=utf-8")
-	public ResponseEntity<String> updateUpDown(HttpSession session,
-			@PathVariable("method") String method, @PathVariable("sort") String sort, 
-			@PathVariable("tip_no") int tip_no){
-		ResponseEntity<String> entity = null;
-		try {
-			if(method.equals("plus")) {
-				TipVo tipVo = new TipVo();
-				tipVo.setTip_no(tip_no);
-				MemberVo memberVo = (MemberVo)session.getAttribute("memberVo");
-				int user_code = memberVo.getUser_code();
-				tipVo.setTip_writer_code(user_code);
-				TipUpDownVo tipUpDownVo = new TipUpDownVo();
-				tipUpDownVo.setUser_code(user_code);
-				tipUpDownVo.setTip_no(tip_no);
-				tipUpDownVo.setTip_sort(sort);
-				
-				tipVo.setUpdownVo(tipUpDownVo);
-				
-				tipService.update_tipUpDown_plus(tipVo);
-			}else if (method.equals("minus")) {
-				TipVo tipVo = new TipVo();
-				tipVo.setTip_no(tip_no);
-				MemberVo memberVo = (MemberVo)session.getAttribute("memberVo");
-				int user_code = memberVo.getUser_code();
-				tipVo.setTip_writer_code(user_code);
-				TipUpDownVo tipUpDownVo = new TipUpDownVo();
-				tipUpDownVo.setUser_code(user_code);
-				tipUpDownVo.setTip_no(tip_no);
-				tipUpDownVo.setTip_sort(sort);
-				
-				tipVo.setUpdownVo(tipUpDownVo);
-				
-				tipService.update_tipUpDown_minus(tipVo);
-				
-			}
-			
-			entity = new ResponseEntity<String>("success", HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		
-		}
-		return entity;
-	}
+
 	
 	// 팁삭제
 	@RequestMapping(value="/tip/{tip_no}", method=RequestMethod.DELETE, produces = "application/json; charset=utf-8")

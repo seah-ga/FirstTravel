@@ -3,7 +3,7 @@
 <%@ page session="true"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../include/nds/header.jsp" %>	
+<%-- <%@include file="../include/nds/header.jsp" %>	 --%>
 	
 	
 <html lang="en">
@@ -592,6 +592,10 @@
 
 
 <style type="text/css">
+select{
+	border-bottom: 1px solid black;
+	
+}
 input.btn-sch{
 	border: 1px solid blue;
 	background-color: rgba(0,0,0,0);
@@ -758,7 +762,7 @@ table.calendar td {
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-4">
-						<select class="city" id="sel_dep">
+						<select class="city" id="sel_dep" style="border-bottom: 1px black; border-bottom-style: solio">
 							<option>출발도시</option>
 							<c:forEach var="CityVo" items="${cityList}">
 							<option value="${CityVo.airport}">${CityVo.domestic_city}</option>
@@ -930,9 +934,9 @@ table.calendar td {
 <!-- 	<script src="/resources/psj/assets/js/vendor/bootstrap-4.1.3.min.js"></script> -->
 	<script src="/resources/psj/assets/js/vendor/wow.min.js"></script>
 	<script src="/resources/psj/assets/js/vendor/owl-carousel.min.js"></script>
-	<script src="/resources/psj/assets/js/vendor/jquery.nice-select.min.js"></script>
+
 	<script src="/resources/psj/assets/js/vendor/ion.rangeSlider.js"></script>
 	<script src="/resources/psj/assets/js/main.js"></script>
-	<%@include file="../include/nds/footer.jsp" %>	
+<%-- 	<%@include file="../include/nds/footer.jsp" %>	 --%>
 </body>
 </html>
