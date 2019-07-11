@@ -84,7 +84,7 @@ $(document).ready(function(){
 			$("#review_country").html(str);
 						
 		} else if (review_class == "해외") { // 해외 일때
-		var countrylisturl = "/ndsrest/countrylist";
+		var countrylisturl = "/overseasrest/countrylist";
 		
 			$.ajax ({
 				"type" : "get",
@@ -108,8 +108,8 @@ $(document).ready(function(){
 	// 국가에 따른 도시 변경
 	$("#review_country").change(function(){
 		var review_country = $("#review_country").val();
-		var domesticurl = "/ndsrest/domesticlist";
-		var countrychkurl = "/ndsrest/countrychk";
+		var domesticurl = "/overseasrest/domesticlist";
+		var countrychkurl = "/overseasrest/countrychk";
 		var str = "";
 		
 		if (review_country == "한국") { // 국가가 한국일때

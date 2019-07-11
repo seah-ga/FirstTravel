@@ -40,5 +40,6 @@ public class CompanionReplyDaoImpl implements ICompanionReplyDao {
 	}
 	
 	
+	
 
 }

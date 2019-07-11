@@ -26,7 +26,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		String chk_id = request.getParameter("chk_id");
 		if (chk_id == null) {
 			chk_id = "N";
-		}
+		} // 스케쥴러, 글쓰기 
 		System.out.println("LoginInterceptor, chk_id : " + chk_id);
 		HttpSession session = request.getSession();
 		MemberVo memberVo = (MemberVo)session.getAttribute("memberVo");
