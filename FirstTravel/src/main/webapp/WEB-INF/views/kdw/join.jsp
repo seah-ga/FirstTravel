@@ -133,7 +133,7 @@ $(document).ready(function() {
 			"success" : function(received) {
 				console.log(received);
 				$("#authkey").val(received);
-				$("#user_key").val(received);
+// 				$("#user_key").val(received);
 			}
 		});
 	});

@@ -933,6 +933,6 @@ table.calendar td {
 	<script src="/resources/psj/assets/js/vendor/jquery.nice-select.min.js"></script>
 	<script src="/resources/psj/assets/js/vendor/ion.rangeSlider.js"></script>
 	<script src="/resources/psj/assets/js/main.js"></script>
-	<%@include file="../include/nds/footer.jsp" %>	
+<%-- 	<%@include file="../include/nds/footer.jsp" %>	 --%>
 </body>
 </html>

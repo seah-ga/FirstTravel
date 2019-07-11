@@ -748,7 +748,7 @@ function getPageInfo(country_name,search_val,search_type) {
 					txt_td.html(update_content);
 					replyHtml += "<a class='rep_update' style='cursor:pointer' data-tip_rep_no='"+ tip_rep_no +"'>수정</a>|"
 					replyHtml += "<a class='rep_delete' style='cursor:pointer' data-tip_rep_no='"+ tip_rep_no +"'>삭제</a>"
-					this_El.html(replyHtml);
+					this_td.html(replyHtml);
 				}
 			});	
 			console.log(tip_rep_no);
