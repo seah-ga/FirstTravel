@@ -30,6 +30,9 @@ public interface IGalleryDao {
 	// 첨부파일 위치 저장
 	public void fileAttach(String file_path) throws Exception;
 	
+	// 첨부파일 위치 저장
+	public void fileAttachModify(String file_path, int g_no) throws Exception;
+	
 	// 첨부파일 경로 가져오기
 	public String[] getFile(int g_no) throws Exception;
 	

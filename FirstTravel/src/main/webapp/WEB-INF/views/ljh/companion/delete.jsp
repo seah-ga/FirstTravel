@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../include/nds/header.jsp" %>
+<style>
+.container{
+	padding-bottom:50px;
+}
+</style>
 <script>
 $(document).ready(function(){
 	//수정완료 메시지

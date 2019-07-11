@@ -89,9 +89,9 @@ $(document).ready(function(){
             <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
               
 
-              <h1 class="text-white font-weight-light">해외</h1>
+              <h1 class="text-white font-weight-light">동행자분을 찾았으면 여기를 누르세요(해외)!</h1>
               <p class="mb-5">세계속으로 발걸음을 딛여보아요</p>
-              <p><a href="/nds/itemoverseasmain" class="btn btn-primary py-3 px-5 text-white">지금 당장 예약하세요!<br>Book Now!</a></p>
+              <p><a href="/nds/itemoverseasmain" class="btn btn-primary py-3 px-5 text-white">여행지 보러가기!<br>Book Now!</a></p>
 
             </div>
           </div>
@@ -103,9 +103,9 @@ $(document).ready(function(){
           <div class="row align-items-center justify-content-center text-center">
 
             <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
-              <h1 class="text-white font-weight-light">국내</h1>
+              <h1 class="text-white font-weight-light">동행자분을 찾았으면 여기를 누르세요(국내)!</h1>
               <p class="mb-5">주변의 전통을 둘러보아요</p>
-              <p><a href="/psj/plan" class="btn btn-primary py-3 px-5 text-white">지금 당장 예약하세요!<br>Book Now!</a></p>
+              <p><a href="/psj/plan" class="btn btn-primary py-3 px-5 text-white">여행지 보러가기!<br>Book Now!</a></p>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@ $(document).ready(function(){
 		
 		
 		<!-- 글의 목록 보이기 -->								
-<h1>동행자 구하기</h1>
+<h1>동행자 구하기 & 이벤트</h1>
 <br>
 <br>
 <div class="container-fluid">

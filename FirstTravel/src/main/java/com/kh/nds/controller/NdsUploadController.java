@@ -126,6 +126,7 @@ public class NdsUploadController {
 						"attachment; filename=" + downloadName);
 			}
 			realPath = uploadPath + File.separator + fileName;
+			System.out.println("NdsUploadController, display(), realPath:" + realPath);
 			FileInputStream is = new FileInputStream(realPath);
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(is), headers, HttpStatus.OK);
 		} catch (Exception e) {

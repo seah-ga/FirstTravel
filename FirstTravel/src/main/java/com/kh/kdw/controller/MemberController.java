@@ -33,7 +33,7 @@ public class MemberController {
 	// 로그인 폼
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request) throws Exception {
-		Cookie[] cookies = request.getCookies();
+		Cookie[] cookies = request.getCookies();		
 		String user_cookie = null;
 		for (Cookie cookie : cookies) {
 			String cookieName = cookie.getName();
@@ -143,7 +143,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberinfo-run", method=RequestMethod.POST)
-	public String memberInfoRun(MemberVo memberVo) throws Exception {
+	public String memberInfoRun(MemberVo memberVo, HttpSession session) throws Exception {
+		MemberVo vo = (MemberVo)session.getAttribute("memberVo");
+		int user_code = vo.getUser_code();
+		memberVo.setUser_code(user_code);
+		String search_address = memberVo.getSearch_address();
+		String detail_address = memberVo.getDetail_address();
+		memberVo.setUser_address(search_address, detail_address);
+		System.out.println("memberVo : " + memberVo);
 		memberService.memberModify(memberVo);
 		return "redirect:/ljh/main";
 	}

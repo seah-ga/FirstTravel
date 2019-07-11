@@ -26,7 +26,7 @@
 <script type="text/javascript" src="//www.hanatour.com/_script/util/HntAppSmsLayer.js?v=20140515"></script><form name="etrust" method="post" action="//www.etrust.or.kr/jsp/open/eTrust_info.jsp"><input type="hidden" name="unique_id" value="1278576313390"></form> 
  <script type="text/javascript" src="//www.hanatour.com/_script/footer_content.js?v=20151221"></script><link rel="stylesheet" type="text/css" href="//www.hanatour.com/_css/2014/floating.css?v=201405"><script type="text/javascript" src="//www.hanatour.com/_script/util/floating_fixedBnr.js"></script><script type="text/javascript" src="//www.hanatour.com/_script/util/floating_fixedBnr2.js"></script>
 
-  <script src="/resources/ljh/js/jquery-3.3.1.min.js"></script>
+<!--   <script src="/resources/ljh/js/jquery-3.3.1.min.js"></script> -->
   <script src="/resources/ljh/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="/resources/ljh/js/jquery-ui.js"></script>
   <script src="/resources/ljh/js/popper.min.js"></script>

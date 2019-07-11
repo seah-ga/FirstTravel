@@ -59,32 +59,38 @@ $(document).ready(function() {
               
               <!-- 유저 아이디 -->
               <div class="md-form mb-5">
-                <input type="text" id="user_id" class="form-control" value="${memberVo.user_id}" readonly="readonly">
+                <input type="text" id="user_id" name="user_id" class="form-control" value="${memberVo.user_id}" readonly="readonly">
                 <label for="user_id" class="">아이디</label>
+              </div>
+              
+              <!-- 유저 이름 -->
+              <div class="md-form mb-5">
+                <input type="text" id="user_name" name="user_name" class="form-control" value="${memberVo.user_name}">
+                <label for="user_name" class="">이름</label>
               </div>
               
               <!-- 비밀번호 -->
               <div class="md-form mb-5">
-                <input type="password" id="user_pw" class="form-control" value="${memberVo.user_pw }">
+                <input type="password" id="user_pw" name="user_pw" class="form-control" value="${memberVo.user_pw }">
                 <label for="user_pw" class="">비밀번호</label>
               </div>
               
               <!-- 연락처 -->
               <div class="md-form mb-5">
-                <input type="text" id="user_phone" class="form-control" value="${memberVo.user_phone }">
+                <input type="text" id="user_phone" name="user_phone" class="form-control" value="${memberVo.user_phone }">
                 <label for="user_phone" class="">연락처</label>
               </div>
 
               <!--email-->
               <div class="md-form mb-5">
-                <input type="text" id="email" class="form-control" value="${memberVo.user_email}">
-                <label for="email" class="">Email</label>
+                <input type="text" id="user_email" name="user_email" class="form-control" value="${memberVo.user_email}">
+                <label for="user_email" class="">Email</label>
               </div>
 
               <!-- 주소 -->
               <div class="md-form mb-5">
-                <input type="text" id="address" class="form-control" value="${memberVo.user_address }">
-                <label for="address" class="">주소</label>
+                <input type="text" id="user_address" name=detail_address class="form-control" value="${memberVo.user_address }">
+                <label for="user_address" class="">주소</label>
               </div>
 
               <!--Grid row-->

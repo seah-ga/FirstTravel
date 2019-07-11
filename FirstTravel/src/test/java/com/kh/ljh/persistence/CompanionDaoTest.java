@@ -65,7 +65,7 @@ public class CompanionDaoTest {
 	}
 	@Test
 	public void testDelete() throws Exception{
-		companionDao.delete(521);
+		companionDao.delete(542);
 	}
 
 }
