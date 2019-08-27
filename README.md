@@ -16,16 +16,26 @@ Front-end: JQuery, Javascript
 DBMS : OracleDB  
 
 ## Preview
-### 아키텍쳐
+### 아키텍쳐  
+
+
 ![Image Alt 아키텍쳐](./arch.png)   
-### ERD
+### ERD  
+
+
 ![Image Alt ERD](./erd.png) 
-### 로그인 페이지
+### 로그인 페이지  
+
+
 ![Image Alt login](./login.png) 
-### 항공, 호텔 운항정보 파싱
+### 항공, 호텔 정보 파싱  
+
+
 ![Image Alt 아키텍쳐](./pars.png)  
 ![Image Alt 아키텍쳐](./pars2.png)  
-### 스케쥴러
+### 스케쥴러  
+
+
 ![Image Alt 아키텍쳐](./plan.png) 
   
   
