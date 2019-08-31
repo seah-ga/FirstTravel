@@ -10,7 +10,7 @@
 
 ## SKills 
 Framework : Spring Framework ( Using My-batis )  
-Dependencies : log4j, my-batis, jackson, mail, imgscar ...    
+Dependencies : junit,log4j, my-batis, jackson, mail, imgscar ...    
 Server Language: JAVA  
 Front-end: JQuery, Javascript  
 DBMS : OracleDB  
