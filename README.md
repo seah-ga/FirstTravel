@@ -8,7 +8,7 @@
 2. 스케쥴 캘린더 기능  
 3. 각종 커뮤니티 게시판  
 
-## SKills 
+## Skills 
 Framework : Spring Framework ( Using My-batis )  
 Dependencies : junit,log4j, my-batis, jackson, mail, imgscar ...    
 Server Language: JAVA  
